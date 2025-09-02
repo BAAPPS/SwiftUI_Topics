@@ -1,0 +1,17 @@
+# macOS system files
+.DS_Store
+
+Secrets.plist
+
+# Xcode
+build/
+DerivedData/
+*.xcworkspace
+*.xcuserdata
+*.moved-aside
+*.xcuserstate
+
+# Swift Package Manager
+Packages/
+
+
