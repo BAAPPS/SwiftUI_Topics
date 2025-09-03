@@ -1,0 +1,2593 @@
+{
+    "numFound": 67554,
+    "start": 0,
+    "numFoundExact": true,
+    "num_found": 67554,
+    "documentation_url": "https://openlibrary.org/dev/docs/api/search",
+    "q": "computer science",
+    "offset": null,
+    "docs": [
+        {
+            "author_key": [
+                "OL534760A",
+                "OL3384973A"
+            ],
+            "author_name": [
+                "J. Glenn Brookshear",
+                "Brookshear"
+            ],
+            "cover_edition_key": "OL3694228M",
+            "cover_i": 193281,
+            "ebook_access": "printdisabled",
+            "edition_count": 17,
+            "first_publish_year": 1985,
+            "has_fulltext": true,
+            "ia": [
+                "computerscienceo0000broo_x6g8",
+                "computerscienceo00broo_1",
+                "computerscienceo0000broo_m4h0",
+                "computerscienceo00broo_0",
+                "computerscienceo00broo",
+                "computerscienceo00jgle_229"
+            ],
+            "ia_collection_s": "cua-ol;internetarchivebooks;ithacacollege-ol;johnshopkins-ol;printdisabled;rochester-ol;schroederlibrary-ol;universityofarizona-ol;universityofcoloradoboulder-ol",
+            "key": "/works/OL3275955W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL2882667A",
+                "OL3348176A"
+            ],
+            "author_name": [
+                "Carl French",
+                "C. S. French"
+            ],
+            "cover_edition_key": "OL8168392M",
+            "cover_i": 1572574,
+            "ebook_access": "borrowable",
+            "edition_count": 7,
+            "first_publish_year": 1989,
+            "has_fulltext": true,
+            "ia": [
+                "computerscience0000fren_j1v3",
+                "computerscience0000fren_c3q9",
+                "computerscience0000fren_w7a3"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL8584971W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL12102721M",
+            "lending_identifier_s": "computerscience0000fren_j1v3",
+            "public_scan_b": false,
+            "title": "Computer Science"
+        },
+        {
+            "author_key": [
+                "OL230460A"
+            ],
+            "author_name": [
+                "Judith L. Gersting"
+            ],
+            "cover_edition_key": "OL3483122M",
+            "cover_i": 7136779,
+            "ebook_access": "printdisabled",
+            "edition_count": 15,
+            "first_publish_year": 1982,
+            "has_fulltext": true,
+            "ia": [
+                "mathematicalstru0000gers",
+                "mathematicalstru00gers",
+                "mathematicalstru0002gers"
+            ],
+            "ia_collection_s": "binghamton-ol;dartmouthlibrary-ol;gwulibraries-ol;internetarchivebooks;johnshopkins-ol;occidentalcollegelibrary-ol;printdisabled;rochester-ol;the-claremont-colleges-ol;udc-ol;unb-ol;universityofarizona-ol;universityofcoloradoboulder-ol;wrlc-ol",
+            "key": "/works/OL1922611W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Mathematical structures for computer science"
+        },
+        {
+            "author_key": [
+                "OL534760A",
+                "OL2671213A"
+            ],
+            "author_name": [
+                "J. Glenn Brookshear",
+                "Glenn Brookshear"
+            ],
+            "cover_edition_key": "OL7408965M",
+            "cover_i": 136349,
+            "ebook_access": "printdisabled",
+            "edition_count": 13,
+            "first_publish_year": 2002,
+            "has_fulltext": true,
+            "ia": [
+                "computerscienceo0007broo",
+                "computerscienceo0000broo_i9g4"
+            ],
+            "ia_collection_s": "internetarchivebooks;occidentalcollegelibrary-ol;printdisabled;the-claremont-colleges-ol",
+            "key": "/works/OL20480707W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL6749946A",
+                "OL7834114A",
+                "OL629361A",
+                "OL7834115A",
+                "OL7834116A"
+            ],
+            "author_name": [
+                "Sio-Iong Ao",
+                "Haeng Kon Kim",
+                "Oscar Castillo",
+                "Alan Hoi-shou Chan",
+                "Hideki Katagiri"
+            ],
+            "cover_edition_key": "OL27946824M",
+            "cover_i": 9334768,
+            "ebook_access": "no_ebook",
+            "edition_count": 40,
+            "first_publish_year": 2013,
+            "has_fulltext": false,
+            "key": "/works/OL20667190W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Transactions on Engineering Technologies"
+        },
+        {
+            "author_key": [
+                "OL230918A",
+                "OL230460A"
+            ],
+            "author_name": [
+                "G. Michael Schneider",
+                "Judith L. Gersting"
+            ],
+            "cover_edition_key": "OL26842270M",
+            "cover_i": 8524066,
+            "ebook_access": "printdisabled",
+            "edition_count": 15,
+            "first_publish_year": 1995,
+            "has_fulltext": true,
+            "ia": [
+                "invitationtocomp0002schn",
+                "invitationtocomp0000schn_w5g3",
+                "invitationtocomp0000schn_l2h0",
+                "invitationtocomp0000schn_6edi",
+                "invitationtocomp0000schn_s8g8",
+                "invitationtocomp0000schn"
+            ],
+            "ia_collection_s": "dartmouthlibrary-ol;internetarchivebooks;printdisabled",
+            "key": "/works/OL1926026W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Invitation to Computer Science"
+        },
+        {
+            "author_key": [
+                "OL6890213A",
+                "OL7654355A"
+            ],
+            "author_name": [
+                "Brian Christian",
+                "Tom Griffiths"
+            ],
+            "cover_edition_key": "OL25935646M",
+            "cover_i": 8042539,
+            "ebook_access": "printdisabled",
+            "edition_count": 10,
+            "first_publish_year": 2016,
+            "has_fulltext": true,
+            "ia": [
+                "algorithmstolive00chri"
+            ],
+            "ia_collection_s": "americana;printdisabled",
+            "key": "/works/OL17357767W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "subtitle": "The Computer Science of Human Decisions",
+            "title": "Algorithms to Live By"
+        },
+        {
+            "author_key": [
+                "OL2623461A"
+            ],
+            "author_name": [
+                "Arthur C. Clarke"
+            ],
+            "cover_edition_key": "OL24857274M",
+            "cover_i": 11344400,
+            "ebook_access": "borrowable",
+            "edition_count": 116,
+            "first_publish_year": 1968,
+            "has_fulltext": true,
+            "ia": [
+                "2001lodysseedele0000clar",
+                "2001lodysseedele0000clar_f0h6",
+                "2001odyseeimwelt00clar",
+                "2001spaceodyssey0000clar_s5y2",
+                "2001unaodiseaesp00clar",
+                "2001unaodiseaesp00clar",
+                "2001spaceodyssey00arth",
+                "2001spaceodyssey0000clar_t6h6",
+                "2001spaceodyssey00clar",
+                "200100arth",
+                "2001spaceodyssey00clar_0",
+                "2001spaceodyssey0000clar_u5h0"
+            ],
+            "ia_collection_s": "americana;barryuniversity-ol;binghamton-ol;cnusd-ol;delawarecountydistrictlibrary;delawarecountydistrictlibrary-ol;denverpubliclibrary-ol;gwulibraries-ol;inlibrary;internetarchivebooks;kalamazoocollege-ol;library_of_atlantis;miltonpubliclibrary-ol;openlibrary-d-ol;printdisabled;stmaryscountylibrary;uhmauicollege-ol;worthingtonlibraries-ol",
+            "key": "/works/OL17365W",
+            "language": [
+                "ger",
+                "por",
+                "eng",
+                "dut",
+                "fre",
+                "rus",
+                "spa",
+                "ita"
+            ],
+            "lending_edition_s": "OL26768420M",
+            "lending_identifier_s": "2001lodysseedele0000clar",
+            "public_scan_b": false,
+            "subtitle": "A Space Odyssey",
+            "title": "2001"
+        },
+        {
+            "author_key": [
+                "OL26170A"
+            ],
+            "author_name": [
+                "Benjamin Franklin"
+            ],
+            "cover_edition_key": "OL7134689M",
+            "cover_i": 5647361,
+            "ebook_access": "public",
+            "edition_count": 679,
+            "first_publish_year": 1791,
+            "has_fulltext": true,
+            "ia": [
+                "autobiographyofb0000fran_s6g2",
+                "correctedversunmu00biglrich",
+                "lifeofbenjaminfr03fran",
+                "autobiobenfrank00franrich",
+                "benjaminfranklin00fran2",
+                "autobiographyofb02fran",
+                "autobiographyofb01franuoft",
+                "autobiographyofb00fran2",
+                "lifeofbenfrankhimself01franrich",
+                "lifeofbenjaminfra01fran",
+                "hisautobiobenfran00weldrich",
+                "lifeofbenjaminfr01fran",
+                "autobiograp00fran",
+                "lifeofdrbenjamin00franrich",
+                "lifeofbenjaminfr00fran",
+                "memlifewritings00franrich",
+                "autobiographyofb00fran_10",
+                "autobiographyofb00fran_0",
+                "autobiographyofb00franuoft",
+                "autobiography00fran",
+                "franklinautobio00frankrich",
+                "benfrankautobio00granrich",
+                "memoirsoflifewri0000fran",
+                "drbenjaminfran00franrich",
+                "benjaminfrautobio00franrich",
+                "lifeofdrbenjamin00fran",
+                "franklinsautobio00fran",
+                "benjaminfranklin00fran3",
+                "benfrankautobio00franrich",
+                "b28777013",
+                "autobiographyofb00fran3",
+                "autobiographyofb1903fran",
+                "autobiographyofb00fran5",
+                "unmutilatedauto00franrich",
+                "lifeofbenjaminfr00franiala",
+                "templefranklin02franrich",
+                "autobiographyofb04fran",
+                "autobiobenfran00miffrich",
+                "autobiographyof00fran",
+                "cu31924014323376",
+                "cu31924089409217",
+                "b24866945",
+                "b28034946",
+                "b24869314",
+                "autobiographyofb00fran_3",
+                "autobiographyofb00fran_4",
+                "autobiograph00fran",
+                "autobiographyofb1884fran",
+                "autobiographyofb1884fran",
+                "autobiographyofb1884fran",
+                "autobiographyofb1937fran",
+                "franklinsautobio1910fran",
+                "lifeofdrbrnfrank00franrich",
+                "autobiographyofb1868fran",
+                "mmoiresdelaviepr00fran",
+                "lifeofbenjaminfr00fran3",
+                "lifeofbenjamin01fran",
+                "benjaminfranklin01fran",
+                "benjaminfra00fran",
+                "lifeofbenjaminfr00fran4",
+                "adt3936.0001.001.umich.edu",
+                "memoirsoflifewri00fran",
+                "memoirsofbenjam02fran",
+                "memoirsofbenjam01fran",
+                "membenfrank01frankrich",
+                "memoirsofbenjami01fran",
+                "memoirsofbenjami00fran",
+                "lifeofbenjaminfran01fran",
+                "spohn1089",
+                "containingautobio00franrich",
+                "autobiography00franuoft",
+                "lifeofdrbenjamin00infran",
+                "lifeofbenjaminfr00fran2",
+                "autobiographyofb00fran_8",
+                "benjaminfranklin00franrich",
+                "autobiographyofb03fran",
+                "autobioforschool00franrich",
+                "memoirslifeandw00frangoog",
+                "autobiographybe00conggoog",
+                "autobiographybe03bigegoog",
+                "autobiographybe00pinegoog",
+                "benjaminfrankli02weldgoog",
+                "benjaminfrankli00weldgoog",
+                "autobiographybe06frangoog",
+                "autobiographybe11frangoog",
+                "lifelatedoctorb00stuegoog",
+                "memoirsbenjamin00frangoog",
+                "autobiographybe13frangoog",
+                "franklinsautobi00reidgoog",
+                "autobiographyofb0000fran_f5f5",
+                "autobiographyofb0000fran_g4z0",
+                "autobiography0000unse_m0w9",
+                "isbn_9781435109292",
+                "autobiographyofb0000unse",
+                "autobiography0000fran",
+                "benjaminfrankli00fran",
+                "autobiographyofb00fran_11",
+                "autobiographyofb0000fran_b7n9",
+                "autobiographyofb0000fran_e9i9",
+                "autobiographyofb0000fran_b7v6",
+                "autobiographyofb0000fran_v7a7",
+                "autobiographyofb0000fran_x0c2",
+                "autobiographyofb00benj_0",
+                "autobiographyben00fran",
+                "compleatedautobi0000fran",
+                "autobiographyofb0000fran",
+                "autobiographyofb0000fran_h1n9",
+                "autobiography0000fran_k6f8",
+                "autobiographie0000benj",
+                "autobiography0000fran_y2h7",
+                "benjaminfranklin0000fran_o8e8",
+                "autobiography00fran_v1l",
+                "benjaminfranklinfranrich",
+                "benjaminfranklin0000fran_h4k4",
+                "autobiographyofb0000fran_m8y4",
+                "autobiographyofb00benj",
+                "autobiographyofb0000fran_b4c4",
+                "autobiographyof000fran"
+            ],
+            "ia_collection_s": "JohnCarterBrownLibrary;americana;americanuniversity-ol;belmont-ol;binghamton-ol;bostonpubliclibrary;bplhoughton;brethrendigitalarchives;brigham_young_university;cdl;cnusd-ol;cornell;dartmouthlibrary-ol;delawarecountydistrictlibrary;delawarecountydistrictlibrary-ol;denverpubliclibrary-ol;drakeuniversity-ol;elizabethtowncollege;europeanlibraries;georgetown-university-law-library-ol;gwulibraries-ol;harvardclassicssingles;inlibrary;internetarchivebooks;ithacacollege-ol;jcbfrench;johnshopkins-ol;library_of_atlantis;library_of_congress;lincolncollection;marygrovecollege;marymount-ol;medicalheritagelibrary;medicallibrary;michigan_books;newyorkpubliclibrary;occidentalcollegelibrary-ol;openlibrary-d-ol;pma-ol;printdisabled;randolph-macon-college-ol;rcplondon;riceuniversity-ol;robarts;rochester-ol;the-claremont-colleges-ol;toronto;trent_university;trinitycollege;tulsacc-ol;ukmhl;unb-ol;uni-ol;university_of_illinois_urbana-champaign;university_of_toronto;university_pittsburgh;universityofarizona-ol;universityofoklahoma-ol;universityofthewest-ol;wellcomelibrary;wilsoncollege-ol;winterthurlibrary-ol;worthingtonlibraries-ol",
+            "key": "/works/OL26492W",
+            "language": [
+                "jpn",
+                "chi",
+                "ita",
+                "ger",
+                "swe",
+                "fre",
+                "eng"
+            ],
+            "lending_edition_s": "OL32372574M",
+            "lending_identifier_s": "autobiographyofb0000fran_s6g2",
+            "public_scan_b": true,
+            "title": "The Autobiography of Benjamin Franklin",
+            "id_standard_ebooks": [
+                "benjamin-franklin/the-autobiography-of-benjamin-franklin"
+            ]
+        },
+        {
+            "author_key": [
+                "OL1862861A",
+                "OL3244931A"
+            ],
+            "author_name": [
+                "Marvin V. Zelkowitz",
+                "Marshall C. Yovits"
+            ],
+            "cover_edition_key": "OL9455977M",
+            "cover_i": 1094406,
+            "ebook_access": "unclassified",
+            "edition_count": 69,
+            "first_publish_year": 1995,
+            "has_fulltext": false,
+            "ia": [
+                "webtechnology00bsma"
+            ],
+            "key": "/works/OL7938163W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Advances in Computers, Volume 49 (Advances in Computers)"
+        },
+        {
+            "author_key": [
+                "OL34221A"
+            ],
+            "author_name": [
+                "Isaac Asimov"
+            ],
+            "cover_edition_key": "OL16521070M",
+            "cover_i": 12385229,
+            "ebook_access": "borrowable",
+            "edition_count": 97,
+            "first_publish_year": 1950,
+            "has_fulltext": true,
+            "ia": [
+                "iorobot00asim",
+                "yorobot0000isaa",
+                "lesrobots0000isaa",
+                "iorobot0000unse",
+                "isbn_9780329143558",
+                "lesrobots0000isaa_s7t1",
+                "irobot00asim",
+                "irobotasim00asim",
+                "irobot0asim",
+                "irobot0000asim_h2b4",
+                "irobot00asim_0",
+                "irobot00isaa",
+                "irobot0000asim_s7r5",
+                "irobot0000unse_w6s4",
+                "irobot0000unse",
+                "irobot00asim_1",
+                "irobot0000asim",
+                "irobot0000asim_u0v3",
+                "lesrobots0000asim",
+                "irobot0000unse_q1n1"
+            ],
+            "ia_collection_s": "California-State-Suggested-Reading;additional_collections;americana;americanuniversity-ol;books;cmsbschool-ol;cnusd-ol;delawarecountydistrictlibrary;denverpubliclibrary-ol;gwulibraries-ol;hamiltonpubliclibrary-ol;inlibrary;internetarchivebooks;johnshopkins-ol;library_of_atlantis;marygrovecollege;openlibrary-d-ol;printdisabled;rochester-ol;spokanepubliclibrary-ol;the-claremont-colleges-ol;toronto;tulsacc-ol;unb-ol;uni-ol;universityofcoloradoboulder-ol;uslprototype;wilsoncollege-ol;worthingtonlibraries-ol",
+            "key": "/works/OL46241W",
+            "language": [
+                "ita",
+                "fre",
+                "chi",
+                "ger",
+                "por",
+                "spa",
+                "dut",
+                "gre",
+                "eng",
+                "und",
+                "tur"
+            ],
+            "lending_edition_s": "OL25584856M",
+            "lending_identifier_s": "iorobot00asim",
+            "public_scan_b": false,
+            "title": "I, Robot"
+        },
+        {
+            "author_key": [
+                "OL39286A",
+                "OL403700A"
+            ],
+            "author_name": [
+                "Behrouz A. Forouzan",
+                "Richard F. Gilberg"
+            ],
+            "cover_edition_key": "OL992805M",
+            "cover_i": 2378050,
+            "ebook_access": "printdisabled",
+            "edition_count": 7,
+            "first_publish_year": 1997,
+            "has_fulltext": true,
+            "ia": [
+                "zdanh_test_031_computersciences00foro"
+            ],
+            "ia_collection_s": "internetarchivebooks;printdisabled;uni-ol",
+            "key": "/works/OL35529W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL4489781A"
+            ],
+            "author_name": [
+                "United States. General Accounting Office"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 93,
+            "first_publish_year": 1987,
+            "has_fulltext": false,
+            "key": "/works/OL565227W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Financial Management"
+        },
+        {
+            "author_key": [
+                "OL3348176A"
+            ],
+            "author_name": [
+                "C. S. French"
+            ],
+            "cover_edition_key": "OL17130820M",
+            "cover_i": 11608620,
+            "ebook_access": "borrowable",
+            "edition_count": 7,
+            "first_publish_year": 1980,
+            "has_fulltext": true,
+            "ia": [
+                "computerscience0000fren_t3v1",
+                "computerscience0000fren",
+                "computersciencei0000fren"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL9295916W",
+            "language": [
+                "und",
+                "eng"
+            ],
+            "lending_edition_s": "OL22325411M",
+            "lending_identifier_s": "computerscience0000fren_t3v1",
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL1192523A",
+                "OL2653309A",
+                "OL2653310A"
+            ],
+            "author_name": [
+                "L. Goldschlager",
+                "Les Goldschlager",
+                "Andrew Lister"
+            ],
+            "cover_edition_key": "OL3781119M",
+            "cover_i": 6610998,
+            "ebook_access": "borrowable",
+            "edition_count": 4,
+            "first_publish_year": 1982,
+            "has_fulltext": true,
+            "ia": [
+                "computersciencem00gold"
+            ],
+            "ia_collection_s": "americana;belmont-ol;inlibrary;internetarchivebooks;printdisabled;universityofarizona-ol;universityofcoloradoboulder-ol;universityofoklahoma-ol",
+            "key": "/works/OL5270336W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL3781119M",
+            "lending_identifier_s": "computersciencem00gold",
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL7982922A",
+                "OL7982923A"
+            ],
+            "author_name": [
+                "Wladston Ferreira Filho",
+                "Raimondo Pictet"
+            ],
+            "cover_edition_key": "OL28266566M",
+            "cover_i": 10194609,
+            "ebook_access": "no_ebook",
+            "edition_count": 3,
+            "first_publish_year": 2017,
+            "has_fulltext": false,
+            "key": "/works/OL20873589W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer Science Distilled"
+        },
+        {
+            "author_key": [
+                "OL457106A"
+            ],
+            "author_name": [
+                "Thomas A. Sudkamp"
+            ],
+            "cover_edition_key": "OL3300911M",
+            "cover_i": 1176484,
+            "ebook_access": "unclassified",
+            "edition_count": 6,
+            "first_publish_year": 1988,
+            "has_fulltext": false,
+            "ia": [
+                "languagesmachine00sudk"
+            ],
+            "key": "/works/OL2985241W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Languages and machines"
+        },
+        {
+            "author_key": [
+                "OL11171087A"
+            ],
+            "author_name": [
+                "Computer Science Computer Science Academy"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 2020,
+            "has_fulltext": false,
+            "key": "/works/OL30618028W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Python Programming : This Book Includes"
+        },
+        {
+            "author_key": [
+                "OL2661833A"
+            ],
+            "author_name": [
+                "Peter Bishop"
+            ],
+            "cover_edition_key": "OL10124740M",
+            "cover_i": 13032294,
+            "ebook_access": "borrowable",
+            "edition_count": 5,
+            "first_publish_year": 1982,
+            "has_fulltext": true,
+            "ia": [
+                "computingscience0000bish",
+                "computingscience0000pete_j0a1"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL7996286W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL10124740M",
+            "lending_identifier_s": "computingscience0000bish",
+            "public_scan_b": false,
+            "title": "Computing Science"
+        },
+        {
+            "author_key": [
+                "OL1193239A"
+            ],
+            "author_name": [
+                "Roger R. Flynn"
+            ],
+            "cover_edition_key": "OL7269536M",
+            "cover_i": 1063219,
+            "ebook_access": "borrowable",
+            "edition_count": 2,
+            "first_publish_year": 2002,
+            "has_fulltext": true,
+            "ia": [
+                "computersciences01roge"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL5272374W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL9224250M",
+            "lending_identifier_s": "computersciences01roge",
+            "public_scan_b": false,
+            "title": "Computer Sciences"
+        },
+        {
+            "author_key": [
+                "OL11171087A"
+            ],
+            "author_name": [
+                "Computer Science Computer Science Academy"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 2020,
+            "has_fulltext": false,
+            "key": "/works/OL30516658W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Python for Data Analysis"
+        },
+        {
+            "author_key": [
+                "OL4489781A"
+            ],
+            "author_name": [
+                "United States. General Accounting Office"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 402,
+            "first_publish_year": 1943,
+            "has_fulltext": false,
+            "key": "/works/OL565229W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Financial audit"
+        },
+        {
+            "author_key": [
+                "OL256328A",
+                "OL7825587A",
+                "OL7825588A"
+            ],
+            "author_name": [
+                "Narciso Garcia",
+                "Arthur Damask",
+                "Steven Schwarz"
+            ],
+            "cover_edition_key": "OL414486M",
+            "cover_i": 1192983,
+            "ebook_access": "no_ebook",
+            "edition_count": 11,
+            "first_publish_year": 1986,
+            "has_fulltext": false,
+            "key": "/works/OL2085228W",
+            "language": [
+                "und",
+                "eng"
+            ],
+            "public_scan_b": false,
+            "subtitle": "With Emphasis on Atomic and Semiconductor Physics",
+            "title": "Physics for Computer Science Students"
+        },
+        {
+            "author_key": [
+                "OL7648886A"
+            ],
+            "author_name": [
+                "Mr. Kevin P Hare"
+            ],
+            "cover_edition_key": "OL27372492M",
+            "cover_i": 8835681,
+            "ebook_access": "no_ebook",
+            "edition_count": 3,
+            "first_publish_year": 2018,
+            "has_fulltext": false,
+            "key": "/works/OL20186966W",
+            "public_scan_b": false,
+            "title": "Computer Science Principles"
+        },
+        {
+            "author_key": [
+                "OL228319A",
+                "OL3437803A"
+            ],
+            "author_name": [
+                "Robert Sedgewick",
+                "Kevin Wayne"
+            ],
+            "cover_edition_key": "OL27442527M",
+            "cover_i": 8902454,
+            "ebook_access": "no_ebook",
+            "edition_count": 3,
+            "first_publish_year": 2016,
+            "has_fulltext": false,
+            "key": "/works/OL20246829W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer Science"
+        },
+        {
+            "author_key": [
+                "OL366480A",
+                "OL419575A"
+            ],
+            "author_name": [
+                "Susan K. Baumann",
+                "Steven L. Mandell"
+            ],
+            "cover_edition_key": "OL10425528M",
+            "cover_i": 12742615,
+            "ebook_access": "borrowable",
+            "edition_count": 3,
+            "first_publish_year": 1992,
+            "has_fulltext": true,
+            "ia": [
+                "computersciencel0000baum"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL2569419W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL10425528M",
+            "lending_identifier_s": "computersciencel0000baum",
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL26283A"
+            ],
+            "author_name": [
+                "William Gibson"
+            ],
+            "cover_i": 283860,
+            "ebook_access": "printdisabled",
+            "edition_count": 63,
+            "first_publish_year": 1984,
+            "has_fulltext": true,
+            "ia": [
+                "neuromancer0000gibs_b5r9",
+                "neuromancer0000gibs_t6z2",
+                "neuromancer00gibs_0",
+                "neuromancien00gibs",
+                "neuromancer00gibs",
+                "neuromancer0000gibs"
+            ],
+            "ia_collection_s": "americana;americanuniversity-ol;belmont-ol;binghamton-ol;bpljordan-ol;cnusd-ol;cua-ol;delawarecountydistrictlibrary;denverpubliclibrary-ol;drakeuniversity-ol;georgetown-university-law-library-ol;gwulibraries-ol;hamiltonpubliclibrary-ol;internetarchivebooks;ithacacollege-ol;johnshopkins-ol;kalamazoocollege-ol;library_of_atlantis;miltonpubliclibrary-ol;occidentalcollegelibrary-ol;openlibrary-d-ol;printdisabled;riceuniversity-ol;rochester-ol;schroederlibrary-ol;the-claremont-colleges-ol;tulsacc-ol;uhmauicollege-ol;unb-ol;uni-ol;universityofcoloradoboulder-ol;universityofoklahoma-ol;uslprototype;wilsoncollege-ol",
+            "key": "/works/OL27258W",
+            "language": [
+                "eng",
+                "ger",
+                "fre",
+                "ita",
+                "chi",
+                "fin",
+                "por",
+                "dan",
+                "spa",
+                "dut",
+                "nor"
+            ],
+            "public_scan_b": false,
+            "title": "Neuromancer"
+        },
+        {
+            "author_key": [
+                "OL548592A",
+                "OL7498049A"
+            ],
+            "author_name": [
+                "Roger S. Pressman",
+                "Bruce Maxim"
+            ],
+            "cover_edition_key": "OL9262741M",
+            "cover_i": 66176,
+            "ebook_access": "borrowable",
+            "edition_count": 55,
+            "first_publish_year": 1982,
+            "has_fulltext": true,
+            "ia": [
+                "softwareengineer00roge",
+                "softwareengineer0003pres",
+                "softwareengineer4edpres",
+                "softwareengineeprer00pres",
+                "softwareengineer0000roge",
+                "softwareengineer00pres",
+                "softwareengineer00pres_114",
+                "softwareengineer00pres_352"
+            ],
+            "ia_collection_s": "americana;inlibrary;internetarchivebooks;printdisabled;unb-ol",
+            "key": "/works/OL284009W",
+            "language": [
+                "spa",
+                "ger",
+                "eng"
+            ],
+            "lending_edition_s": "OL9252775M",
+            "lending_identifier_s": "softwareengineer00roge",
+            "public_scan_b": false,
+            "title": "Software Engineering"
+        },
+        {
+            "author_key": [
+                "OL3375566A",
+                "OL2662981A"
+            ],
+            "author_name": [
+                "Norma D. Mullen",
+                "P. Charles Brown"
+            ],
+            "cover_edition_key": "OL10131125M",
+            "cover_i": 8048243,
+            "ebook_access": "borrowable",
+            "edition_count": 5,
+            "first_publish_year": 1983,
+            "has_fulltext": true,
+            "ia": [
+                "englishforcomput0000mull",
+                "englishforcomput0000mull_v0c8"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL9329575W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL10131125M",
+            "lending_identifier_s": "englishforcomput0000mull",
+            "public_scan_b": false,
+            "title": "English for computer science"
+        },
+        {
+            "author_key": [
+                "OL12952140A"
+            ],
+            "author_name": [
+                "computer science"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 2020,
+            "has_fulltext": false,
+            "key": "/works/OL35855146W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Flamingo Coloring Book"
+        },
+        {
+            "author_key": [
+                "OL323185A",
+                "OL2734323A"
+            ],
+            "author_name": [
+                "June Jamrich Parsons",
+                "Dan Oja"
+            ],
+            "cover_edition_key": "OL11853115M",
+            "cover_i": 9289977,
+            "ebook_access": "printdisabled",
+            "edition_count": 30,
+            "first_publish_year": 1996,
+            "has_fulltext": true,
+            "ia": [
+                "computerconcepts00pars_0",
+                "computerconcepts0000pars_w6k3",
+                "computerconcepts00pars",
+                "computerconcepts0003pars",
+                "computerconcepts00june_0",
+                "computerconcepts0000pars_l2t4",
+                "computerconcepts2ndedit00pars",
+                "computerconcepts0007edpars",
+                "computerconcepts0000pars",
+                "isbn_9780619017323",
+                "computerconcepts0000pars_k5s2",
+                "computerconcepts0000pars_c2g9"
+            ],
+            "ia_collection_s": "americana;internetarchivebooks;marygrovecollege;openlibrary-d-ol;printdisabled;uni-ol;universityofthewest-ol",
+            "key": "/works/OL2373712W",
+            "language": [
+                "eng",
+                "spa"
+            ],
+            "public_scan_b": false,
+            "title": "Computer Concepts"
+        },
+        {
+            "author_key": [
+                "OL1010153A"
+            ],
+            "author_name": [
+                "N. David Mermin"
+            ],
+            "cover_edition_key": "OL7767682M",
+            "cover_i": 1268897,
+            "ebook_access": "unclassified",
+            "edition_count": 7,
+            "first_publish_year": 2007,
+            "has_fulltext": false,
+            "ia": [
+                "quantumcomputers00merm"
+            ],
+            "key": "/works/OL4799736W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Quantum Computer Science"
+        },
+        {
+            "author_key": [
+                "OL2030267A"
+            ],
+            "author_name": [
+                "Alexandra I. Forsythe"
+            ],
+            "cover_edition_key": "OL5315421M",
+            "cover_i": 4502535,
+            "ebook_access": "printdisabled",
+            "edition_count": 1,
+            "first_publish_year": 1970,
+            "has_fulltext": true,
+            "ia": [
+                "computerscienceb0000unse"
+            ],
+            "ia_collection_s": "internetarchivebooks;printdisabled",
+            "key": "/works/OL19018553W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL15434947A"
+            ],
+            "author_name": [
+                "Alan Williams"
+            ],
+            "cover_edition_key": "OL32735637M",
+            "cover_i": 11362024,
+            "ebook_access": "borrowable",
+            "edition_count": 2,
+            "first_publish_year": 2014,
+            "has_fulltext": true,
+            "ia": [
+                "cfehighercomputi0000will"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL24665290W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL32735637M",
+            "lending_identifier_s": "cfehighercomputi0000will",
+            "public_scan_b": false,
+            "title": "CfE higher computing science"
+        },
+        {
+            "author_key": [
+                "OL586858A"
+            ],
+            "author_name": [
+                "Alfred V. Aho"
+            ],
+            "cover_edition_key": "OL1109992M",
+            "cover_i": 456028,
+            "ebook_access": "borrowable",
+            "edition_count": 3,
+            "first_publish_year": 1992,
+            "has_fulltext": true,
+            "ia": [
+                "foundationsofcom00alfr"
+            ],
+            "ia_collection_s": "binghamton-ol;cua-ol;dartmouthlibrary-ol;inlibrary;internetarchivebooks;ithacacollege-ol;kalamazoocollege-ol;occidentalcollegelibrary-ol;printdisabled;riceuniversity-ol;rochester-ol;the-claremont-colleges-ol;universityofoklahoma-ol;universityofthewest-ol",
+            "key": "/works/OL3509443W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL1557209M",
+            "lending_identifier_s": "foundationsofcom00alfr",
+            "public_scan_b": false,
+            "title": "Foundations of computer science"
+        },
+        {
+            "author_key": [
+                "OL2030267A"
+            ],
+            "author_name": [
+                "Alexandra I. Forsythe"
+            ],
+            "cover_edition_key": "OL7614299M",
+            "cover_i": 4642275,
+            "ebook_access": "no_ebook",
+            "edition_count": 8,
+            "first_publish_year": 1965,
+            "has_fulltext": false,
+            "key": "/works/OL7136893W",
+            "language": [
+                "und",
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer Science"
+        },
+        {
+            "author_key": [
+                "OL1556114A"
+            ],
+            "author_name": [
+                "D. C. Palmer"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 1980,
+            "has_fulltext": false,
+            "key": "/works/OL6109160W",
+            "language": [
+                "und"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL6322049A"
+            ],
+            "author_name": [
+                "J. K. Atkin"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 2,
+            "first_publish_year": 1980,
+            "has_fulltext": false,
+            "key": "/works/OL13437072W",
+            "language": [
+                "und",
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL2139510A"
+            ],
+            "author_name": [
+                "Organisation for Economic Co-operation and Development"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 1972,
+            "has_fulltext": false,
+            "key": "/works/OL2209185W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL720958A",
+                "OL229501A",
+                "OL2669938A"
+            ],
+            "author_name": [
+                "Ronald L. Graham",
+                "Donald Knuth",
+                "Oren Patashnik"
+            ],
+            "cover_edition_key": "OL1429049M",
+            "cover_i": 135182,
+            "ebook_access": "unclassified",
+            "edition_count": 8,
+            "first_publish_year": 1988,
+            "has_fulltext": false,
+            "ia": [
+                "mathematiquescon00grah",
+                "concretemathemat00grah_444"
+            ],
+            "key": "/works/OL3951639W",
+            "language": [
+                "fre",
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Concrete mathematics"
+        },
+        {
+            "author_key": [
+                "OL28257A"
+            ],
+            "author_name": [
+                "Michael Crichton"
+            ],
+            "cover_edition_key": "OL32352096M",
+            "cover_i": 10984324,
+            "ebook_access": "borrowable",
+            "edition_count": 65,
+            "first_publish_year": 2002,
+            "has_fulltext": true,
+            "ia": [
+                "pureiemonoge0000unse",
+                "laproie0000cric_x9i0",
+                "beuteroman0000cric",
+                "laproie0000cric_x4e2",
+                "prey0000unse",
+                "prey0000cric_p4v7",
+                "preynovel0000cric_a9b3",
+                "preynovel0001cric",
+                "preynove00cric",
+                "prey0000cric_q9h9",
+                "laproie0000cric",
+                "preynovel0000cric",
+                "prey0000cric_j6w7",
+                "prey0000cric_a5e1",
+                "prey0000cric_h4k1",
+                "prey0000cric",
+                "preynovel00cric",
+                "prey0000cric_y2t5",
+                "prey0000cric_j1p5",
+                "prey0000cric_z0f8",
+                "prey0000mich",
+                "prey00cric",
+                "preynov00cric",
+                "prey00cric_0",
+                "presacric00cric",
+                "naimiliesha0000cric",
+                "preycric00cric",
+                "cd_prey_michael-crichton_1"
+            ],
+            "ia_collection_s": "americana;americanuniversity-ol;audio_bookspoetry;binghamton-ol;cnusd-ol;dartmouthlibrary-ol;delawarecountydistrictlibrary;delawarecountydistrictlibrary-ol;drakeuniversity-ol;goffstownlibrary-ol;gwulibraries-ol;inlibrary;internetarchiveaudiobooks;internetarchivebooks;johnshopkins-ol;kalamazoocollege-ol;marygrovecollege;printdisabled;randolph-macon-college-ol;samples_only;schroederlibrary-ol;stream_only;the-claremont-colleges-ol;uni-ol;universityofarizona-ol;universityofcoloradoboulder-ol;wilsoncollege-ol;worthingtonlibraries-ol;wrlc-ol",
+            "key": "/works/OL46883W",
+            "language": [
+                "eng",
+                "spa",
+                "fre",
+                "ger",
+                "jpn",
+                "chi"
+            ],
+            "lending_edition_s": "OL35739209M",
+            "lending_identifier_s": "pureiemonoge0000unse",
+            "public_scan_b": false,
+            "title": "Prey"
+        },
+        {
+            "author_key": [
+                "OL6927953A"
+            ],
+            "author_name": [
+                "Thomas S. Clary"
+            ],
+            "cover_edition_key": "OL23980714M",
+            "cover_i": 11646406,
+            "ebook_access": "borrowable",
+            "edition_count": 14,
+            "first_publish_year": 2010,
+            "has_fulltext": true,
+            "ia": [
+                "horizonsincomput0001unse"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL15881964W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL23980714M",
+            "lending_identifier_s": "horizonsincomput0001unse",
+            "public_scan_b": false,
+            "title": "Horizons in computer science research"
+        },
+        {
+            "author_key": [
+                "OL56621A"
+            ],
+            "author_name": [
+                "Ian Robertson Sinclair"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 3,
+            "first_publish_year": 1990,
+            "has_fulltext": false,
+            "key": "/works/OL10627392W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL1521094A",
+                "OL3034539A"
+            ],
+            "author_name": [
+                "D. Kiryanov",
+                "E. Kiryanova"
+            ],
+            "cover_edition_key": "OL8592003M",
+            "cover_i": 1723857,
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 2006,
+            "has_fulltext": false,
+            "key": "/works/OL18606392W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computational science"
+        },
+        {
+            "author_key": [
+                "OL7485051A"
+            ],
+            "author_name": [
+                "Sumita Arora"
+            ],
+            "cover_edition_key": "OL32224308M",
+            "cover_i": 10865309,
+            "ebook_access": "borrowable",
+            "edition_count": 1,
+            "first_publish_year": 2017,
+            "has_fulltext": true,
+            "ia": [
+                "computersciencew0002aror"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL24341765W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL32224308M",
+            "lending_identifier_s": "computersciencew0002aror",
+            "public_scan_b": false,
+            "title": "Computer Science With C++ Class"
+        },
+        {
+            "author_key": [
+                "OL1075439A"
+            ],
+            "author_name": [
+                "Allen B. Tucker"
+            ],
+            "cover_edition_key": "OL18215748M",
+            "cover_i": 8631617,
+            "ebook_access": "unclassified",
+            "edition_count": 5,
+            "first_publish_year": 2004,
+            "has_fulltext": false,
+            "ia": [
+                "computersciencee00jajo"
+            ],
+            "key": "/works/OL19602101W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science handbook"
+        },
+        {
+            "author_key": [
+                "OL1003630A",
+                "OL2635096A"
+            ],
+            "author_name": [
+                "Jean-Paul Tremblay",
+                "Richard B. Bunt"
+            ],
+            "cover_edition_key": "OL2527723M",
+            "cover_i": 4141467,
+            "ebook_access": "printdisabled",
+            "edition_count": 8,
+            "first_publish_year": 1979,
+            "has_fulltext": true,
+            "ia": [
+                "introductiontoco00trem"
+            ],
+            "ia_collection_s": "americana;internetarchivebooks;openlibrary-d-ol;printdisabled;unb-ol",
+            "key": "/works/OL4777626W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "subtitle": "an algorithmic approach",
+            "title": "An introduction to computer science"
+        },
+        {
+            "author_key": [
+                "OL1392395A"
+            ],
+            "author_name": [
+                "Eoin Colfer"
+            ],
+            "cover_edition_key": "OL7359693M",
+            "cover_i": 12636263,
+            "ebook_access": "borrowable",
+            "edition_count": 63,
+            "first_publish_year": 2003,
+            "has_fulltext": true,
+            "ia": [
+                "artemisgwarthcho0000colf",
+                "artemisfaulkodve0000colf",
+                "artemisfowlderge0000colf",
+                "artemisfowlilcod0000colf",
+                "artemisfowletern00colf",
+                "eternitycodearte00eoin",
+                "artemisfowletern0000colf_j3x6",
+                "artemisfowletern0000colf_x1w6",
+                "artemisfowletern0000colf_q9k7",
+                "artemisfowletern0000colf_v9q6",
+                "artemisfowletern0000colf_e8t0",
+                "artemisfowletern00colf_0",
+                "codeeternite0000colf",
+                "artemisfowletern0000colf",
+                "artemisfowletern0000colf_y5s5",
+                "artemisfowletern0000colf_t9x3",
+                "artemisfowlderge0000eoin"
+            ],
+            "ia_collection_s": "americana;belmont-ol;bpljordan-ol;cnusd-ol;delawarecountydistrictlibrary-ol;denverpubliclibrary-ol;framingham-ol;goffstownlibrary-ol;hamiltonpubliclibrary-ol;inlibrary;internetarchivebooks;openlibrary-d-ol;phillipsacademy-preview;printdisabled;salisburyfreelibrary-ol;spokanepubliclibrary-ol;stmaryscountylibrary;uni-ol;universityofoklahoma-ol;uslprototype;worthingtonlibraries-ol",
+            "key": "/works/OL5725961W",
+            "language": [
+                "heb",
+                "chi",
+                "ita",
+                "spa",
+                "wel",
+                "fre",
+                "pol",
+                "ger",
+                "rus",
+                "dut",
+                "eng"
+            ],
+            "lending_edition_s": "OL32078133M",
+            "lending_identifier_s": "artemisgwarthcho0000colf",
+            "public_scan_b": false,
+            "title": "Artemis Fowl and the Eternity Code"
+        },
+        {
+            "author_key": [
+                "OL10858188A"
+            ],
+            "author_name": [
+                "Computer Computer Science"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 1995,
+            "has_fulltext": false,
+            "key": "/works/OL29399322W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Cgss Catalog Winter"
+        },
+        {
+            "cover_edition_key": "OL9224252M",
+            "cover_i": 4936781,
+            "ebook_access": "borrowable",
+            "edition_count": 2,
+            "has_fulltext": true,
+            "ia": [
+                "computersciences03"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL18155446W",
+            "lending_edition_s": "OL9224252M",
+            "lending_identifier_s": "computersciences03",
+            "public_scan_b": false,
+            "title": "Computer sciences"
+        },
+        {
+            "cover_edition_key": "OL9224253M",
+            "cover_i": 4936799,
+            "ebook_access": "borrowable",
+            "edition_count": 2,
+            "has_fulltext": true,
+            "ia": [
+                "computersciences04"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL18155447W",
+            "lending_edition_s": "OL9224253M",
+            "lending_identifier_s": "computersciences04",
+            "public_scan_b": false,
+            "title": "Computer sciences"
+        },
+        {
+            "author_key": [
+                "OL8353145A"
+            ],
+            "author_name": [
+                "Wild Pages Wild Pages Press"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 2018,
+            "has_fulltext": false,
+            "key": "/works/OL40919278W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer Science"
+        },
+        {
+            "author_key": [
+                "OL19981A"
+            ],
+            "author_name": [
+                "Stephen King"
+            ],
+            "cover_edition_key": "OL7948976M",
+            "cover_i": 14654054,
+            "ebook_access": "borrowable",
+            "edition_count": 61,
+            "first_publish_year": 2006,
+            "has_fulltext": true,
+            "ia": [
+                "cep0000king",
+                "phone00meis",
+                "cellulaireroman0000king",
+                "cell00step",
+                "stephenkingcell0000unse",
+                "cell0000step",
+                "cellsupertascabi0000na",
+                "cellnovel0000king_g5e9",
+                "cellnovel0000king_a6x3",
+                "cellnovel0000step",
+                "cell0000king_z6o5",
+                "cellnovel0000king_e4n4",
+                "cell0000king",
+                "isbn_9781473625754",
+                "cellnovel0000king",
+                "cellulairefrench0000step",
+                "cellnovel00king",
+                "isbn_9780786285686",
+                "cell0000king_d9d7"
+            ],
+            "ia_collection_s": "americana;americanuniversity-ol;cnusd-ol;dartmouthlibrary-ol;delawarecountydistrictlibrary;delawarecountydistrictlibrary-ol;drakeuniversity-ol;goffstownlibrary-ol;hamiltonpubliclibrary-ol;inlibrary;internetarchivebooks;ithacacollege-ol;miltonpubliclibrary-ol;openlibrary-d-ol;printdisabled;schroederlibrary-ol;spokanepubliclibrary-ol;stmaryscountylibrary;the-claremont-colleges-ol;uni-ol;universityofarizona-ol;universityofcoloradoboulder-ol;wilsoncollege-ol;worthingtonlibraries-ol",
+            "key": "/works/OL81597W",
+            "language": [
+                "chi",
+                "spa",
+                "por",
+                "rus",
+                "ita",
+                "ger",
+                "fre",
+                "eng",
+                "tur"
+            ],
+            "lending_edition_s": "OL35595822M",
+            "lending_identifier_s": "cep0000king",
+            "public_scan_b": false,
+            "title": "Cell"
+        },
+        {
+            "author_key": [
+                "OL1193239A"
+            ],
+            "author_name": [
+                "Roger R. Flynn"
+            ],
+            "cover_edition_key": "OL7269537M",
+            "cover_i": 4936757,
+            "ebook_access": "borrowable",
+            "edition_count": 2,
+            "first_publish_year": 2002,
+            "has_fulltext": true,
+            "ia": [
+                "computersciences02"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL18155445W",
+            "lending_edition_s": "OL7269537M",
+            "lending_identifier_s": "computersciences02",
+            "public_scan_b": false,
+            "title": "Computer sciences"
+        },
+        {
+            "author_key": [
+                "OL7106587A"
+            ],
+            "author_name": [
+                "Shane Torbert"
+            ],
+            "cover_edition_key": "OL25269967M",
+            "cover_i": 8618548,
+            "ebook_access": "unclassified",
+            "edition_count": 5,
+            "first_publish_year": 2011,
+            "has_fulltext": false,
+            "ia": [
+                "appliedcomputers00torb_073"
+            ],
+            "key": "/works/OL16585050W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Applied computer science"
+        },
+        {
+            "author_key": [
+                "OL1236218A"
+            ],
+            "author_name": [
+                "Ferguson Publishing Company"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 112,
+            "first_publish_year": 2006,
+            "has_fulltext": false,
+            "key": "/works/OL31756013W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Careers in Focus"
+        },
+        {
+            "author_key": [
+                "OL534760A"
+            ],
+            "author_name": [
+                "J. Glenn Brookshear"
+            ],
+            "cover_edition_key": "OL27026224M",
+            "cover_i": 8631625,
+            "ebook_access": "unclassified",
+            "edition_count": 1,
+            "first_publish_year": 2007,
+            "has_fulltext": false,
+            "ia": [
+                "computerscienceo00broo_116"
+            ],
+            "key": "/works/OL19836670W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL8464765A",
+                "OL8464766A"
+            ],
+            "author_name": [
+                "Kevin P Hare",
+                "Pindar Van Arman"
+            ],
+            "cover_edition_key": "OL30151433M",
+            "cover_i": 10444129,
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 2020,
+            "has_fulltext": false,
+            "key": "/works/OL22130834W",
+            "public_scan_b": false,
+            "title": "Computer Science Principles"
+        },
+        {
+            "author_key": [
+                "OL10447387A"
+            ],
+            "author_name": [
+                "Giorgino Mondo"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 2018,
+            "has_fulltext": false,
+            "key": "/works/OL28008755W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computational Science"
+        },
+        {
+            "author_key": [
+                "OL2030267A"
+            ],
+            "author_name": [
+                "Alexandra I. Forsythe"
+            ],
+            "cover_edition_key": "OL5075103M",
+            "cover_i": 11057347,
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 1970,
+            "has_fulltext": false,
+            "key": "/works/OL17996549W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL2030267A"
+            ],
+            "author_name": [
+                "Alexandra I. Forsythe"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 1969,
+            "has_fulltext": false,
+            "key": "/works/OL19438149W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL229459A"
+            ],
+            "author_name": [
+                "Walter J. Savitch"
+            ],
+            "cover_edition_key": "OL32352953M",
+            "cover_i": 10985976,
+            "ebook_access": "borrowable",
+            "edition_count": 1,
+            "first_publish_year": 2013,
+            "has_fulltext": true,
+            "ia": [
+                "pearsoncustomcom0000unse"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL24425817W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL32352953M",
+            "lending_identifier_s": "pearsoncustomcom0000unse",
+            "public_scan_b": false,
+            "title": "Pearson custom computer science"
+        },
+        {
+            "author_key": [
+                "OL1437425A"
+            ],
+            "author_name": [
+                "David Reed"
+            ],
+            "cover_edition_key": "OL24411788M",
+            "cover_i": 9296936,
+            "ebook_access": "printdisabled",
+            "edition_count": 6,
+            "first_publish_year": 2005,
+            "has_fulltext": true,
+            "ia": [
+                "balancedintroduc0000reed"
+            ],
+            "ia_collection_s": "internetarchivebooks;openlibrary-d-ol;printdisabled;the-claremont-colleges-ol",
+            "key": "/works/OL5855093W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "A Balanced Introduction to Computer Science"
+        },
+        {
+            "author_key": [
+                "OL224406A"
+            ],
+            "author_name": [
+                "Richard C. Dorf"
+            ],
+            "cover_edition_key": "OL4566315M",
+            "cover_i": 8555963,
+            "ebook_access": "borrowable",
+            "edition_count": 3,
+            "first_publish_year": 1972,
+            "has_fulltext": true,
+            "ia": [
+                "introductiontoco0000dorf"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL1874290W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL9558443M",
+            "lending_identifier_s": "introductiontoco0000dorf",
+            "public_scan_b": false,
+            "title": "Introduction to computers and computer science"
+        },
+        {
+            "author_key": [
+                "OL1192999A"
+            ],
+            "author_name": [
+                "Glyn Emery"
+            ],
+            "cover_edition_key": "OL3890989M",
+            "cover_i": 14462147,
+            "ebook_access": "borrowable",
+            "edition_count": 3,
+            "first_publish_year": 1977,
+            "has_fulltext": true,
+            "ia": [
+                "elementsofcomput0000emer"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL5271723W",
+            "language": [
+                "und",
+                "eng"
+            ],
+            "lending_edition_s": "OL3890989M",
+            "lending_identifier_s": "elementsofcomput0000emer",
+            "public_scan_b": false,
+            "title": "Elements of computer science"
+        },
+        {
+            "author_key": [
+                "OL1711578A"
+            ],
+            "author_name": [
+                "United Kingdom Atomic Energy Authority. Research Group."
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 1969,
+            "has_fulltext": false,
+            "key": "/works/OL6453113W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science research"
+        },
+        {
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 2019,
+            "has_fulltext": false,
+            "key": "/works/OL38066926W",
+            "public_scan_b": false,
+            "title": "Computer Science"
+        },
+        {
+            "author_key": [
+                "OL13145157A"
+            ],
+            "author_name": [
+                "Jöran Beel"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 2009,
+            "has_fulltext": false,
+            "key": "/works/OL36592968W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer Science"
+        },
+        {
+            "author_key": [
+                "OL7680014A"
+            ],
+            "author_name": [
+                "Ethi Pike"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 2017,
+            "has_fulltext": false,
+            "key": "/works/OL41655639W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer Science"
+        },
+        {
+            "author_key": [
+                "OL1235446A"
+            ],
+            "author_name": [
+                "Franco P. Preparata"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 1975,
+            "has_fulltext": false,
+            "key": "/works/OL22556884W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Theoretical computer science"
+        },
+        {
+            "author_key": [
+                "OL2030267A"
+            ],
+            "author_name": [
+                "Alexandra I. Forsythe"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 1970,
+            "has_fulltext": false,
+            "key": "/works/OL18519719W",
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL5951072A"
+            ],
+            "author_name": [
+                "Association for Computing Machinery. Special Interest Group on Computer Science Education."
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 1977,
+            "has_fulltext": false,
+            "key": "/works/OL13043691W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science curricula"
+        },
+        {
+            "author_key": [
+                "OL4183960A"
+            ],
+            "author_name": [
+                "Alexandra Forsythe"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 1969,
+            "has_fulltext": false,
+            "key": "/works/OL10219818W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer Science"
+        },
+        {
+            "author_key": [
+                "OL2730619A"
+            ],
+            "author_name": [
+                "Barry Burd"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 1995,
+            "has_fulltext": false,
+            "key": "/works/OL8205653W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer Science"
+        },
+        {
+            "author_key": [
+                "OL1076190A",
+                "OL6135672A"
+            ],
+            "author_name": [
+                "Cullen Schaffer",
+                "Cullen Schaffer"
+            ],
+            "cover_edition_key": "OL2399063M",
+            "cover_i": 11960555,
+            "ebook_access": "borrowable",
+            "edition_count": 2,
+            "first_publish_year": 1988,
+            "has_fulltext": true,
+            "ia": [
+                "principlesofcomp0000scha"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL4980156W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL2399063M",
+            "lending_identifier_s": "principlesofcomp0000scha",
+            "public_scan_b": false,
+            "title": "Principles of computer science"
+        },
+        {
+            "author_key": [
+                "OL1359713A"
+            ],
+            "author_name": [
+                "Kitagawa, Toshio"
+            ],
+            "cover_edition_key": "OL24836967M",
+            "cover_i": 6857240,
+            "ebook_access": "borrowable",
+            "edition_count": 1,
+            "first_publish_year": 1983,
+            "has_fulltext": true,
+            "ia": [
+                "computersciencet07kita"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL15930863W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL24836967M",
+            "lending_identifier_s": "computersciencet07kita",
+            "public_scan_b": false,
+            "title": "Computer science & technologies"
+        },
+        {
+            "author_key": [
+                "OL36319A",
+                "OL2879724A"
+            ],
+            "author_name": [
+                "Ron White",
+                "Timothy Edward Downs"
+            ],
+            "cover_edition_key": "OL397094M",
+            "cover_i": 554456,
+            "ebook_access": "printdisabled",
+            "edition_count": 16,
+            "first_publish_year": 1993,
+            "has_fulltext": true,
+            "ia": [
+                "howcomputersworkwhite00whit",
+                "howcomputerswor000whit",
+                "howcomputerswork00whit",
+                "howcomputerswork0008whit",
+                "howcomputerswork00ronw_0",
+                "howcomputerswork00whit_0",
+                "howcomputerswork00ronw"
+            ],
+            "ia_collection_s": "americana;barryuniversity-ol;binghamton-ol;cnusd-ol;internetarchivebooks;johnshopkins-ol;printdisabled;riceuniversity-ol;schroederlibrary-ol;udc-ol;uhmauicollege-ol;uni-ol;universityofoklahoma-ol;wrlc-ol",
+            "key": "/works/OL520219W",
+            "language": [
+                "eng",
+                "chi"
+            ],
+            "public_scan_b": false,
+            "title": "How computers work"
+        },
+        {
+            "author_key": [
+                "OL8070491A",
+                "OL8248748A",
+                "OL3778786A"
+            ],
+            "author_name": [
+                "George Rouse",
+                "Jason Pitt",
+                "Sean O'Byrne"
+            ],
+            "cover_edition_key": "OL29271823M",
+            "cover_i": 12921209,
+            "ebook_access": "printdisabled",
+            "edition_count": 1,
+            "first_publish_year": 2015,
+            "has_fulltext": true,
+            "ia": [
+                "ocrlevelcomputer0000rous"
+            ],
+            "ia_collection_s": "internetarchivebooks;printdisabled",
+            "key": "/works/OL21569300W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer Science"
+        },
+        {
+            "author_key": [
+                "OL110851A"
+            ],
+            "author_name": [
+                "Subrata Dasgupta"
+            ],
+            "cover_edition_key": "OL27210996M",
+            "cover_i": 14827885,
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 2016,
+            "has_fulltext": false,
+            "key": "/works/OL20030950W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL1236017A"
+            ],
+            "author_name": [
+                "John E. Parnell"
+            ],
+            "cover_edition_key": "OL2855666M",
+            "cover_i": 10576907,
+            "ebook_access": "borrowable",
+            "edition_count": 3,
+            "first_publish_year": 1984,
+            "has_fulltext": true,
+            "ia": [
+                "computersciencea0000parn"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL5366007W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL2855666M",
+            "lending_identifier_s": "computersciencea0000parn",
+            "public_scan_b": false,
+            "title": "Computer science advanced placement guidebook"
+        },
+        {
+            "author_key": [
+                "OL2030267A"
+            ],
+            "author_name": [
+                "Alexandra I. Forsythe"
+            ],
+            "cover_edition_key": "OL5068078M",
+            "cover_i": 9504530,
+            "ebook_access": "printdisabled",
+            "edition_count": 1,
+            "first_publish_year": 1969,
+            "has_fulltext": true,
+            "ia": [
+                "computersciencef00fors"
+            ],
+            "ia_collection_s": "dartmouthlibrary-ol;internetarchivebooks;printdisabled;the-claremont-colleges-ol;udc-ol;unb-ol;universityofcoloradoboulder-ol",
+            "key": "/works/OL16446373W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL7363156A"
+            ],
+            "author_name": [
+                "Dilip Kumar Sultania"
+            ],
+            "cover_edition_key": "OL26211637M",
+            "cover_i": 7892609,
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 2015,
+            "has_fulltext": false,
+            "key": "/works/OL17607677W",
+            "public_scan_b": false,
+            "title": "Theoretical Computer Science"
+        },
+        {
+            "author_key": [
+                "OL542415A"
+            ],
+            "author_name": [
+                "Owen L. Astrachan"
+            ],
+            "cover_edition_key": "OL9475122M",
+            "cover_i": 1076271,
+            "ebook_access": "printdisabled",
+            "edition_count": 6,
+            "first_publish_year": 1996,
+            "has_fulltext": true,
+            "ia": [
+                "computersciencet0000astr_a8f4",
+                "computersciencet00astr",
+                "computersciencet0000astr"
+            ],
+            "ia_collection_s": "dartmouthlibrary-ol;internetarchivebooks;johnshopkins-ol;printdisabled;riceuniversity-ol;rochester-ol;schroederlibrary-ol;the-claremont-colleges-ol;unb-ol;uni-ol;universityofarizona-ol;universityofcoloradoboulder-ol",
+            "key": "/works/OL3343833W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "A Computer Science Tapestry"
+        },
+        {
+            "author_key": [
+                "OL3418269A"
+            ],
+            "author_name": [
+                "Tricia Walker"
+            ],
+            "cover_edition_key": "OL21133329M",
+            "cover_i": 14159661,
+            "ebook_access": "no_ebook",
+            "edition_count": 5,
+            "first_publish_year": 1989,
+            "has_fulltext": false,
+            "key": "/works/OL9381668W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL1232884A"
+            ],
+            "author_name": [
+                "Allen L. Wold"
+            ],
+            "cover_edition_key": "OL3180935M",
+            "cover_i": 8466129,
+            "ebook_access": "borrowable",
+            "edition_count": 1,
+            "first_publish_year": 1984,
+            "has_fulltext": true,
+            "ia": [
+                "computerscience0000wold"
+            ],
+            "ia_collection_s": "bpljordan-ol;inlibrary;internetarchivebooks;printdisabled;universityofarizona-ol",
+            "key": "/works/OL5355712W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL3180935M",
+            "lending_identifier_s": "computerscience0000wold",
+            "public_scan_b": false,
+            "title": "Computer science"
+        },
+        {
+            "author_key": [
+                "OL1199973A"
+            ],
+            "author_name": [
+                "Leszek Rutkowski"
+            ],
+            "cover_edition_key": "OL27018239M",
+            "cover_i": 8619487,
+            "ebook_access": "no_ebook",
+            "edition_count": 34,
+            "first_publish_year": 2012,
+            "has_fulltext": false,
+            "key": "/works/OL19827983W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Artificial Intelligence and Soft Computing"
+        },
+        {
+            "author_key": [
+                "OL3269706A"
+            ],
+            "author_name": [
+                "David Hemmendinger"
+            ],
+            "cover_edition_key": "OL3597240M",
+            "cover_i": 2391711,
+            "ebook_access": "printdisabled",
+            "edition_count": 1,
+            "first_publish_year": 2000,
+            "has_fulltext": true,
+            "ia": [
+                "encyclopediaofco0000unse_o5e6"
+            ],
+            "ia_collection_s": "binghamton-ol;brynmawr-ol;californiastateuniversityfresno-ol;cua-ol;dartmouthlibrary-ol;gwulibraries-ol;internetarchivebooks;ithacacollege-ol;printdisabled;rochester-ol;the-claremont-colleges-ol;tulsacc-ol;uni-ol;universityofarizona-ol;universityofcoloradoboulder-ol;universityofoklahoma-ol",
+            "key": "/works/OL18142507W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Encyclopedia of computer science"
+        },
+        {
+            "author_key": [
+                "OL1518186A"
+            ],
+            "author_name": [
+                "John M. Zelle"
+            ],
+            "cover_edition_key": "OL3692244M",
+            "cover_i": 935554,
+            "ebook_access": "borrowable",
+            "edition_count": 2,
+            "first_publish_year": 2003,
+            "has_fulltext": true,
+            "ia": [
+                "pythonprogrammin00zell_0"
+            ],
+            "ia_collection_s": "americanuniversity-ol;drakeuniversity-ol;inlibrary;internetarchivebooks;phillipsacademy-preview;printdisabled;rochester-ol;udc-ol;wilsoncollege-ol",
+            "key": "/works/OL6037340W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL3692244M",
+            "lending_identifier_s": "pythonprogrammin00zell_0",
+            "public_scan_b": false,
+            "title": "Python programming"
+        },
+        {
+            "author_key": [
+                "OL1516903A"
+            ],
+            "author_name": [
+                "Roselyn Teukolsky"
+            ],
+            "cover_edition_key": "OL27142473M",
+            "cover_i": 9864007,
+            "ebook_access": "printdisabled",
+            "edition_count": 4,
+            "first_publish_year": 2013,
+            "has_fulltext": true,
+            "ia": [
+                "apcomputerscienc0006teuk",
+                "apcomputerscienc0000teuk_7ed"
+            ],
+            "ia_collection_s": "internetarchivebooks;printdisabled;tulsacc-ol",
+            "key": "/works/OL19962242W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "AP computer science A"
+        },
+        {
+            "author_key": [
+                "OL3713580A"
+            ],
+            "author_name": [
+                "Kevin Hare"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 2017,
+            "has_fulltext": false,
+            "key": "/works/OL27700930W",
+            "public_scan_b": false,
+            "title": "Computer Science Principles"
+        },
+        {
+            "author_key": [
+                "OL3285801A",
+                "OL1550429A",
+                "OL2777037A"
+            ],
+            "author_name": [
+                "Michael G. Schneider",
+                "Kenneth Lambert",
+                "Thomas Whaley"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 2000,
+            "has_fulltext": false,
+            "key": "/works/OL31725687W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Invitation to Computer Science"
+        },
+        {
+            "author_key": [
+                "OL18822A"
+            ],
+            "author_name": [
+                "R. Baeza-Yates"
+            ],
+            "cover_edition_key": "OL1086748M",
+            "cover_i": 2357852,
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 1994,
+            "has_fulltext": false,
+            "key": "/works/OL18294693W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computer science 2"
+        },
+        {
+            "author_key": [
+                "OL660131A"
+            ],
+            "author_name": [
+                "R. F. C. Walters"
+            ],
+            "cover_edition_key": "OL15058566M",
+            "cover_i": 5297320,
+            "ebook_access": "unclassified",
+            "edition_count": 5,
+            "first_publish_year": 1991,
+            "has_fulltext": false,
+            "ia": [
+                "categoriescomput00walt_263"
+            ],
+            "key": "/works/OL3755501W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Categories and computer science"
+        },
+        {
+            "author_key": [
+                "OL14256959A"
+            ],
+            "author_name": [
+                "George Duckett"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 2016,
+            "has_fulltext": false,
+            "key": "/works/OL41354199W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Computational Science"
+        },
+        {
+            "author_key": [
+                "OL534759A"
+            ],
+            "author_name": [
+                "Leland L. Beck"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 2,
+            "first_publish_year": 1984,
+            "has_fulltext": false,
+            "key": "/works/OL5358441W",
+            "public_scan_b": false,
+            "title": "Computer Science"
+        },
+        {
+            "author_key": [
+                "OL12480715A"
+            ],
+            "author_name": [
+                "CodeHS"
+            ],
+            "ebook_access": "no_ebook",
+            "edition_count": 7,
+            "first_publish_year": 2024,
+            "has_fulltext": false,
+            "key": "/works/OL38380869W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Oklahoma Computer Science"
+        },
+        {
+            "author_key": [
+                "OL1080625A"
+            ],
+            "author_name": [
+                "Edwin D. Reilly"
+            ],
+            "cover_edition_key": "OL18217957M",
+            "cover_i": 10275301,
+            "ebook_access": "printdisabled",
+            "edition_count": 2,
+            "first_publish_year": 2004,
+            "has_fulltext": true,
+            "ia": [
+                "conciseencyclope0000unse_v5u2"
+            ],
+            "ia_collection_s": "binghamton-ol;californiastateuniversityfresno-ol;internetarchivebooks;ithacacollege-ol;occidentalcollegelibrary-ol;printdisabled;universityofarizona-ol;wrlc-ol",
+            "key": "/works/OL18426898W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Concise encyclopedia of computer science"
+        },
+        {
+            "author_key": [
+                "OL579149A"
+            ],
+            "author_name": [
+                "Roger Penrose"
+            ],
+            "cover_edition_key": "OL18339648M",
+            "cover_i": 7901942,
+            "ebook_access": "borrowable",
+            "edition_count": 28,
+            "first_publish_year": 1989,
+            "has_fulltext": true,
+            "ia": [
+                "emperorsnewmindc00penr",
+                "emperorsnewmind00roge",
+                "lanuevamentedele0000penr",
+                "emperorsnewmind00penr"
+            ],
+            "ia_collection_s": "americana;framingham-ol;inlibrary;internetarchivebooks;printdisabled;rochester-ol;universityofcoloradoboulder-ol;universityofoklahoma-ol",
+            "key": "/works/OL3474169W",
+            "language": [
+                "fre",
+                "ger",
+                "spa",
+                "eng",
+                "tur"
+            ],
+            "lending_edition_s": "OL2190164M",
+            "lending_identifier_s": "emperorsnewmindc00penr",
+            "public_scan_b": false,
+            "subtitle": "Concerning Computers, Minds, and the Laws of Physics",
+            "title": "The Emperor's New Mind"
+        },
+        {
+            "author_key": [
+                "OL3278116A"
+            ],
+            "author_name": [
+                "K. Lee Lerner"
+            ],
+            "cover_edition_key": "OL25433809M",
+            "cover_i": 7265985,
+            "ebook_access": "borrowable",
+            "edition_count": 1,
+            "first_publish_year": 2013,
+            "has_fulltext": true,
+            "ia": [
+                "computersciences0003unse"
+            ],
+            "ia_collection_s": "inlibrary;internetarchivebooks;printdisabled",
+            "key": "/works/OL16809131W",
+            "language": [
+                "eng"
+            ],
+            "lending_edition_s": "OL25433809M",
+            "lending_identifier_s": "computersciences0003unse",
+            "public_scan_b": false,
+            "title": "Computer Sciences"
+        },
+        {
+            "author_key": [
+                "OL39286A",
+                "OL2638690A"
+            ],
+            "author_name": [
+                "Behrouz A. Forouzan",
+                "Sophia Chung Fegan"
+            ],
+            "cover_edition_key": "OL9345895M",
+            "cover_i": 1273755,
+            "ebook_access": "no_ebook",
+            "edition_count": 1,
+            "first_publish_year": 2002,
+            "has_fulltext": false,
+            "key": "/works/OL23788989W",
+            "language": [
+                "eng"
+            ],
+            "public_scan_b": false,
+            "title": "Foundations of computer science"
+        }
+    ]
+}
