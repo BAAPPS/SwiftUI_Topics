@@ -38,8 +38,33 @@ The goal is to practice creating **Swift data models** that can decode and repre
 
 ## What I Learned
 
+* **Decoding JSON into Swift models** using the `Codable` protocol and handling optional values.
+* **Building reusable UI components** (e.g., `IconTextRow`, color extensions, and modifiers for navigation/back button).
+* **Working with `LazyVGrid`** to display dynamic book data in a clean, scrollable grid layout.
+* **Using Kingfisher (`KFImage`)** to efficiently load and cache remote images.
+* **Accessibility best practices** in SwiftUI:
+
+  * Adding meaningful `.accessibilityLabel` and `.accessibilityHint` values.
+  * Using `.accessibilityHidden(true)` to reduce noise.
+  * Structuring elements so VoiceOver reads them in a logical order.
+  
+* **Navigation in SwiftUI** with `NavigationLink(value:)` and `.navigationDestination(for:)` to keep code more declarative.
+* **Custom styling**:
+
+  * Defining a color palette in a `Color+Extensions.swift` file.
+  * Creating reusable UI patterns like the book info rows and overlay buttons.
+  
+* **String manipulation** by extending `String` with a `titleCased()` method to ensure consistent capitalization.
+
 ---
 
 ## What I Would Do Differently
 
----
+* **Centralize layout logic**: Instead of calculating `columnWidth` inline, move that to a helper or environment value for cleaner code.
+* **Improve image handling**: Create a custom view for book covers with consistent aspect ratios, so the sizing logic isn’t repeated in multiple places.
+* **More test coverage**: Add unit tests for JSON decoding (e.g., ensuring optional fields like `author_name` or `subtitle` are handled gracefully).
+* **Error handling**: Show placeholder views when images fail to load or when fields like `subtitle` are missing.
+* **Accessibility testing**: Run through the app with VoiceOver more extensively to fine-tune the order of elements and hints.
+* **Scalability**: Refactor the ViewModels so they can handle larger datasets or support pagination from the OpenLibrary API.
+* **Design consistency**: Store icons and spacing values in a design system file (instead of scattering throughout views).
+

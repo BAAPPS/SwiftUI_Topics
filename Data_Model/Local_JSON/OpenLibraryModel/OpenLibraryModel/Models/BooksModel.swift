@@ -21,6 +21,6 @@ struct BooksModel: Codable {
     
     static let response: BooksModel = Bundle.main.decode("CSBooks.json")
     static let allDocs: [BookModel] = response.docs
-    static let bookExample = allDocs[0]
+    static let bookExample = allDocs[4]
     
 }

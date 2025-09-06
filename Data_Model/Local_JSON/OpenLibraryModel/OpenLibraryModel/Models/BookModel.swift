@@ -18,6 +18,7 @@ struct BookModel: Codable, Identifiable, Hashable {
     let key: String
     let language: [String]?
     let title: String
+    let subtitle: String?
     
     enum CodingKeys: String, CodingKey {
         case authorKeys = "author_key"
@@ -26,7 +27,7 @@ struct BookModel: Codable, Identifiable, Hashable {
         case coverI = "cover_i"
         case editionCount = "edition_count"
         case firstPublishYear = "first_publish_year"
-        case key, language, title
+        case key, language, title, subtitle
     }
     
     

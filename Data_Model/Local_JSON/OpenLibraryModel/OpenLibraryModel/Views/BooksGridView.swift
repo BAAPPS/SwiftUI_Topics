@@ -70,6 +70,7 @@ struct BooksGridView: View {
             BooksDetailView(book: book)
         }
         .navigationTitle("Books")
+        .navigationBarColor(background: Color.red.opacity(0.9), titleColor: Color.white)
     }
 }
 
