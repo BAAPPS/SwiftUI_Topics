@@ -16,6 +16,9 @@ struct ShowsDetailView: View {
         GridItem(.flexible(), spacing: 12)
     ]
     
+    
+
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -93,34 +96,38 @@ struct ShowsDetailView: View {
                     .font(.headline)
                     .padding(.vertical)
                 
-                LazyVGrid(columns: columns, spacing: 12) {
-                    ForEach(Array(show.episodes.enumerated()), id: \.1.title) {  index,episode in
-                        
-                        let isLeftColumn = index % 2 == 0
-                        
-                        KFImage.url(from: episode.thumbnail_url)
-                            .placeholder {
-                                ZStack {
-                                    Color.black.opacity(0.2)
-                                    ProgressView()
+                
+                Group {
+                    let sortedEpisodes = show.episodes.dedupAndSort()
+                    LazyVGrid(columns: columns, spacing: 12) {
+                        ForEach(Array(sortedEpisodes.enumerated()), id: \.1.title) {  index,episode in
+                            
+                            let isLeftColumn = index % 2 == 0
+                            
+                            KFImage.url(from: episode.thumbnail_url)
+                                .placeholder {
+                                    ZStack {
+                                        Color.black.opacity(0.2)
+                                        ProgressView()
+                                    }
                                 }
-                            }
-                            .resizable()
-                            .scaledToFill()
-                            .frame(height: 100)
-                            .clipped()
-                            .cornerRadius(8, corners: isLeftColumn ? [.topRight, .bottomRight] : [.topLeft, .bottomLeft])
-                            .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
-                            .overlay(
-                                Text(episode.title)
-                                    .font(.subheadline)
-                                    .foregroundColor(.white)
-                                    .padding(6)
-                                    .background(Color.black.opacity(0.6))
-                                    .cornerRadius(4)
-                                    .padding(4),
-                                alignment: .bottom
-                            )
+                                .resizable()
+                                .scaledToFill()
+                                .frame(height: 100)
+                                .clipped()
+                                .cornerRadius(8, corners: isLeftColumn ? [.topRight, .bottomRight] : [.topLeft, .bottomLeft])
+                                .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
+                                .overlay(
+                                    Text(episode.title)
+                                        .font(.subheadline)
+                                        .foregroundColor(.white)
+                                        .padding(6)
+                                        .background(Color.black.opacity(0.6))
+                                        .cornerRadius(4)
+                                        .padding(4),
+                                    alignment: .bottom
+                                )
+                        }
                     }
                 }
             }

@@ -29,18 +29,18 @@ struct ShowsListView: View {
                                     axis: (x: 1, y: 0, z: 0)
                                 )
                         }
-                        .scrollTargetLayout()
                     }
+                    .scrollTargetLayout()
+                    .scrollTargetBehavior(.viewAligned)
                     .foregroundColor(Color(hex:"#540b0e"))
-                    .navigationTitle("Shows")
-                    .navigationDestination(for:ShowsModel.self) { show in
-                        ShowsDetailView(show:show)
-                    }
                     
                 }
             }
         }
-        .scrollTargetBehavior(.viewAligned)
+        .navigationTitle("Shows")
+        .navigationDestination(for:ShowsModel.self) { show in
+            ShowsDetailView(show:show)
+        }
     }
 }
 
