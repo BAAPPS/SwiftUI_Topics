@@ -69,14 +69,9 @@ Explore the app in action, highlighting its clean layout, fullscreen image brows
 * **Fullscreen Artwork Browsing**
   Vertical paging allows users to swipe through artwork images seamlessly.
   
-![Fullscreen Artwork Browsing](https://github.com/user-attachments/assets/8ef8e216-486d-4b68-8a2a-183ef61be48a)
+![Fullscreen Artwork Browsing](https://github.com/user-attachments/assets/0a8033d8-6a83-449a-ac0a-84b0ce51f323)
 
 * **Detailed Artwork View**
   Tap the info button to see full artwork details, including title, artist, format, dates, and copyright. All components are accessible and readable by VoiceOver.
 
-
-![Detailed Artwork View](https://github.com/user-attachments/assets/41d80d2a-5b07-4738-9535-6a6029b45511)
-
-* **Accessible Components**
-  Reusable components like `IconTextRow` make the app easier to maintain and fully accessible.
-
+![Detailed Artwork View](https://github.com/user-attachments/assets/ef99ec77-5b7a-4001-9253-7728848ccf7e)

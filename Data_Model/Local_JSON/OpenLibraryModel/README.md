@@ -68,3 +68,33 @@ The goal is to practice creating **Swift data models** that can decode and repre
 * **Scalability**: Refactor the ViewModels so they can handle larger datasets or support pagination from the OpenLibrary API.
 * **Design consistency**: Store icons and spacing values in a design system file (instead of scattering throughout views).
 
+
+## App Showcase
+
+
+### 📚 Books Grid
+
+Browse books in a responsive grid layout powered by LazyVGrid.
+
+- Displays book covers, titles, and authors.
+
+- Adaptive layout adjusts to screen size.
+
+- Supports VoiceOver with meaningful labels for each book item.
+
+![LazyVGrid Books](https://github.com/user-attachments/assets/2eb153e9-f571-41c5-9bb5-3c1a1dc558e6)
+
+### 🔍 Book Details
+
+Tap the info button to see full book details, including:
+
+- Title, author(s), and publish year
+
+- Cover image (loaded via Kingfisher)
+
+- Optional fields handled gracefully (subtitle, edition, etc.)
+
+- Reusable IconTextRow components for clean and accessible display
+
+![Detailed Book View](https://github.com/user-attachments/assets/febc192d-27f7-4021-bb16-90aecfab4640)
+
