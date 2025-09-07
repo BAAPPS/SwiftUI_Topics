@@ -14,13 +14,17 @@ struct ImageModel: Codable, Identifiable, Hashable {
     }
     let idsid: Int
     let date: Date
+    let createdDate: Date
+    let lastUpdated: Date
     let format: String
     let copyright: String
     let caption: String?
-    let createdDate: Date
+    let baseImageURL: String
     
     enum CodingKeys: String, CodingKey {
         case idsid, date, format, copyright, caption
         case createdDate = "createdate"
+        case baseImageURL = "baseimageurl"
+        case lastUpdated = "lastupdate"
     }
 }
