@@ -3,6 +3,8 @@
 
 Secrets.plist
 
+Secrets.swift
+
 # Xcode
 build/
 DerivedData/
