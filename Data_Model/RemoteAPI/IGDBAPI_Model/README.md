@@ -46,12 +46,44 @@ This project provides hands-on experience with:
 
 ## What I Learned
 
+* How to **integrate a third-party API** with OAuth authentication in Swift.
+* Techniques for **decoding complex, nested JSON** with optional fields.
+* Building **dynamic SwiftUI layouts** including grids and lists.
+* Using **reusable components** (`IconTextRow`, etc.) for clean code.
+* Accessibility considerations for **VoiceOver** and screen readers.
+* Managing **state and view updates** with `@Environment` and observable models.
+
 ---
 
 ## What I Would Do Differently
+
+* Implement **caching** to reduce repeated network requests and improve performance.
+* Add **pagination or infinite scrolling** for large game datasets.
+* Use **SwiftData or CoreData** to persist game data locally.
+* Refactor some components for **better modularity and testability**.
+* Improve **error handling** and user feedback for network failures.
 
 ---
 
 ## App Showcase
 
----
+
+### Games Grid View
+
+- Explore all games in a 2x2 grid layout, showing cover art and titles.
+
+![Games Grid View](https://github.com/user-attachments/assets/fe9413c3-94ea-459f-a21f-cf8a63d65ea2)
+
+
+### Games List View
+
+- Browse games in a scrollable list, with thumbnails and quick navigation.
+
+![Games Grid View](https://github.com/user-attachments/assets/fd8dab82-59c7-4bfb-b589-84111a41a844)
+
+
+### Games Details View
+
+- View detailed information including cover, genres, release date, summary, and external link.
+
+![Games Details View](https://github.com/user-attachments/assets/ae044b86-ce65-4533-aab1-8a65dba6ddc8)
