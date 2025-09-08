@@ -8,14 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    let gamesVM = GamesViewModel()
+    let gameViewModeModel = GamesViewModeModel()
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            ZStack {
+                Color.gray800
+                    .ignoresSafeArea()
+                GamesListGridView()
+                    .environment(gamesVM)
+                    .environment(gameViewModeModel)
+                    .navigationDestination(for: GamesModel.self) { game in
+                        GamesDetailView(game: game)
+                    }
+            }
         }
-        .padding()
     }
 }
 
