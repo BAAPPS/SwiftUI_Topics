@@ -11,6 +11,10 @@ struct GamesListGridView: View {
     @Environment(GamesViewModel.self) var gamesVM
     @Environment(GamesViewModeModel.self) var gamesViewModeModel
     
+    
+//    @Binding var selectedGame: GamesModel? // Bind this from parent for navigation
+
+    
     var body: some View {
         VStack {
             // Toggle buttons
@@ -38,18 +42,22 @@ struct GamesListGridView: View {
             // Content
             switch gamesViewModeModel.currentMode {
             case .grid:
+//                GamesGridView(selectedGame: $selectedGame)
                 GamesGridView()
             case .list:
-                GamesListView()
+//                GamesListView(selectedGame: $selectedGame)
+                  GamesListView()
             }
         }
     }
 }
 
 #Preview {
+    @Previewable @State var selectedGame: GamesModel? = nil
     ZStack {
         Color.gray800
             .ignoresSafeArea()
+//        GamesListGridView(selectedGame: $selectedGame)
         GamesListGridView()
             .environment(GamesViewModel())
             .environment(GamesViewModeModel())

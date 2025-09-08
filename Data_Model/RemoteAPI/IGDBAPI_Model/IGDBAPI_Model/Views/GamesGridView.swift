@@ -11,6 +11,9 @@ import Kingfisher
 struct GamesGridView: View {
     @Environment(GamesViewModel.self) var gamesVM
     
+//    @Binding var selectedGame: GamesModel? // Bind this from parent for navigation
+//    
+    
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -51,6 +54,24 @@ struct GamesGridView: View {
                             .padding(.vertical, 13)
                             .padding(.horizontal, 10)
                             
+                            // Chevron button triggers navigation only
+                            
+                            //                            Button {
+                            //                                selectedGame = game
+                            //                            } label: {
+                            //                                Image(systemName: "info.circle.fill")
+                            //                                    .font(.title2)
+                            //                                    .padding(2)
+                            //                                    .background(Color.gray300)
+                            //                                    .foregroundColor(.white)
+                            //                                    .clipShape(Circle())
+                            //                                    .shadow(radius: 4)
+                            //                            }
+                            //                            .buttonStyle(.plain) // Keeps it looking like a normal image
+                            //                            .accessibilityLabel("Show details for \(game.name)")
+                            //                            .accessibilityHint("Tap to view \(game.name) details")
+                        
+                            
                             
                             Spacer()
                             
@@ -65,7 +86,7 @@ struct GamesGridView: View {
                                 .accessibilityLabel(game.name)
                                 .accessibilityAddTraits(.isHeader)
                         }
-  
+                        
                     }
                     .frame(maxWidth: .infinity)
                     .background(Color.gray700)
@@ -84,11 +105,13 @@ struct GamesGridView: View {
 }
 
 #Preview {
+//    @Previewable @State var selectedGame: GamesModel? = nil
     NavigationStack {
         ZStack {
             Color.gray800
                 .ignoresSafeArea()
             
+//            GamesGridView(selectedGame: $selectedGame)
             GamesGridView()
                 .environment(GamesViewModel())
         }

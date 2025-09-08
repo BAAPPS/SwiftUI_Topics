@@ -10,6 +10,9 @@ import Kingfisher
 
 struct GamesListView: View {
     @Environment(GamesViewModel.self) var gamesVM
+    
+    //    @Binding var selectedGame: GamesModel?
+    
     var body: some View {
         VStack {
             if gamesVM.isLoading {
@@ -36,7 +39,7 @@ struct GamesListView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width:80, height:80)
-                            .accessibilityHidden(true) 
+                            .accessibilityHidden(true)
                         
                         
                         
@@ -50,6 +53,21 @@ struct GamesListView: View {
                                 .accessibilityLabel("Show details for \(game.name)")
                                 .accessibilityHint("Tap to view \(game.name) details")
                         }
+                        
+                        // Chevron button triggers navigation only
+                        //                        Button {
+                        //                            selectedGame = game
+                        //                        } label: {
+                        //                            Image(systemName: "chevron.right")
+                        //                                .font(.title2)
+                        //                                .padding(2)
+                        //                                .foregroundColor(Color.gray200)
+                        //                                .shadow(radius: 4)
+                        //                        }
+                        //                        .buttonStyle(.plain) // Keeps it looking like a normal image
+                        //                        .frame(maxWidth:.infinity, alignment: .trailing)
+                        //                        .accessibilityLabel("Show details for \(game.name)")
+                        //                        .accessibilityHint("Tap to view \(game.name) details")
                         
                         
                     }
@@ -72,6 +90,9 @@ struct GamesListView: View {
 }
 
 #Preview {
+    
+//    @Previewable @State var selectedGame: GamesModel? = nil
+    
     NavigationStack {
         
         ZStack {
@@ -79,6 +100,7 @@ struct GamesListView: View {
             Color.gray800
                 .ignoresSafeArea()
             
+//            GamesListView(selectedGame: $selectedGame)
             GamesListView()
                 .environment(GamesViewModel())
         }
