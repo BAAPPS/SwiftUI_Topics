@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+@Observable
+final class NewsAPIManager {
+    static let shared = NewsAPIManager()
+}
