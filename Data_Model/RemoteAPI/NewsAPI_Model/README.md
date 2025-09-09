@@ -33,6 +33,7 @@ Working with NewsAPI provides an opportunity to:
 - Experiment with different request parameters (sources, categories, keywords)  
 - Handle dynamic and sometimes inconsistent API data gracefully  
 - Build a custom search bar to query endpoints interactively  
+- Implement pagination with infinite scrolling for smoother content browsing  
 - Design SwiftUI views that adapt to live, ever-changing content  
 
 ---
