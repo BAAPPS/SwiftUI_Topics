@@ -22,7 +22,11 @@ The goal is to gain confidence with **`URLSession`**, **async/await**, and **`Co
 
 ## Sub-Projects
 <!--- [RAWGAPI_Model](./RAWGAPI_Model) → Explore the [RAWG Video Games Database API](https://rawg.io/apidocs) for games, genres, and platforms  -->
-- [IGDBAPI_Model](./IGDBAPI_Model) → Explore the [IGDB (Internet Games Database) API](https://api-docs.igdb.com/#examples) for games, companies, and platforms  
+- [IGDBAPI_Model](./IGDBAPI_Model) → Explore the [IGDB (Internet Games Database) API](https://api-docs.igdb.com/#examples) for games, companies, and platforms 
+
+- [NewsAPI_Model](./NewsAPI_Model) → Explore the [NewsAPI](https://newsapi.org/docs) for fetching and displaying news articles  
+
+
 
 ---
 
