@@ -1,9 +1,9 @@
 # macOS system files
 .DS_Store
 
-Secrets.plist
-
-Secrets.swift
+# Secrets (ignore everywhere)
+**/Secrets.swift
+**/Secrets.plist
 
 # Xcode
 build/
@@ -15,5 +15,3 @@ DerivedData/
 
 # Swift Package Manager
 Packages/
-
-
