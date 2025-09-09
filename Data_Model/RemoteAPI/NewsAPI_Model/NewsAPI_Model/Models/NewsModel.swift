@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct NewsModel: Codable {
+    let articles:[ArticleModel]
+}
