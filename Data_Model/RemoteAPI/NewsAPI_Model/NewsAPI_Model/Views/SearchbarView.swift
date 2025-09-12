@@ -23,10 +23,16 @@ struct SearchBarView: View {
                     .accessibilityHidden(true) // prevent duplicate announcement
             }
             
-            TextField("", text: $text, onCommit: {
-                onCommit?()
-            })
-            .padding(10)
+            TextField("", text: $text)
+                .onSubmit {
+                    let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+                    if !trimmed.isEmpty {
+                        onCommit?()
+                    }
+                }
+                .submitLabel(.search)
+                .padding(10)
+         
         }
         .background(Color(.systemGray6))
         .cornerRadius(10)
