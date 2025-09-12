@@ -7,7 +7,9 @@
 `Coverr_Model` is a learning-focused Swift project that integrates with the [Coverr Video API](https://api.coverr.co/docs).  
 The main goal is to practice **data modeling**, **decoding JSON responses**, and **working with API keys** in a real-world SwiftUI app environment.  
 
-The app fetches video metadata from the Coverr API (titles, descriptions, thumbnails, tags, etc.) and displays it in a simple SwiftUI interface. This project emphasizes **understanding API-driven workflows** while writing clean, robust models.
+The app fetches video metadata from the Coverr API (titles, descriptions, thumbnails, tags, etc.) and displays it in a simple SwiftUI interface. This project emphasizes **understanding API-driven workflows** while writing clean, robust models.  
+
+> ⚠️ **Note:** This project is for personal learning and experimentation with the Coverr API and is **not intended for production use**.
 
 ---
 
