@@ -9,10 +9,13 @@ import SwiftUI
 
 struct TabBarView: View {
     @Binding var selectedTab: AppTab
+    
     var body: some View {
         HStack {
             ForEach(AppTab.allCases) { tab  in
-                Spacer()
+                // Frst and last tabs get the rounded ends, middle none
+                let isFirst = tab == AppTab.allCases.first
+                let isLast  = tab == AppTab.allCases.last
                 Button(action: {
                     withAnimation {
                         selectedTab = tab
@@ -30,14 +33,15 @@ struct TabBarView: View {
                     .frame(maxWidth: .infinity)
                     .background(
                         Color.blue.opacity(selectedTab == tab ? 0.1 : 0)
-                            .cornerRadius(10)
+                            .cornerRadiusModifier(16,
+                                    corners: isFirst ? [.topRight, .bottomRight] :
+                                    isLast  ? [.topLeft, .bottomLeft] :[])
+                        
                     )
                 }
-                Spacer()
                 
             }
         }
-        .padding(.horizontal)
         .background(.ultraThinMaterial)
     }
 }

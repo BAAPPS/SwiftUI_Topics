@@ -8,40 +8,29 @@
 import SwiftUI
 import Kingfisher
 
+import SwiftUI
+
 struct AllNewsView: View {
     @Environment(NewsViewModel.self) var newsViewModel
     @State private var searchText: String = ""
-    @Namespace private var animation
     
-    @State private var selectedArticle: ArticleModel? = nil
-    
-    @State private var dragOffset: CGFloat = 0
-    
+    @Binding var selectedArticle: ArticleModel?
+    var animation: Namespace.ID                 
     
     var body: some View {
-        ZStack {
-            VStack {
-                SearchBarView(text: $searchText, placeholder: "Search by topic...") {
-                    newsViewModel.queryText = searchText
-                }
-                .padding(.top, 10)
-                
-                NewsFeedView(
-                    articles: newsViewModel.allArticles,
-                    selectedArticle: $selectedArticle,
-                    animation: animation,
-                    fetchNextPage: { newsViewModel.fetchAllNextPage() }
-                )
-                .environment(newsViewModel)
+        VStack {
+            SearchBarView(text: $searchText, placeholder: "Search by topic...") {
+                newsViewModel.queryText = searchText
             }
+            .padding(.top, 10)
             
-            SwipeDismissOverlayView(selectedItem: $selectedArticle, animation: animation) { article in
-                NewsDetailView(article: article) {
-                    withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
-                        selectedArticle = nil
-                    }
-                }
-            }
+            NewsFeedView(
+                articles: newsViewModel.allArticles,
+                selectedArticle: $selectedArticle,
+                animation: animation,
+                fetchNextPage: { newsViewModel.fetchAllNextPage() }
+            )
+            .environment(newsViewModel)
         }
         .onAppear {
             if newsViewModel.allArticles.isEmpty {
@@ -51,8 +40,10 @@ struct AllNewsView: View {
     }
 }
 
-
 #Preview {
-    AllNewsView()
+    @Previewable @State var selectedArticle: ArticleModel? = .mock
+    @Previewable @Namespace var animation
+    
+    AllNewsView(selectedArticle: $selectedArticle, animation: animation)
         .environment(NewsViewModel())
 }

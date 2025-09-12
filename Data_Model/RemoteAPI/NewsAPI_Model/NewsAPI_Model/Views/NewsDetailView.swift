@@ -12,6 +12,7 @@ struct NewsDetailView: View {
     let article: ArticleModel
     var onDone: () -> Void  // ✅ custom closure
     
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
@@ -22,28 +23,38 @@ struct NewsDetailView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(maxWidth: .infinity, maxHeight: 250)
                         .clipped()
+                        .accessibilityHidden(true)
+                    
                 }
                 
                 VStack{
                     Text(article.title)
                         .font(.title2)
                         .bold()
+                        .foregroundColor(.lochmara950)
                     
                     if let author = article.author {
                         Text("By \(author)")
                             .font(.subheadline)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.lochmara700)
                     }
                     
                     if let description = article.description {
                         Text(description)
                             .font(.body)
                             .padding(.top, 10)
+                            .foregroundColor(.lochmara950)
                     }
                 }
                 .padding()
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel(makeAccessibilityLabel(for: article))
+                .accessibilityHint("Read the article.")
+                
             }
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityHint("Swipe down to close this detail view.")
         .overlay(
             HStack {
                 Spacer()
@@ -54,14 +65,31 @@ struct NewsDetailView: View {
                         .font(.subheadline)
                         .foregroundColor(.white)
                         .padding()
-                        .background(Color(.red).opacity(0.8))
+                        .background(Color.lochmara950)
                         .clipShape(Circle())
+                        .accessibilityHidden(true)
                 }
                 .padding()
+                .offset(y:40)
+                .accessibilityLabel("Tap to close detail")
+                .accessibilityAddTraits(.isButton)
+                
+                
             },
             alignment: .topTrailing
         )
         
+    }
+    // MARK: - Helper for accessibility label
+    private func makeAccessibilityLabel(for article: ArticleModel) -> String {
+        var label = article.title
+        if let author = article.author {
+            label += ". By \(author)."
+        }
+        if let description = article.description {
+            label += " \(description)"
+        }
+        return label
     }
 }
 

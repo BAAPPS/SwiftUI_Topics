@@ -9,9 +9,9 @@ import SwiftUI
 
 struct TopHeadlineNewsView: View {
     @Environment(NewsViewModel.self) var newsViewModel
-    @Namespace private var animation
-    
-    @State private var selectedArticle: ArticleModel? = nil
+
+    @Binding var selectedArticle: ArticleModel?
+    var animation: Namespace.ID
     
     var body: some View {
         @Bindable var newsViewModel = newsViewModel
@@ -42,11 +42,9 @@ struct TopHeadlineNewsView: View {
                 .environment(newsViewModel)
             }
             
-            SwipeDismissOverlayView(selectedItem: $selectedArticle, animation: animation) { article in
+            SwipeDismissOverlayView(selectedItem: $selectedArticle, animation: animation) { article, close in
                 NewsDetailView(article: article) {
-                    withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
-                        selectedArticle = nil
-                    }
+                    close()
                 }
             }
         }
@@ -59,7 +57,9 @@ struct TopHeadlineNewsView: View {
 }
 
 #Preview {
-    TopHeadlineNewsView()
+    @Previewable @State var selectedArticle: ArticleModel? = .mock
+    @Previewable @Namespace var animation
+    TopHeadlineNewsView(selectedArticle: $selectedArticle, animation: animation)
         .environment(NewsViewModel())
 }
 

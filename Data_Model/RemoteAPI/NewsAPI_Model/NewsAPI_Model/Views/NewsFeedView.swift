@@ -14,11 +14,10 @@ struct NewsFeedView: View {
     @Binding var selectedArticle: ArticleModel?
     var animation: Namespace.ID
     var fetchNextPage: (() -> Void)? = nil
-
-     
+    
+    
     var body: some View {
         ZStack {
-            // Loading / Error / List
             if articles.isEmpty {
                 ProgressView("Loading...")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -53,7 +52,7 @@ struct NewsFeedView: View {
 #Preview {
     @Previewable @Namespace var animation
     @Previewable @State var selected: ArticleModel? = nil
-
+    
     NewsFeedView(articles: [.mock], selectedArticle: $selected, animation: animation)
         .environment(NewsViewModel())
 }
