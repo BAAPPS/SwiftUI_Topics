@@ -10,25 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @State var videosVM = VideosViewModel()
     var body: some View {
-        VStack {
-            Text("Coverr Video Model")
-                .font(.title)
-            if videosVM.isLoading {
-                ProgressView("Loading...")
-            }
-            if let error = videosVM.errorMessage {
-                Text("Error: \(error)")
-                    .foregroundColor(.red)
-            }
-            
-            Text("All Videos: \(videosVM.allVideos.count)")
-            Text("All Collections: \(videosVM.allCollections.count)")
-            Text("All Collection Videos: \(videosVM.allCollectionsVideo.count)")
-        }
-        .padding()
-        .task {
-            await testAllEndpoints()
-        }
+        FullScreenVideosView()
+            .environment(videosVM)
     }
     
     

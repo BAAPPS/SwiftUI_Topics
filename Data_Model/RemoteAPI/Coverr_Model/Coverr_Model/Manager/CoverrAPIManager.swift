@@ -112,6 +112,9 @@ final class CoverrAPIManager {
         
         guard let url = components?.url else { throw APIError.invalidURL }
         
+        // ✅ Debug print full request URL with query items
+        print("➡️ Final request URL:", url.absoluteString)
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
@@ -119,7 +122,7 @@ final class CoverrAPIManager {
         
         // Debug: print raw JSON first 50 chars
         if let jsonString = String(data: data, encoding: .utf8) {
-            print("Raw JSON:\n", jsonString.prefix(50) + "...")
+            print("Raw JSON:\n", jsonString)
         }
         
         // Decode top-level status first to catch server errors

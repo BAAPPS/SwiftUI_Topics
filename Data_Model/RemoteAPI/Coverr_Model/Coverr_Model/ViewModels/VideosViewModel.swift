@@ -48,7 +48,7 @@ class VideosViewModel {
         defer { isLoading = false }
         
         do {
-            let videosModel = try await manager.fetchVideosAsync(page: currentPage)
+            let videosModel = try await manager.fetchVideosAsync(page: currentPage, urls: true)
             allVideos.append(contentsOf: videosModel.hits)
             currentPage += 1
         } catch let apiError as APIError {
