@@ -57,7 +57,6 @@ class VideosViewModel {
             errorMessage = error.localizedDescription
         }
     }
-    
     // MARK: - Fetch All Collections
     func fetchCollections(reset: Bool = false) async {
         if reset {

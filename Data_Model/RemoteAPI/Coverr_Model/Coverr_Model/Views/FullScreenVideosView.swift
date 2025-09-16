@@ -25,9 +25,7 @@ struct VideoCell: View {
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(
-            Text(video.tags.isEmpty
-                 ? "Video"
-                 : video.tags.joined(separator: ", "))
+            Text(video.tags?.joined(separator: ", ") ?? "Video")
         )
         .accessibilityValue(Text(isActive ? "Currently playing" : "Paused"))
         .accessibilityHint(Text("Swipe up or down to move between videos"))
@@ -39,6 +37,8 @@ struct FullScreenVideosView: View {
     @Environment(VideosViewModel.self) var videosVM
     @State private var currentPage = 0
     @State private var fillMode = true // toggle fill or fit per video
+    @State private var selectedVideo: VideoHitsModel? = nil
+    
     
     var body: some View {
         // ZStack layering: first = back (video), last = front (button/icon overlay)
@@ -79,7 +79,30 @@ struct FullScreenVideosView: View {
                     
                 }
                 Spacer()
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.4).delay(0.2)) {
+                        selectedVideo = videosVM.allVideos[currentPage]
+                    }
+                }) {
+                    Image(systemName: "info.circle" )
+                        .font(.system(size: 23, weight: .bold))
+                        .padding()
+                        .background(Color.black.opacity(0.5))
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                        .padding()
+                        .frame(maxWidth:.infinity, alignment: .bottomTrailing)
+                        .padding(.bottom, 40)
+                        .accessibilityHidden(true)
+                }
+                .accessibilityLabel(Text("Show video details"))
+                .accessibilityHint(Text("Displays detailed information about the current video"))
             }
+        }
+        .sheet(item: $selectedVideo) { video in
+            VideoDetailsView(video: video)
+            .presentationDetents([.fraction(0.4), .medium, .large])
+            .presentationDragIndicator(.visible)
         }
     }
 }

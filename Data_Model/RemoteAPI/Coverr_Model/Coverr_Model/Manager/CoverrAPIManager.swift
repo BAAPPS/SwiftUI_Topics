@@ -70,7 +70,8 @@ final class CoverrAPIManager {
         pageSize: Int = 20,
         urls: Bool = false,
         sort: String? = nil,
-        collectionID: String? = nil
+        collectionID: String? = nil,
+        videoID: String? = nil
     ) async throws -> VideosModel {
         
         // Determine default page
@@ -84,7 +85,11 @@ final class CoverrAPIManager {
         let urlString: String
         switch endpoint {
         case .videos:
-            urlString = "https://api.coverr.co/\(endpoint.path)"
+            if let idOfVideo = videoID, !idOfVideo.isEmpty {
+                urlString = "https://api.coverr.co/\(endpoint.path)/\(idOfVideo)"
+            } else{
+                urlString = "https://api.coverr.co/\(endpoint.path)"
+            }
         case .collections:
             if let id = collectionID, !id.isEmpty {
                 // Specific collection videos
