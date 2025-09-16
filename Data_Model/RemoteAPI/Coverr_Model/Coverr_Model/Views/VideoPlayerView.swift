@@ -11,8 +11,8 @@ import AVKit
 struct VideoPlayerView: View {
     let url: URL
     let isActive: Bool
+    let fillMode: Bool
     @State private var player: AVPlayer? = nil
-    var fillMode: Bool = true // toggle fill or fit per video
 
     var body: some View {
         GeometryReader { proxy in
@@ -49,7 +49,8 @@ struct VideoPlayerView: View {
 #Preview {
     VideoPlayerView(
         url: URL(string: "https://cdn.coverr.co/videos/coverr-photographer-in-mountains-7798/1080p.mp4")!,
-        isActive: true
+        isActive: true,
+        fillMode: true
     )
     .ignoresSafeArea()
 }
