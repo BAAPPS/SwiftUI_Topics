@@ -41,6 +41,7 @@ struct FullScreenVideosView: View {
     @State private var fillMode = true // toggle fill or fit per video
     
     var body: some View {
+        // ZStack layering: first = back (video), last = front (button/icon overlay)
         ZStack {
             SnapPagingView(pageCount: videosVM.allVideos.count, currentPage: $currentPage) { width, height in
                 VStack(spacing:0) {
@@ -74,7 +75,7 @@ struct FullScreenVideosView: View {
                     .accessibilityLabel(Text("Switch video scaling"))
                     .accessibilityValue(Text(fillMode ? "Currently in fill mode" : "Currently in fit mode"))
                     .accessibilityHint(Text("Toggles between fill and fit mode for the video"))
-
+                    
                     
                 }
                 Spacer()
