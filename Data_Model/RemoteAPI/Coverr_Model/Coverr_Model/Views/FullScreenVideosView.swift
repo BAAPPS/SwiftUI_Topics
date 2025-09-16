@@ -15,12 +15,22 @@ struct VideoCell: View {
     let fillMode: Bool
     
     var body: some View {
-        if let urls = video.urls {
-            VideoPlayerView(url: urls.mp4, isActive: isActive, fillMode: fillMode)
-        } else {
-            Color.black
-                .overlay(Text("No Video").foregroundColor(.white))
+        Group{
+            if let urls = video.urls {
+                VideoPlayerView(url: urls.mp4, isActive: isActive, fillMode: fillMode)
+            } else {
+                Color.black
+                    .overlay(Text("No Video").foregroundColor(.white))
+            }
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(
+            Text(video.tags.isEmpty
+                 ? "Video"
+                 : video.tags.joined(separator: ", "))
+        )
+        .accessibilityValue(Text(isActive ? "Currently playing" : "Paused"))
+        .accessibilityHint(Text("Swipe up or down to move between videos"))
     }
 }
 
@@ -59,7 +69,13 @@ struct FullScreenVideosView: View {
                             .foregroundColor(.white)
                             .cornerRadius(8)
                             .padding()
+                            .accessibilityHidden(true)
                     }
+                    .accessibilityLabel(Text("Switch video scaling"))
+                    .accessibilityValue(Text(fillMode ? "Currently in fill mode" : "Currently in fit mode"))
+                    .accessibilityHint(Text("Toggles between fill and fit mode for the video"))
+
+                    
                 }
                 Spacer()
             }
