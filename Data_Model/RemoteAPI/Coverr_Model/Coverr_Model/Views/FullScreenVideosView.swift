@@ -101,7 +101,7 @@ struct FullScreenVideosView: View {
         }
         .sheet(item: $selectedVideo) { video in
             VideoDetailsView(video: video)
-            .presentationDetents([.fraction(0.4), .medium, .large])
+            .presentationDetents([.large])
             .presentationDragIndicator(.visible)
         }
     }
