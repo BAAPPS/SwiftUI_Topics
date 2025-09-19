@@ -23,18 +23,19 @@ struct VideoDetailsView: View {
                 }
                 
                 if let publishedAt = video.publishedAt {
-                    dividerModifier()
+                    dividerModifier(color:.pink)
                     IconTextRow(systemName: "arrow.up.circle", text: publishedAt.displayString)
                 }
                 
                 if let updatedAt = video.updatedAt {
-                    dividerModifier()
+                    dividerModifier(color:.pink)
                     IconTextRow(systemName: "arrow.triangle.2.circlepath", text: updatedAt.displayString)
                 }
                 
                 
             }
             .padding(.top, 10)
+            .padding(.horizontal, 5)
             
             if let tags = video.tags {
                 LazyVGrid(columns: columns, spacing: 8) {

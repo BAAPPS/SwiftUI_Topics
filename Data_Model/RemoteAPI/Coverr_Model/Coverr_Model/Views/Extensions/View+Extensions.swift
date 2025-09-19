@@ -29,7 +29,7 @@ struct DividerModifer: ViewModifier {
     func body(content: Content) -> some View {
         Divider()
             .frame(height: height)
-            .foregroundColor(color)
+            .background(color)
     }
 }
 
