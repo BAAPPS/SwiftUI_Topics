@@ -126,9 +126,9 @@ final class CoverrAPIManager {
         let (data, _) = try await URLSession.shared.data(for: request)
         
         // Debug: print raw JSON first 50 chars
-        if let jsonString = String(data: data, encoding: .utf8) {
-            print("Raw JSON:\n", jsonString)
-        }
+//        if let jsonString = String(data: data, encoding: .utf8) {
+//            print("Raw JSON:\n", jsonString)
+//        }
         
         // Decode top-level status first to catch server errors
         if let apiStatus = try? JSONDecoder().decode(APIResponseStatus.self, from: data),

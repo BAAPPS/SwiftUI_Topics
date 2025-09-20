@@ -6,12 +6,24 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct Coverr_ModelApp: App {
+    @State private var networkMonitor = NetworkMonitorModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentViewProvider()
+                .modelContainer(for: VideoEntityModel.self)
+                .environment(networkMonitor)
         }
+    }
+}
+
+// Helper view to access the environment ModelContext and inject it into ContentView
+struct ContentViewProvider: View {
+    @Environment(\.modelContext) private var context
+    var body: some View {
+        ContentView(context: context)
     }
 }

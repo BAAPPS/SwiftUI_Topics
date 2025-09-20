@@ -6,12 +6,20 @@
 //
 
 import Foundation
+import SwiftData
 
 @MainActor
 @Observable
 class VideosViewModel {
     private let manager = CoverrAPIManager.shared
     private let maxPages = 25
+    
+    
+     var context: ModelContext
+     
+     init(context: ModelContext) {
+         self.context = context
+     }
     
     // MARK: - All Videos
     var allVideos: [VideoHitsModel] = []
@@ -51,12 +59,36 @@ class VideosViewModel {
             let videosModel = try await manager.fetchVideosAsync(page: currentPage, urls: true)
             allVideos.append(contentsOf: videosModel.hits)
             currentPage += 1
+            
+            
+            // Save to SwiftData
+            for hit in videosModel.hits {
+                let descriptor = FetchDescriptor<VideoEntityModel>(
+                    predicate: #Predicate { $0.id == hit.id }
+                )
+                
+                if let _ = try? context.fetch(descriptor).first {
+                    continue // skip duplicates
+                }
+                
+                let videoEntity = VideoEntityModel(from: hit)
+                if let urls = videoEntity.urls {
+                    context.insert(urls)
+                }
+                context.insert(videoEntity)
+            }
+            
+            try context.save()
+            
+            
+            
         } catch let apiError as APIError {
             errorMessage = apiError.errorDescription
         } catch {
             errorMessage = error.localizedDescription
         }
     }
+    
     // MARK: - Fetch All Collections
     func fetchCollections(reset: Bool = false) async {
         if reset {
@@ -79,6 +111,22 @@ class VideosViewModel {
             )
             allCollections.append(contentsOf: collectionsModel.hits)
             collectionsPage += 1
+            
+            
+            for collection in collectionsModel.hits  {
+                let descriptor = FetchDescriptor<VideoEntityModel>(
+                    predicate: #Predicate {$0.id == collection.id}
+                )
+                
+                if let _ = try? context.fetch(descriptor).first {continue}
+                
+                let entity = VideoEntityModel(from: collection)
+                
+                context.insert(entity)
+            }
+            
+            try context.save()
+            
         } catch let apiError as APIError {
             errorMessage = apiError.errorDescription
         } catch {
@@ -130,9 +178,92 @@ class VideosViewModel {
                 let newVideos = result.videos.filter { !fetchedVideoIDs.contains($0.id) }
                 newVideos.forEach { fetchedVideoIDs.insert($0.id) }
                 allCollectionsVideo.append(contentsOf: newVideos)
+                
+                // Save new collection videos to SwiftData
+                for hit in newVideos {
+                    let descriptor = FetchDescriptor<VideoEntityModel>(
+                        predicate: #Predicate { $0.id == hit.id }
+                    )
+                    if let _ = try? context.fetch(descriptor).first { continue }
+                    
+                    let videoEntity = VideoEntityModel(from: hit)
+                    if let urls = videoEntity.urls {
+                        context.insert(urls)
+                    }
+                    context.insert(videoEntity)
+                }
             }
+            
+            try? context.save()
+        }
+    }
+    
+    // MARK: - Load Offline Videos
+    func loadOfflineVideos() async {
+        do {
+            let cachedVideos = try context.fetch(FetchDescriptor<VideoEntityModel>())
+            let mappedVideos = cachedVideos.map { VideoHitsModel(from: $0) }
+            
+            // Deduplicate by ID
+            allVideos = Array(
+                Dictionary(uniqueKeysWithValues: mappedVideos.map { ($0.id, $0) }).values
+            )
+            
+            print("Loaded \(allVideos.count) offline videos")
+        } catch {
+            print("Failed to load offline videos:", error)
         }
     }
 
+    // MARK: - Load Offline Collection Videos
+    func loadOfflineCollections() async {
+        do {
+            let cachedCollections = try context.fetch(FetchDescriptor<VideoEntityModel>())
+            let mappedCollections = cachedCollections.map { VideoHitsModel(from: $0) }
+            
+            // Deduplicate by ID
+            allCollections = Array(
+                Dictionary(uniqueKeysWithValues: mappedCollections.map { ($0.id, $0) }).values
+            )
+            
+            print("Loaded \(allCollections.count) offline collections")
+        } catch {
+            print("Failed to load offline collections:", error)
+        }
+    }
 
+    
+    func loadVideosDependingOnNetwork(isConnected: Bool) async {
+         if isConnected {
+             await fetchVideos(reset: true)
+         } else {
+             await loadOfflineVideos()
+         }
+     }
+    
+    func loadCollectionsDependingOnNetwork(isConnected: Bool) async {
+        if isConnected {
+            await fetchCollections(reset: true)
+        } else {
+            await loadOfflineCollections()
+        }
+    }
+
+    
+}
+
+
+@MainActor
+extension VideosViewModel {
+    func testSwiftData() {
+        do {
+            let cachedVideos = try context.fetch(FetchDescriptor<VideoEntityModel>())
+            print("✅ SwiftData stored \(cachedVideos.count) videos")
+//            for video in cachedVideos {
+//                print("Video title:", video.title, "ID:", video.id)
+//            }
+        } catch {
+            print("❌ Failed to fetch videos from SwiftData:", error)
+        }
+    }
 }

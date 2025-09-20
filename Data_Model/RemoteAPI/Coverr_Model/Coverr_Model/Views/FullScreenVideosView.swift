@@ -7,20 +7,30 @@
 
 import SwiftUI
 import AVKit
+import SwiftData
 
 // MARK: - Video Cell
 struct VideoCell: View {
+    @Environment(NetworkMonitorModel.self) var networkMonitor
     let video: VideoHitsModel
     let isActive: Bool
     let fillMode: Bool
     
     var body: some View {
         Group{
-            if let urls = video.urls {
+            if networkMonitor.isConnected, let urls = video.urls {
                 VideoPlayerView(url: urls.mp4, isActive: isActive, fillMode: fillMode)
             } else {
                 Color.black
-                    .overlay(Text("No Video").foregroundColor(.white))
+                    .overlay(
+                        VStack {
+                            Image(systemName: "wifi.slash")
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                            Text("Offline — video unavailable")
+                                .foregroundColor(.white)
+                        }
+                    )
             }
         }
         .accessibilityElement(children: .ignore)
@@ -35,6 +45,7 @@ struct VideoCell: View {
 // MARK: - FullScreen Video View
 struct FullScreenVideosView: View {
     @Environment(VideosViewModel.self) var videosVM
+    @Environment(NetworkMonitorModel.self) var networkMonitor
     @State private var currentPage = 0
     @State private var fillMode = true // toggle fill or fit per video
     @State private var selectedVideo: VideoHitsModel? = nil
@@ -101,12 +112,24 @@ struct FullScreenVideosView: View {
         }
         .sheet(item: $selectedVideo) { video in
             VideoDetailsView(video: video)
-            .presentationDetents([.large])
-            .presentationDragIndicator(.visible)
+                .presentationDetents([.large])
+                .presentationDragIndicator(.visible)
         }
     }
 }
+
 #Preview {
+    // Create a ModelContainer for preview
+    let container = try! ModelContainer(for: VideoEntityModel.self, VideoUrlsEntityModel.self)
+    let context = ModelContext(container)
+    
+    // Create the ViewModel with context
+    let videosVM = VideosViewModel(context: context)
+    let networkMonitor = NetworkMonitorModel()
+    
+    // Inject both the ModelContext and VM into the FullScreenVideosView
     FullScreenVideosView()
-        .environment(VideosViewModel())
+        .environment(\.modelContext, context)
+        .environment(videosVM)
+        .environment(networkMonitor)
 }

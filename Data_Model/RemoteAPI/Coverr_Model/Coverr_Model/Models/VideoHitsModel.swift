@@ -57,4 +57,26 @@ extension VideoHitsModel {
             mp4_download: URL(string: "https://cdn.coverr.co/videos/coverr-the-open-trunk-of-a-white-car-4854/1080p.mp4?download=true")!
         )
     )
+    
+    init(from entity: VideoEntityModel) {
+        self.id = entity.id
+        self.createdAt = entity.createdAt
+        self.updatedAt = entity.updatedAt
+        self.title = entity.title
+        self.poster = entity.poster
+        self.thumbnail = entity.thumbnail
+        self.description = entity.videoDescription
+        self.state = entity.state
+        self.tags = entity.tags
+        self.publishedAt = entity.publishedAt
+        self.downloads = entity.downloads
+        self.likes = entity.likes
+        self.views = entity.views
+        self.downloadsLastMonth = entity.downloadsLastMonth
+        if let urlsEntity = entity.urls {
+            self.urls = VideoUrlsModel(from: urlsEntity)
+        } else {
+            self.urls = nil
+        }
+    }
 }
