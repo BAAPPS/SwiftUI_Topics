@@ -15,10 +15,13 @@ struct Coverr_ModelApp: App {
         WindowGroup {
             ContentViewProvider()
                 .modelContainer(for: VideoEntityModel.self)
-                .environment(networkMonitor)
+                // Inject the production network monitor wrapped in the holder
+                .environment(NetworkMonitorHolder(networkMonitor))
         }
     }
 }
+
+
 
 // Helper view to access the environment ModelContext and inject it into ContentView
 struct ContentViewProvider: View {

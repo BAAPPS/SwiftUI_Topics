@@ -10,9 +10,15 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var context
-    @Environment(NetworkMonitorModel.self) var networkMonitor
+
+    @Environment(NetworkMonitorHolder.self) private var networkHolder
+
+    
     @State private var videosVM: VideosViewModel
     @State private var showOfflineBanner = false
+    
+    private var networkMonitor: NetworkMonitorProtocol { networkHolder.monitor }
+
     
     init(context: ModelContext) {
         _videosVM = State(wrappedValue: VideosViewModel(context: context))
@@ -27,36 +33,9 @@ struct ContentView: View {
                     await videosVM.loadVideosDependingOnNetwork(isConnected: networkMonitor.isConnected)
                     await videosVM.loadCollectionsDependingOnNetwork(isConnected: networkMonitor.isConnected)
                     videosVM.testSwiftData()
-                    
-                    
-
-                    if !networkMonitor.isConnected {
-                        showOfflineBanner = true
-                        Task {
-                            try? await Task.sleep(nanoseconds: 5_000_000_000)
-                            withAnimation {
-                                showOfflineBanner = false
-                            }
-                        }
-                    }
                 }
-            
-            
-            // Offline banner
-            if showOfflineBanner {
-                VStack {
-                    Text("No Internet — videos are offline")
-                        .padding()
-                        .background(Color.yellow)
-                        .cornerRadius(8)
-                        .shadow(radius: 5)
-                        .padding(.top, 20)
-                    Spacer()
-                }
-                .transition(.move(edge: .top).combined(with: .opacity))
-                .animation(.default, value: networkMonitor.isConnected)
-            }
         }
+        .networkBanner(using: networkMonitor)
     }
     
     // MARK: - Test All Endpoints
@@ -80,11 +59,14 @@ struct ContentView: View {
 
 
 #Preview {
+    // Create a SwiftData container for preview
     let container = try! ModelContainer(for: VideoEntityModel.self)
     let context = ModelContext(container)
-    let networkMonitor = NetworkMonitorModel()
     
+    // Use a mock network monitor for preview
+    let mockNetworkMonitor = MockNetworkMonitor(isConnected: true)
     ContentView(context: context)
         .environment(\.modelContext, context)
-        .environment(networkMonitor)
+        // Inject the mock network monitor wrapped in the holder
+        .environment(NetworkMonitorHolder(mockNetworkMonitor))
 }

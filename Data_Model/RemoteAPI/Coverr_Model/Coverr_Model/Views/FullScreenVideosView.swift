@@ -11,10 +11,13 @@ import SwiftData
 
 // MARK: - Video Cell
 struct VideoCell: View {
-    @Environment(NetworkMonitorModel.self) var networkMonitor
+    @Environment(NetworkMonitorHolder.self) private var networkHolder
     let video: VideoHitsModel
     let isActive: Bool
     let fillMode: Bool
+    
+    private var networkMonitor: NetworkMonitorProtocol { networkHolder.monitor }
+
     
     var body: some View {
         Group{
@@ -45,11 +48,13 @@ struct VideoCell: View {
 // MARK: - FullScreen Video View
 struct FullScreenVideosView: View {
     @Environment(VideosViewModel.self) var videosVM
-    @Environment(NetworkMonitorModel.self) var networkMonitor
+    @Environment(NetworkMonitorHolder.self) private var networkHolder
     @State private var currentPage = 0
     @State private var fillMode = true // toggle fill or fit per video
     @State private var selectedVideo: VideoHitsModel? = nil
     
+    private var networkMonitor: NetworkMonitorProtocol { networkHolder.monitor }
+
     
     var body: some View {
         // ZStack layering: first = back (video), last = front (button/icon overlay)
@@ -119,17 +124,14 @@ struct FullScreenVideosView: View {
 }
 
 #Preview {
-    // Create a ModelContainer for preview
     let container = try! ModelContainer(for: VideoEntityModel.self, VideoUrlsEntityModel.self)
     let context = ModelContext(container)
-    
-    // Create the ViewModel with context
     let videosVM = VideosViewModel(context: context)
-    let networkMonitor = NetworkMonitorModel()
     
-    // Inject both the ModelContext and VM into the FullScreenVideosView
+    let mockNetworkMonitor = MockNetworkMonitor(isConnected: false) // offline preview
+    
     FullScreenVideosView()
         .environment(\.modelContext, context)
         .environment(videosVM)
-        .environment(networkMonitor)
+        .environment(NetworkMonitorHolder(mockNetworkMonitor))
 }

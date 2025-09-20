@@ -34,11 +34,41 @@ struct DividerModifer: ViewModifier {
 }
 
 
+struct NetworkBannerModifier: ViewModifier {
+    var networkMonitor: NetworkMonitorProtocol
+
+    func body(content: Content) -> some View {
+        ZStack(alignment:.top) {
+            content
+            
+            if !networkMonitor.isConnected {
+                HStack {
+                    Image(systemName: "wifi.slash")
+                        .foregroundColor(.white)
+                    Text("No Internet Connection")
+                        .foregroundColor(.white)
+                        .bold()
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.red)
+                .transition(.move(edge: .top).combined(with: .opacity))
+                .animation(.easeInOut, value: networkMonitor.isConnected)
+            }
+        }
+    }
+}
+
+
 extension View {
     
     func dividerModifier(height: CGFloat = 25, color: Color = .black) -> some View {
         self.modifier(DividerModifer(height: height, color: color))
     }
+    
+    func networkBanner(using networkMonitor: NetworkMonitorProtocol) -> some View {
+           modifier(NetworkBannerModifier(networkMonitor: networkMonitor))
+       }
 }
 
 // MARK: - View
