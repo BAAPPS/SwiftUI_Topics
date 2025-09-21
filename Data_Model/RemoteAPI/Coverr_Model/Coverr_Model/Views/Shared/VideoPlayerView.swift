@@ -119,7 +119,7 @@ struct VideoPlayerView: View {
                     ProgressView(value: progress)
                         .progressViewStyle(LinearProgressViewStyle(tint: .white))
                         .padding(.horizontal)
-                        .padding(.bottom, 50)
+                        .padding(.bottom, 110)
                         .accessibilityHidden(true)
                 }
             } else {

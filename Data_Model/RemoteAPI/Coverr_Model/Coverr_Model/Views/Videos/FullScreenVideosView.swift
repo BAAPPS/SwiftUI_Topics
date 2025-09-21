@@ -131,7 +131,7 @@ struct FullScreenVideosView: View {
     let context = ModelContext(container)
     let videosVM = VideosViewModel(context: context)
     
-    let mockNetworkMonitor = MockNetworkMonitor(isConnected: false) // offline preview
+    let mockNetworkMonitor = MockNetworkMonitor(isConnected: true) // offline preview
     
     
     FullScreenVideosView(selectedVideo: $selectedVideo, dragOffset: $dragOffset)
