@@ -10,9 +10,10 @@ import SwiftUI
 struct SnapPagingView<Content: View>: View {
     let pageCount: Int
     @Binding var currentPage: Int
+    @Binding var dragOffset: CGFloat
     let content: (CGFloat, CGFloat) -> Content
     
-    @GestureState private var dragOffset: CGFloat = 0
+    @GestureState private var gestureOffset: CGFloat = 0
     
     var body: some View {
         
@@ -28,8 +29,11 @@ struct SnapPagingView<Content: View>: View {
                 .animation(.easeInOut, value: currentPage)
                 .gesture(
                     DragGesture()
-                        .updating($dragOffset) { value, state, _ in
+                        .updating($gestureOffset) { value, state, _ in
                             state = value.translation.height
+                        }
+                        .onChanged { value in
+                            dragOffset = value.translation.height
                         }
                         .onEnded { value in
                             let dragThreshold = pageHeight / 2
@@ -40,7 +44,7 @@ struct SnapPagingView<Content: View>: View {
                             else if value.translation.height > dragThreshold && currentPage > 0 {
                                 currentPage -= 1
                             }
-                            
+                            dragOffset = 0
                         }
                 )
         }
@@ -51,7 +55,8 @@ struct SnapPagingView<Content: View>: View {
 
 #Preview {
     @Previewable @State var page = 0
-    SnapPagingView(pageCount: 3, currentPage: $page) { width, height in
+    @Previewable @State var dragOffset: CGFloat = 0
+    SnapPagingView(pageCount: 3, currentPage: $page, dragOffset: $dragOffset) { width, height in
         VStack(spacing: 0) {
             ForEach(0..<3) { index in
                 ZStack {

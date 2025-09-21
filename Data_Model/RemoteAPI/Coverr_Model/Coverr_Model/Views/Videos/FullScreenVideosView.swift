@@ -51,15 +51,16 @@ struct FullScreenVideosView: View {
     @Environment(NetworkMonitorHolder.self) private var networkHolder
     @State private var currentPage = 0
     @State private var fillMode = true // toggle fill or fit per video
-    @State private var selectedVideo: VideoHitsModel? = nil
-    
+    @Binding var selectedVideo: VideoHitsModel?
+    @Binding var dragOffset: CGFloat
+     
     private var networkMonitor: NetworkMonitorProtocol { networkHolder.monitor }
 
     
     var body: some View {
         // ZStack layering: first = back (video), last = front (button/icon overlay)
         ZStack {
-            SnapPagingView(pageCount: videosVM.allVideos.count, currentPage: $currentPage) { width, height in
+            SnapPagingView(pageCount: videosVM.allVideos.count, currentPage: $currentPage, dragOffset: $dragOffset) { width, height in
                 VStack(spacing:0) {
                     ForEach(Array(videosVM.allVideos.enumerated()), id: \.element.id) { index, video in
                         VideoCell(video: video, isActive: currentPage == index, fillMode: fillMode)
@@ -124,13 +125,16 @@ struct FullScreenVideosView: View {
 }
 
 #Preview {
+    @Previewable @State var selectedVideo: VideoHitsModel? = .example
+    @Previewable @State var dragOffset: CGFloat = 0
     let container = try! ModelContainer(for: VideoEntityModel.self, VideoUrlsEntityModel.self)
     let context = ModelContext(container)
     let videosVM = VideosViewModel(context: context)
     
     let mockNetworkMonitor = MockNetworkMonitor(isConnected: false) // offline preview
     
-    FullScreenVideosView()
+    
+    FullScreenVideosView(selectedVideo: $selectedVideo, dragOffset: $dragOffset)
         .environment(\.modelContext, context)
         .environment(videosVM)
         .environment(NetworkMonitorHolder(mockNetworkMonitor))
