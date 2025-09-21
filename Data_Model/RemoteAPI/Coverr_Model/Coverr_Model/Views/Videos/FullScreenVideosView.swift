@@ -108,7 +108,7 @@ struct FullScreenVideosView: View {
                         .cornerRadius(8)
                         .padding()
                         .frame(maxWidth:.infinity, alignment: .bottomTrailing)
-                        .padding(.bottom, 40)
+                        .padding(.bottom, 70)
                         .accessibilityHidden(true)
                 }
                 .accessibilityLabel(Text("Show video details"))

@@ -8,6 +8,21 @@
 import Foundation
 import SwiftUI
 
+// MARK: - Shape
+
+struct RoundedCorner: Shape {
+    var radius: CGFloat
+    var corners: UIRectCorner = .allCorners
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(
+            roundedRect: rect,
+            byRoundingCorners: corners,
+            cornerRadii: CGSize(width: radius, height: radius)
+        )
+        return Path(path.cgPath)
+    }
+}
+
 
 // MARK: - Date formatting for views
 extension Date {
@@ -69,6 +84,10 @@ extension View {
     func networkBanner(using networkMonitor: NetworkMonitorProtocol) -> some View {
            modifier(NetworkBannerModifier(networkMonitor: networkMonitor))
        }
+    
+    func cornerRadiusModifier(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape(RoundedCorner(radius:radius, corners: corners))
+    }
 }
 
 // MARK: - View

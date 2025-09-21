@@ -10,15 +10,12 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var context
-
     @Environment(NetworkMonitorHolder.self) private var networkHolder
 
-    
     @State private var videosVM: VideosViewModel
     @State private var showOfflineBanner = false
     
     private var networkMonitor: NetworkMonitorProtocol { networkHolder.monitor }
-
     
     init(context: ModelContext) {
         _videosVM = State(wrappedValue: VideosViewModel(context: context))
@@ -26,16 +23,15 @@ struct ContentView: View {
     
     
     var body: some View {
-        ZStack {
-            FullScreenVideosView()
-                .environment(videosVM)
-                .task(id: networkMonitor.isConnected) {
-                    await videosVM.loadVideosDependingOnNetwork(isConnected: networkMonitor.isConnected)
-                    await videosVM.loadCollectionsDependingOnNetwork(isConnected: networkMonitor.isConnected)
-                    videosVM.testSwiftData()
-                }
-        }
-        .networkBanner(using: networkMonitor)
+        
+        CustomTabBarView()
+            .environment(videosVM)
+            .task(id: networkMonitor.isConnected) {
+                await videosVM.loadVideosDependingOnNetwork(isConnected: networkMonitor.isConnected)
+                await videosVM.loadCollectionsDependingOnNetwork(isConnected: networkMonitor.isConnected)
+                videosVM.testSwiftData()
+            }
+            .networkBanner(using: networkMonitor)
     }
     
     // MARK: - Test All Endpoints
@@ -53,7 +49,6 @@ struct ContentView: View {
         
         print("All collection videos count:", videosVM.allCollectionsVideo.count)
         print("✅ All endpoints tested successfully")
-        
     }
 }
 
@@ -67,6 +62,6 @@ struct ContentView: View {
     let mockNetworkMonitor = MockNetworkMonitor(isConnected: true)
     ContentView(context: context)
         .environment(\.modelContext, context)
-        // Inject the mock network monitor wrapped in the holder
+    // Inject the mock network monitor wrapped in the holder
         .environment(NetworkMonitorHolder(mockNetworkMonitor))
 }
