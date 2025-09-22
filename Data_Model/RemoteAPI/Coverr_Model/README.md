@@ -21,6 +21,7 @@ The app fetches video metadata from the Coverr API (titles, descriptions, thumbn
 - **Codable** for JSON decoding  
 - **API Key authentication** for Coverr API access  
 - **SwiftData (optional)** for persistence and experimenting with data storage  
+- **NWPathMonitor (Network framework)** to monitor real-time network connectivity
 
 ---
 
@@ -31,6 +32,7 @@ The app fetches video metadata from the Coverr API (titles, descriptions, thumbn
 - 📄 Decode paginated JSON responses (with nested fields)  
 - ⏳ Handle loading states and errors gracefully  
 - 🗂 Example models for practicing SwiftData integration  
+- 📶 Network Awareness: Detect online/offline states using NWPathMonitor and handle gracefully
 
 ---
 
@@ -43,52 +45,59 @@ Most tutorials stick to “fake” APIs (like JSONPlaceholder). By using **Cover
 
 This helps bridge the gap between toy examples and **real-world app development**.
 
-<!------->
-<!---->
-<!--## What I Learned-->
-<!--- How to store and access an **API key** securely in a Swift project  -->
-<!--- How to design `Codable` models for complex JSON responses  -->
-<!--- Using `async/await` with `URLSession` for cleaner networking code  -->
-<!--- Error handling for failed requests, missing fields, or invalid JSON  -->
-<!--- How pagination works in REST APIs and how to model it  -->
-<!--- Basic **SwiftData integration** for storing API results locally  -->
-<!---->
-<!------->
-<!---->
-<!--## What I Would Do Differently-->
-<!--- Add **caching** for thumbnails and video metadata to improve performance  -->
-<!--- Implement a **search UI** with debouncing for smoother user experience  -->
-<!--- Expand error handling (e.g. rate limits, expired keys)  -->
-<!--- Explore building a **video detail view** that plays the Coverr video inline  -->
-<!--- Eventually abstract networking into a reusable service layer for testing  -->
-<!---->
-<!------->
+---
+
+## What I Learned
+
+* How to store and access an **API key** securely in a Swift project
+* How to design `Codable` models for **complex, nested JSON responses**
+* Using `async/await` with `URLSession` for cleaner and safer networking
+* **Monitoring network connectivity** with `NWPathMonitor` and adapting UI accordingly
+* Error handling for failed requests, missing fields, or invalid JSON
+* How **pagination works** in REST APIs and how to model it effectively
+* Basic **SwiftData integration** for storing API results locally
+* Building a **TikTok-style vertical scrolling feed** for video content
+* Creating a **custom tab bar** with icons, labels, and animated selection states
+
+---
+
+## What I Would Do Differently
+
+* Add **caching** for thumbnails and video metadata to improve performance and reduce network usage
+* Implement a **search UI with debouncing** for smoother user experience
+* Expand error handling (e.g., API rate limits, expired keys, offline scenarios)
+* Build a **video detail view** that plays Coverr videos inline
+* Abstract networking into a **reusable service layer** for easier testing and maintainability
+* Enhance the **TikTok-style feed** with smooth transitions, preloading, and pull-to-refresh
+* Make the **custom tab bar** more reusable and visually polished across different screens
 
 
-<!--## App Showcase-->
-<!---->
-<!--### All News View-->
-<!---->
-<!--- A scrollable feed displaying all articles with a clean, card-style layout.-->
-<!---->
-<!--- Users can tap on any article to expand it into a detailed view.-->
-<!---->
-<!--![All News View](https://github.com/user-attachments/assets/e9519729-1d19-455f-8f8c-5f41e2010c3a)-->
-<!---->
-<!--### Top Headline News View-->
-<!---->
-<!--- Shows curated top headlines for quick access to the most important news.-->
-<!---->
-<!--- Supports the same smooth card-to-detail interaction as the main feed.-->
-<!---->
-<!--![Top Headline News View](https://github.com/user-attachments/assets/98ea1eb7-3820-4e94-9a86-dec9db1199b0)-->
-<!---->
-<!---->
-<!--### News Detail View-->
-<!---->
-<!--- Expands a selected article with full content, images, and additional metadata.-->
-<!---->
-<!--- Features smooth matched geometry animation, swipe-to-dismiss sliding, and consistent corner radius.-->
-<!---->
-<!--![News Detail View](https://github.com/user-attachments/assets/ed46a49b-c23f-432c-905a-83b914d386bb)-->
+---
+
+## App Showcase
+
+### All Videos Tab – TikTok Style View
+
+The primary feed displays videos in full-screen, vertical scrolling style (like TikTok). Users can swipe up or down to navigate between videos seamlessly.
+
+![TikTok Style View](https://github.com/user-attachments/assets/3329e87e-b5aa-496c-b957-1e787faf3f4c)
+
+### All Videos Tab – Minimized Style View
+
+This view displays videos in a smaller, un-clipped format. It’s ideal for keeping the entire video visible.
+
+![Minimized Style View](https://github.com/user-attachments/assets/a51f7d68-96ab-4b85-a22b-b8fa3409b9ca)
+
+
+### Collections View
+
+Organizes videos into curated collections. Users can browse collections and access all videos within a particular collection. This view also supports pagination and seamless video loading per collection.
+
+![Collections View](https://github.com/user-attachments/assets/91131cd5-5e9d-4825-a6ac-dcf88aa3e812)
+
+### Video Detail View
+
+Displays detailed information about a selected video, including title, description, tags, etc. Accessible via the info button on each video.
+
+![Video Detail View](https://github.com/user-attachments/assets/dd75bda7-d1be-4b27-9edf-22309bf8f948)
 
