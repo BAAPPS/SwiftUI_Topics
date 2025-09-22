@@ -46,8 +46,8 @@ SwiftUI_Topics/
 
 ### 📂 Data Models
 - [x] Local JSON
-- [ ] Server JSON
-- [ ] Core Data
+- [x] Server JSON
+- [ ] Swift Data
 
 ### 🌐 Networking
 - [ ] URLSession
