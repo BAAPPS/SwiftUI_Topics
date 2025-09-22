@@ -49,12 +49,17 @@ struct VideoCell: View {
 struct FullScreenVideosView: View {
     @Environment(VideosViewModel.self) var videosVM
     @Environment(NetworkMonitorHolder.self) private var networkHolder
+    
+    var collectionID: String? = nil
+       
+    
     @Binding var videos: [VideoHitsModel]
     @State private var currentPage = 0
     @State private var fillMode = true // toggle fill or fit per video
     @Binding var selectedVideo: VideoHitsModel?
     @Binding var dragOffset: CGFloat
     
+
     private var networkMonitor: NetworkMonitorProtocol { networkHolder.monitor }
     
     
@@ -71,6 +76,17 @@ struct FullScreenVideosView: View {
                     }
                 }
             }
+            .onChange(of: currentPage) { oldValue, newValue in
+                guard newValue == videos.count - 1, let collectionID else { return }
+                Task {
+                    let more = await videosVM.fetchVideosForCollection(collectionID: collectionID)
+                    await MainActor.run {
+                        videos.append(contentsOf: more)
+                    }
+                }
+            }
+
+
             
             VStack{
                 HStack{

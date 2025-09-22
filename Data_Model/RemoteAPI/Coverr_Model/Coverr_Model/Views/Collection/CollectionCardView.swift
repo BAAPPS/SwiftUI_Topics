@@ -46,7 +46,12 @@ struct CollectionCardView: View {
     }
 }
 
-
 #Preview {
-    CollectionCardView(collection: .example, cornerRadius: 12)
+    ZStack{
+        Color.black.opacity(0.7)
+            .ignoresSafeArea()
+        CollectionCardView(collection: .example, cornerRadius: 12)
+            .frame(width: 300, height: 200)
+        
+    }
 }

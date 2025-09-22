@@ -20,9 +20,8 @@ struct TabContentView: View {
         case .all:
             FullScreenVideosView(videos:$videos, selectedVideo: $selectedVideo,dragOffset: $dragOffset)
                 .environment(videosVM)
-
         case .collection:
-            CollectionView( selectedVideo: $selectedVideo, videos:$videos)
+            CollectionView(selectedVideo: $selectedVideo, videos:$videos)
                 .environment(videosVM)
         }
     }

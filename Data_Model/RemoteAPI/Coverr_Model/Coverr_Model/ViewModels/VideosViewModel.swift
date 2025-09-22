@@ -8,6 +8,12 @@
 import Foundation
 import SwiftData
 
+// MARK: - Collection State
+private struct CollectionState {
+    var currentPage: Int = 0
+    var fetchedVideoIDs: Set<String> = []
+}
+
 @MainActor
 @Observable
 class VideosViewModel {
@@ -15,11 +21,11 @@ class VideosViewModel {
     private let maxPages = 25
     
     
-     var context: ModelContext
-     
-     init(context: ModelContext) {
-         self.context = context
-     }
+    var context: ModelContext
+    
+    init(context: ModelContext) {
+        self.context = context
+    }
     
     // MARK: - All Videos
     var allVideos: [VideoHitsModel] = []
@@ -29,8 +35,11 @@ class VideosViewModel {
     var allCollections: [CollectionHitModel] = []
     private var collectionsPage = 0
     
-    var allCollectionsVideo: [CollectionVideoModel] = []
+    // MARK: - Collection Videos Pagination
+     private var collectionStates: [String: CollectionState] = [:] // one state per collection
+     
     private var collectionsVideoPage = 1
+    var allCollectionsVideo: [CollectionVideoModel] = []
     
     // Track fetched video IDs to prevent duplicates
     private var fetchedVideoIDs = Set<String>()
@@ -134,99 +143,38 @@ class VideosViewModel {
         }
     }
     
-    // MARK: - Fetch Videos for a Specific Collection Concurrently
-    
-    @MainActor
-    func fetchAllCollectionsVideosConcurrently(reset: Bool = false) async {
-        if reset {
-            collectionsVideoPage = 1
-            allCollectionsVideo = []
-            fetchedVideoIDs.removeAll()
-            errorMessage = nil
-        }
-        
-        guard !allCollections.isEmpty else { return }
-        
-        await withTaskGroup(of: (collectionID: String, videos: [VideoHitsModel]).self) { group in
-            for collection in allCollections {
-                group.addTask {
-                    var page = 1
-                    let maxPages = 25
-                    var allVideosForCollection: [VideoHitsModel] = []
-                    
-                    while page <= maxPages {
-                        do {
-                            let videosModel = try await self.manager.fetchVideosAsync(
-                                endpoint: .collections,
-                                page: page,
-                                urls: true,
-                                collectionID: collection.id,
-                            )
-                            if videosModel.hits.isEmpty { break }
-                            allVideosForCollection.append(contentsOf: videosModel.hits)
-                            page += 1
-                        } catch {
-                            break
-                        }
-                    }
-                    
-                    return (collectionID: collection.id, videos: allVideosForCollection)
-                }
-            }
-            
-            for await result in group {
-                // Safely update main-actor properties in one place
-                let newVideos = result.videos.filter { !fetchedVideoIDs.contains($0.id) }
-                newVideos.forEach { fetchedVideoIDs.insert($0.id) }
-                let collectionVideos = newVideos.map { CollectionVideoModel(collectionID: result.collectionID, video: $0) }
-                allCollectionsVideo.append(contentsOf: collectionVideos)
-
-                // Save new collection videos to SwiftData
-                for hit in newVideos {
-                    let descriptor = FetchDescriptor<VideoEntityModel>(
-                        predicate: #Predicate { $0.id == hit.id }
-                    )
-                    if let _ = try? context.fetch(descriptor).first { continue }
-                    
-                    let videoEntity = VideoEntityModel(from: hit)
-                    if let urls = videoEntity.urls {
-                        context.insert(urls)
-                    }
-                    context.insert(videoEntity)
-                }
-            }
-            
-            try? context.save()
-        }
-    }
-    
-    func fetchVideosForCollection(collectionID: String) async -> [VideoHitsModel] {
-        var page = 1
-        let maxPages = 25
-        var videosForCollection: [VideoHitsModel] = []
-
-        while page <= maxPages {
-            do {
-                let videosModel = try await self.manager.fetchVideosAsync(
-                    endpoint: .collections,
-                    page: page,
-                    urls:true,
-                    collectionID: collectionID
-                )
-                if videosModel.hits.isEmpty { break }
-                videosForCollection.append(contentsOf: videosModel.hits)
-                page += 1
-            } catch {
-                break
-            }
-        }
-
-        // Deduplicate with fetchedVideoIDs
-        let newVideos = videosForCollection.filter { !self.fetchedVideoIDs.contains($0.id) }
-        newVideos.forEach { self.fetchedVideoIDs.insert($0.id) }
-
-        return newVideos
-    }
+    // MARK: - Fetch Videos for Collection
+    func fetchVideosForCollection(collectionID: String, reset: Bool = false) async -> [VideoHitsModel] {
+           var state = collectionStates[collectionID] ?? CollectionState()
+           
+           if reset {
+               state = CollectionState()
+           }
+           
+           do {
+               let videosModel = try await manager.fetchVideosAsync(
+                   endpoint: .collections,
+                   page: state.currentPage,
+                   urls: true,
+                   collectionID: collectionID
+               )
+               
+               // Filter out duplicates just for this collection
+               let newVideos = videosModel.hits.filter { !state.fetchedVideoIDs.contains($0.id) }
+               newVideos.forEach { state.fetchedVideoIDs.insert($0.id) }
+               
+               if !newVideos.isEmpty {
+                   state.currentPage += 1
+               }
+               
+               // Save updated state back
+               collectionStates[collectionID] = state
+               
+               return newVideos
+           } catch {
+               return []
+           }
+       }
 
     
     // MARK: - Load Offline Videos
@@ -245,7 +193,7 @@ class VideosViewModel {
             print("Failed to load offline videos:", error)
         }
     }
-
+    
     // MARK: - Load Offline Collection Videos
     func loadOfflineCollections() async {
         do {
@@ -262,15 +210,15 @@ class VideosViewModel {
             print("Failed to load offline collections:", error)
         }
     }
-
+    
     
     func loadVideosDependingOnNetwork(isConnected: Bool) async {
-         if isConnected {
-             await fetchVideos(reset: true)
-         } else {
-             await loadOfflineVideos()
-         }
-     }
+        if isConnected {
+            await fetchVideos(reset: true)
+        } else {
+            await loadOfflineVideos()
+        }
+    }
     
     func loadCollectionsDependingOnNetwork(isConnected: Bool) async {
         if isConnected {
@@ -279,7 +227,7 @@ class VideosViewModel {
             await loadOfflineCollections()
         }
     }
-
+    
     
 }
 

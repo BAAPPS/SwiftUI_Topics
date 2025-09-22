@@ -40,9 +40,6 @@ struct ContentView: View {
         await videosVM.fetchCollections(reset: true)
         print("All collections count:", videosVM.allCollections.count)
         
-        print("Fetching videos for all collections concurrently…")
-        await videosVM.fetchAllCollectionsVideosConcurrently(reset: true)
-        
         print("All collection videos count:", videosVM.allCollectionsVideo.count)
         print("✅ All endpoints tested successfully")
 

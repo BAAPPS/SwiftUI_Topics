@@ -18,59 +18,58 @@ struct CollectionView: View {
     let cornerRadius: CGFloat = 12
     
     var body: some View {
-        ZStack {
-            Color.black.opacity(0.8)
-                .ignoresSafeArea()
-            
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: 10) {
-                    ForEach(videosVM.allCollections) { collection in
-                        CollectionCardView(collection: collection, cornerRadius: cornerRadius)
-                            .onTapGesture {
-                                Task {
+        NavigationStack {
+            ZStack {
+                Color.black.opacity(0.8)
+                    .ignoresSafeArea()
+                
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 10) {
+                        ForEach(videosVM.allCollections) { collection in
+                            NavigationLink(destination: {
+                                FullScreenVideosView(
+                                    collectionID: collection.id ,
+                                       videos: $videos,
+                                       selectedVideo: $selectedVideo,
+                                       dragOffset: .constant(0)
+                                   )
+                                .task {
                                     await loadVideos(for: collection)
-                                    showFullScreen = true
                                 }
+
+                            }) {
+                                CollectionCardView(collection: collection, cornerRadius: 12)
                             }
+                        }
                     }
+                    .padding()
                 }
-                .padding()
-            }
-            .task {
-                // Fetch collections on appear
-                await videosVM.fetchCollections(reset: true)
-                print("Collections loaded:", videosVM.allCollections)
+                .task {
+                    // Fetch collections on appear
+                    await videosVM.fetchCollections(reset: true)
+                    print("Collections loaded:", videosVM.allCollections)
+                }
+                .navigationTitle("Collections")
+                .navigationBarTitleDisplayMode(.inline)
             }
         }
-        .sheet(isPresented: $showFullScreen) {
-            FullScreenVideosView(
-                videos: $videos,
-                selectedVideo: $selectedVideo,
-                dragOffset: .constant(0)
-            )
-        }
+        .tint(.white)
     }
     
     // MARK: - Load videos for a collection
     @MainActor
     private func loadVideos(for collection: CollectionHitModel) async {
-        // Option 1: Use pre-fetched videos if available
-        let preFetched = videosVM.allCollectionsVideo
-            .filter { $0.collectionID == collection.id }
-            .map { $0.video }
+        let firstPageVideos = await videosVM.fetchVideosForCollection(
+            collectionID: collection.id,
+            reset: true
+        )
+        videos = firstPageVideos
         
-        if !preFetched.isEmpty {
-            videos = preFetched
-            return
-        }
-        
-        // Option 2: Lazy fetch if no pre-fetched videos
-        videos = await videosVM.fetchVideosForCollection(collectionID: collection.id)
-        
-        print(videos)
+        print("Loaded \(videos.count) videos for collection:", collection.title)
     }
-}
 
+
+}
 
 #Preview {
     @Previewable @State var selectedVideo: VideoHitsModel? = .example
