@@ -14,7 +14,9 @@ struct CustomTabBarView: View {
     @State private var selectedTab: AppTab = .all
     @State private var selectedVideos: VideoHitsModel? = nil
     @State private var dragOffset: CGFloat = 0
-    @State private var videos: [VideoHitsModel] = []
+    @State private var allTabVideos: [VideoHitsModel] = []
+    @State private var collectionTabVideos: [VideoHitsModel] = []
+    
     
     private var networkMonitor: NetworkMonitorProtocol { networkHolder.monitor }
     
@@ -22,15 +24,30 @@ struct CustomTabBarView: View {
     @Namespace private var animation
     var body: some View {
         ZStack{
-            TabContentView(selectedTab: $selectedTab, selectedVideo: $selectedVideos,videos: $videos, dragOffset: $dragOffset, animaton: animation)
-                .environment(videosVM)
-                .task {
-                    if selectedTab == .all && videos.isEmpty {
-                        // Load videos depending on network
+            TabContentView(selectedTab: $selectedTab,
+                           selectedVideo: $selectedVideos,
+                           allTabVideos: $allTabVideos,
+                           collectionTabVideos: $collectionTabVideos,
+                           dragOffset: $dragOffset, animaton: animation)
+            .environment(videosVM)
+            .task(id: selectedTab) {
+                switch selectedTab {
+                case .all:
+                    if allTabVideos.isEmpty {
                         await videosVM.loadVideosDependingOnNetwork(isConnected: networkMonitor.isConnected)
-                        videos = videosVM.allVideos
+                        allTabVideos = videosVM.allVideos
+                    }
+                case .collection:
+                    if collectionTabVideos.isEmpty {
+                        
+                        if let firstCollection = videosVM.allCollections.first {
+                            let videos = await videosVM.fetchVideosForCollection(collectionID: firstCollection.id, reset: true)
+                            collectionTabVideos = videos
+                        }
                     }
                 }
+            }
+
             
             VStack{
                 Spacer()
