@@ -1,9 +1,9 @@
 # 📚 SwiftUI Topics – Mini Projects
 
-![Swift](https://img.shields.io/badge/Swift-5.10-orange?logo=swift)
-![Xcode](https://img.shields.io/badge/Xcode-15-blue?logo=xcode&logoColor=white)
-![Platform](https://img.shields.io/badge/iOS-17-lightgrey?logo=apple)
-![Progress](https://img.shields.io/badge/Progress-1%2F15-brightgreen)
+![Swift](https://img.shields.io/badge/Swift-6.1.2-F05138?logo=swift&logoColor=white&style=for-the-badge)
+![Xcode](https://img.shields.io/badge/Xcode-16.4-1575F9?logo=xcode&logoColor=white&style=for-the-badge)
+![Platform](https://img.shields.io/badge/iOS-18.5-lightgrey?logo=apple&style=for-the-badge)
+![Progress](https://img.shields.io/badge/Progress-2%2F15-brightgreen&style=for-the-badge)
 
 ---
 
