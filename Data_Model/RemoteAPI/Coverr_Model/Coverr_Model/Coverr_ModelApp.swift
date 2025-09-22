@@ -10,17 +10,16 @@ import SwiftData
 
 @main
 struct Coverr_ModelApp: App {
-    @State private var networkMonitor = NetworkMonitorModel()
+    @State private var networkHolder = NetworkMonitorHolder()
+
     var body: some Scene {
         WindowGroup {
             ContentViewProvider()
                 .modelContainer(for: VideoEntityModel.self)
-                // Inject the production network monitor wrapped in the holder
-                .environment(NetworkMonitorHolder(networkMonitor))
+                .environment(networkHolder)
         }
     }
 }
-
 
 
 // Helper view to access the environment ModelContext and inject it into ContentView

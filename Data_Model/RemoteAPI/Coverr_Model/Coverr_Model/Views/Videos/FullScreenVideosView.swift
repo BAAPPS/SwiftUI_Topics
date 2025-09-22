@@ -17,7 +17,7 @@ struct VideoCell: View {
     let fillMode: Bool
     
     private var networkMonitor: NetworkMonitorProtocol { networkHolder.monitor }
-
+    
     
     var body: some View {
         Group{
@@ -49,29 +49,27 @@ struct VideoCell: View {
 struct FullScreenVideosView: View {
     @Environment(VideosViewModel.self) var videosVM
     @Environment(NetworkMonitorHolder.self) private var networkHolder
+    @Binding var videos: [VideoHitsModel]
     @State private var currentPage = 0
     @State private var fillMode = true // toggle fill or fit per video
     @Binding var selectedVideo: VideoHitsModel?
     @Binding var dragOffset: CGFloat
-     
+    
     private var networkMonitor: NetworkMonitorProtocol { networkHolder.monitor }
-
+    
     
     var body: some View {
         // ZStack layering: first = back (video), last = front (button/icon overlay)
         ZStack {
-            SnapPagingView(pageCount: videosVM.allVideos.count, currentPage: $currentPage, dragOffset: $dragOffset) { width, height in
+            SnapPagingView(pageCount: videos.count, currentPage: $currentPage, dragOffset: $dragOffset) { width, height in
                 VStack(spacing:0) {
-                    ForEach(Array(videosVM.allVideos.enumerated()), id: \.element.id) { index, video in
+                    ForEach(Array(videos.enumerated()), id: \.element.id) { index, video in
                         VideoCell(video: video, isActive: currentPage == index, fillMode: fillMode)
                             .frame(width: width, height: height)
                             .ignoresSafeArea()
                             .tag(index)
                     }
                 }
-            }
-            .task {
-                await videosVM.fetchVideos(reset: true)
             }
             
             VStack{
@@ -98,7 +96,7 @@ struct FullScreenVideosView: View {
                 Spacer()
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.4).delay(0.2)) {
-                        selectedVideo = videosVM.allVideos[currentPage]
+                        selectedVideo = videos[currentPage]
                     }
                 }) {
                     Image(systemName: "info.circle" )
@@ -127,6 +125,7 @@ struct FullScreenVideosView: View {
 #Preview {
     @Previewable @State var selectedVideo: VideoHitsModel? = .example
     @Previewable @State var dragOffset: CGFloat = 0
+    @Previewable @State var videos: [VideoHitsModel] = [.example]
     let container = try! ModelContainer(for: VideoEntityModel.self, VideoUrlsEntityModel.self)
     let context = ModelContext(container)
     let videosVM = VideosViewModel(context: context)
@@ -134,7 +133,7 @@ struct FullScreenVideosView: View {
     let mockNetworkMonitor = MockNetworkMonitor(isConnected: true) // offline preview
     
     
-    FullScreenVideosView(selectedVideo: $selectedVideo, dragOffset: $dragOffset)
+    FullScreenVideosView(videos:$videos, selectedVideo: $selectedVideo, dragOffset: $dragOffset)
         .environment(\.modelContext, context)
         .environment(videosVM)
         .environment(NetworkMonitorHolder(mockNetworkMonitor))

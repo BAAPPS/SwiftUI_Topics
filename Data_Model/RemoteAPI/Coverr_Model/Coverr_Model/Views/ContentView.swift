@@ -26,11 +26,7 @@ struct ContentView: View {
         
         CustomTabBarView()
             .environment(videosVM)
-            .task(id: networkMonitor.isConnected) {
-                await videosVM.loadVideosDependingOnNetwork(isConnected: networkMonitor.isConnected)
-                await videosVM.loadCollectionsDependingOnNetwork(isConnected: networkMonitor.isConnected)
-                videosVM.testSwiftData()
-            }
+            .environment(NetworkMonitorHolder(networkMonitor))
             .networkBanner(using: networkMonitor)
     }
     
@@ -49,6 +45,7 @@ struct ContentView: View {
         
         print("All collection videos count:", videosVM.allCollectionsVideo.count)
         print("✅ All endpoints tested successfully")
+
     }
 }
 

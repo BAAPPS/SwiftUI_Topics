@@ -12,15 +12,18 @@ struct TabContentView: View {
     @Environment(VideosViewModel.self) var videosVM
     @Binding var selectedTab: AppTab
     @Binding var selectedVideo: VideoHitsModel?
+    @Binding var videos: [VideoHitsModel]
     @Binding var dragOffset: CGFloat
     var animaton:Namespace.ID
     var body: some View {
         switch selectedTab {
         case .all:
-            FullScreenVideosView(selectedVideo: $selectedVideo, dragOffset: $dragOffset)
+            FullScreenVideosView(videos:$videos, selectedVideo: $selectedVideo,dragOffset: $dragOffset)
                 .environment(videosVM)
+
         case .collection:
-            Text("Collections")
+            CollectionView( selectedVideo: $selectedVideo, videos:$videos)
+                .environment(videosVM)
         }
     }
 }
@@ -28,6 +31,7 @@ struct TabContentView: View {
 #Preview {
     @Previewable @State var selectedTab: AppTab = .all
     @Previewable @State var selectedVideo: VideoHitsModel? = .example
+    @Previewable @State var videos: [VideoHitsModel] = [.example]
     @Previewable @Namespace var animation
     @Previewable @State var dragOffset: CGFloat = 0
     
@@ -36,7 +40,7 @@ struct TabContentView: View {
     let videosVM = VideosViewModel(context: context)
     let mockNetworkMonitor = MockNetworkMonitor(isConnected: true)
     
-    TabContentView(selectedTab: $selectedTab, selectedVideo: $selectedVideo, dragOffset: $dragOffset, animaton: animation)
+    TabContentView(selectedTab: $selectedTab, selectedVideo: $selectedVideo,videos:$videos, dragOffset: $dragOffset, animaton: animation)
         .environment(\.modelContext, context)
         .environment(videosVM)
         .environment(NetworkMonitorHolder(mockNetworkMonitor))

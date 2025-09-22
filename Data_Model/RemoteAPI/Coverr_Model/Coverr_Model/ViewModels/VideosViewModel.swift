@@ -26,10 +26,10 @@ class VideosViewModel {
     private var currentPage = 0
     
     // MARK: - Collections
-    var allCollections: [VideoHitsModel] = []
+    var allCollections: [CollectionHitModel] = []
     private var collectionsPage = 0
     
-    var allCollectionsVideo: [VideoHitsModel] = []
+    var allCollectionsVideo: [CollectionVideoModel] = []
     private var collectionsVideoPage = 1
     
     // Track fetched video IDs to prevent duplicates
@@ -105,22 +105,22 @@ class VideosViewModel {
         defer { isLoading = false }
         
         do {
-            let collectionsModel = try await manager.fetchVideosAsync(
+            let collectionsModel = try await manager.fetchCollectionAsync(
                 endpoint: .collections,
-                page: collectionsPage
+                page: collectionsPage,
             )
             allCollections.append(contentsOf: collectionsModel.hits)
             collectionsPage += 1
             
             
             for collection in collectionsModel.hits  {
-                let descriptor = FetchDescriptor<VideoEntityModel>(
+                let descriptor = FetchDescriptor<CollectionEntityModel>(
                     predicate: #Predicate {$0.id == collection.id}
                 )
                 
                 if let _ = try? context.fetch(descriptor).first {continue}
                 
-                let entity = VideoEntityModel(from: collection)
+                let entity = CollectionEntityModel(from: collection)
                 
                 context.insert(entity)
             }
@@ -159,7 +159,8 @@ class VideosViewModel {
                             let videosModel = try await self.manager.fetchVideosAsync(
                                 endpoint: .collections,
                                 page: page,
-                                collectionID: collection.id
+                                urls: true,
+                                collectionID: collection.id,
                             )
                             if videosModel.hits.isEmpty { break }
                             allVideosForCollection.append(contentsOf: videosModel.hits)
@@ -177,8 +178,9 @@ class VideosViewModel {
                 // Safely update main-actor properties in one place
                 let newVideos = result.videos.filter { !fetchedVideoIDs.contains($0.id) }
                 newVideos.forEach { fetchedVideoIDs.insert($0.id) }
-                allCollectionsVideo.append(contentsOf: newVideos)
-                
+                let collectionVideos = newVideos.map { CollectionVideoModel(collectionID: result.collectionID, video: $0) }
+                allCollectionsVideo.append(contentsOf: collectionVideos)
+
                 // Save new collection videos to SwiftData
                 for hit in newVideos {
                     let descriptor = FetchDescriptor<VideoEntityModel>(
@@ -197,6 +199,35 @@ class VideosViewModel {
             try? context.save()
         }
     }
+    
+    func fetchVideosForCollection(collectionID: String) async -> [VideoHitsModel] {
+        var page = 1
+        let maxPages = 25
+        var videosForCollection: [VideoHitsModel] = []
+
+        while page <= maxPages {
+            do {
+                let videosModel = try await self.manager.fetchVideosAsync(
+                    endpoint: .collections,
+                    page: page,
+                    urls:true,
+                    collectionID: collectionID
+                )
+                if videosModel.hits.isEmpty { break }
+                videosForCollection.append(contentsOf: videosModel.hits)
+                page += 1
+            } catch {
+                break
+            }
+        }
+
+        // Deduplicate with fetchedVideoIDs
+        let newVideos = videosForCollection.filter { !self.fetchedVideoIDs.contains($0.id) }
+        newVideos.forEach { self.fetchedVideoIDs.insert($0.id) }
+
+        return newVideos
+    }
+
     
     // MARK: - Load Offline Videos
     func loadOfflineVideos() async {
@@ -218,8 +249,8 @@ class VideosViewModel {
     // MARK: - Load Offline Collection Videos
     func loadOfflineCollections() async {
         do {
-            let cachedCollections = try context.fetch(FetchDescriptor<VideoEntityModel>())
-            let mappedCollections = cachedCollections.map { VideoHitsModel(from: $0) }
+            let cachedCollections = try context.fetch(FetchDescriptor<CollectionEntityModel>())
+            let mappedCollections = cachedCollections.map { CollectionHitModel(from: $0) }
             
             // Deduplicate by ID
             allCollections = Array(
@@ -259,9 +290,9 @@ extension VideosViewModel {
         do {
             let cachedVideos = try context.fetch(FetchDescriptor<VideoEntityModel>())
             print("✅ SwiftData stored \(cachedVideos.count) videos")
-//            for video in cachedVideos {
-//                print("Video title:", video.title, "ID:", video.id)
-//            }
+            for video in cachedVideos {
+                print("Video title:", video.title, "ID:", video.id)
+            }
         } catch {
             print("❌ Failed to fetch videos from SwiftData:", error)
         }

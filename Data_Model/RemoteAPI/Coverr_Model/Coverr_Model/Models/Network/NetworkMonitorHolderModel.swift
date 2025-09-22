@@ -11,8 +11,19 @@ import Observation
 /// and observed using `@Observable`.
 @Observable
 final class NetworkMonitorHolder {
-    let monitor: NetworkMonitorProtocol
+    var monitor: NetworkMonitorProtocol
+
+    init() {
+        #if targetEnvironment(simulator)
+        // Simulator → always online
+        self.monitor = MockNetworkMonitor(isConnected: true)
+        #else
+        // Device → real NWPathMonitor
+        self.monitor = NetworkMonitorModel()
+        #endif
+    }
     
+    // Optional: allow custom injection if needed
     init(_ monitor: NetworkMonitorProtocol) {
         self.monitor = monitor
     }
