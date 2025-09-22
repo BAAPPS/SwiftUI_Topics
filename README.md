@@ -3,7 +3,7 @@
 ![Swift](https://img.shields.io/badge/Swift-6.1.2-F05138?logo=swift&logoColor=white&style=for-the-badge)
 ![Xcode](https://img.shields.io/badge/Xcode-16.4-1575F9?logo=xcode&logoColor=white&style=for-the-badge)
 ![Platform](https://img.shields.io/badge/iOS-18.5-lightgrey?logo=apple&style=for-the-badge)
-![Progress](https://img.shields.io/badge/Progress-2%2F15-brightgreen&style=for-the-badge)
+![Progress](https://img.shields.io/badge/Progress-2%2F15-brightgreen?style=for-the-badge)
 
 ---
 
