@@ -12,12 +12,16 @@ struct NoteView: View {
     @Environment(NoteViewModel.self) private var noteVM
     @Environment(\.dismiss) private var dismiss
     
+    var note: Note?
+    
     @State private var title = ""
     @State private var content = ""
     @State private var type: NoteType = .personal
     
-    @State private var isEditingTitle = false
-    @State private var isEditingContent = false
+    
+    init(note: Note? = nil) {
+        self.note = note
+    }
     
     var body: some View {
         ScrollView {
@@ -50,35 +54,46 @@ struct NoteView: View {
             }
             .padding()
         }
-        
+        .navigationTitle(note == nil ? "New Note" : "Edit Note")
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
         .toolbar{
-            ToolbarItem(placement: .confirmationAction) {
-                Button("Save") {
-                    saveNote()
-                }
-                .accessibilityLabel("Save Note")
-                .accessibilityHint("Saves the note and closes this screen")
-            }
-            ToolbarItem(placement: .cancellationAction) {
+            ToolbarItem(placement: .navigationBarLeading) {
                 Button("Cancel") {
                     dismiss()
                 }
                 .accessibilityLabel("Cancel")
                 .accessibilityHint("Discards changes and closes this screen")
             }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Save") {
+                    saveNote()
+                }
+                .accessibilityLabel("Save Note")
+                .accessibilityHint("Saves the note and closes this screen")
+            }
         }
-        .navigationTitle("New Note")
-        .navigationBarTitleDisplayMode(.inline)
+        .onAppear{
+            if let note = note {
+                title = note.title
+                content = note.content
+                type = note.type
+            }
+        }
         
     }
     
     private func saveNote() {
-        // Use the ViewModel to add the note
-        noteVM.addNote(title: title, content: content, type: type)
+        if let note = note {
+            // Update existing note
+            noteVM.updateNote(note: note, title: title, content: content, type: type)
+        } else {
+            // Create new note
+            noteVM.addNote(title: title, content: content, type: type)
+        }
         title = ""
         content = ""
         type = .personal
-        
         dismiss()
     }
 }

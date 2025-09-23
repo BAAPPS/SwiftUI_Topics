@@ -44,7 +44,7 @@ class NoteViewModel{
     
     
     // MARK: - Delete
-    private func delete(_ note: Note) {
+   func delete(_ note: Note) {
         context.delete(note)
         save()
     }
