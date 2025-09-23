@@ -20,6 +20,8 @@ struct NotesView: View {
     @State private var noteToDelete: Note? = nil
     @State private var noteDeleteConfirmation = false
     
+    @State private var showFavoriteView = false
+    
     
     private var notesByType: [NoteType: [Note]] {
         Dictionary(grouping: notes) { $0.type }
@@ -27,88 +29,53 @@ struct NotesView: View {
     
     var body: some View {
         List {
-            ForEach(NoteType.allCases, id: \.self) { type in
-                if let notesForType = notesByType[type], !notesForType.isEmpty {
-                    Section(header:
-                                HStack {
-                        Spacer()
-                        Text(type.title)
-                            .font(.title3)
-                            .bold()
-                        Spacer()
-                    }
-                        .padding(.vertical, 4)
-                    ){
-                        ForEach(notesForType) { note in
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(note.title)
-                                        .font(.headline)
-                                    Text(note.content)
-                                        .font(.subheadline)
-                                    
-                                }
-                                Spacer()
-                                
-                                HStack(spacing: 8) {
-                                    // Edit button
-                                    Button(action: {
-                                        noteToEdit = note
-                                    }) {
-                                        Image(systemName: "pencil")
-                                            .foregroundColor(.blue)
-                                            .accessibilityHidden(true)
-                                    }
-                                    .buttonStyle(BorderlessButtonStyle())    .opacity(showEditMode ? 1 : 0)
-                                    .offset(x: showEditMode ? 0 : -20)
-                                    .animation(.easeInOut(duration: 0.25), value: showEditMode)
-                                    .accessibilityLabel("Edit note")
-                                    .accessibilityHint("Opens the note to edit its title, content, and type")
-                                    
-                                    
-                                    
-                                    // Delete button
-                                    Button(action: {
-                                        noteToDelete = note
-                                        noteDeleteConfirmation = true
-                                    }) {
-                                        Image(systemName: "trash")
-                                            .foregroundColor(.red)
-                                            .accessibilityHidden(true)
-                                    }
-                                    .buttonStyle(BorderlessButtonStyle())
-                                    .opacity(showEditMode ? 1 : 0)
-                                    .offset(x: showEditMode ? 0 : 20)
-                                    .animation(.easeInOut(duration: 0.25), value: showEditMode)
-                                    .accessibilityLabel("Delete note")
-                                    .accessibilityHint("Removes this note permanently")
-                                    
-                                }
-                                
-                                
-                            }
-                            .padding(.vertical, 6)
-                            .contentShape(Rectangle())
-                        }
-                    }
+            NotesSectionedListView(
+                notes: notes,
+                showActions: showEditMode,
+                onToggleFavorite: { note in noteVM.toggleFavorite(note) },
+                onEdit: { note in noteToEdit = note },
+                onDelete: { note in
+                    noteToDelete = note
+                    noteDeleteConfirmation = true
                 }
-            }
+            )
         }
         .scrollContentBackground(.hidden)
         .listStyle(.plain)
         .navigationTitle("All Notes")
         .toolbar {
+            ToolbarItem(placement:.principal) {
+                Button(action: {
+                    withAnimation {
+                        showFavoriteView = true
+                    }
+                }){
+                    Image(systemName: "heart.circle.fill")
+                        .font(.title2)
+                        .accessibilityHidden(true)
+                }
+                .accessibilityLabel("Your favorites notes")
+                .accessibilityHint("You can check out your favorite notes here")
+            }
+            
+            
             ToolbarItem(placement:.topBarTrailing) {
                 Button(action: {
                     withAnimation {
                         showEditMode.toggle()
                     }
                 }){
-                    Image(systemName: showEditMode ? "x.circle" : "square.and.pencil")
-                        .accessibilityHidden(true)
+                    Image(
+                        systemName: showEditMode ? "x.circle" : "square.and.pencil"
+                    )
+                    .accessibilityHidden(true)
                 }
-                .accessibilityLabel(showEditMode ? "Exit edit mode" : "Enter edit mode")
-                .accessibilityHint("You can update or delete notes in edit mode")
+                .accessibilityLabel(
+                    showEditMode ? "Exit edit mode" : "Enter edit mode"
+                )
+                .accessibilityHint(
+                    "You can update or delete notes in edit mode"
+                )
             }
             ToolbarItem(placement:.topBarTrailing) {
                 Button(action: { addNotesClicked = true }) {
@@ -136,7 +103,18 @@ struct NotesView: View {
                     .environment(noteVM)
             }
         }
-        .alert("Delete Note?", isPresented: $noteDeleteConfirmation, presenting: noteToDelete) { note in
+        .navigationDestination(isPresented: $showFavoriteView) {
+            FavoritesNotes(favoriteNotes: notes.filter { $0.isFavorite })
+                .environment(noteVM)
+        }
+
+        
+        
+        .alert(
+            "Delete Note?",
+            isPresented: $noteDeleteConfirmation,
+            presenting: noteToDelete
+        ) { note in
             Button("Delete", role: .destructive) {
                 deleteNotes(note)
                 noteToDelete = nil
@@ -146,7 +124,9 @@ struct NotesView: View {
                 noteToDelete = nil
             }
         } message: { note in
-            Text("Are you sure you want to delete \"\(note.title)\"? This cannot be undone.")
+            Text(
+                "Are you sure you want to delete \"\(note.title)\"? This cannot be undone."
+            )
         }
         
     }
@@ -160,7 +140,6 @@ struct NotesView: View {
 #Preview {
     let container = try! ModelContainer(for: Note.self)
     let context = ModelContext(container)
-    
     
     NavigationStack {
         NotesView()

@@ -1,9 +1,9 @@
-//
-//  NoteView.swift
-//  SwiftNote
-//
-//  Created by D F on 9/23/25.
-//
+////
+////  NoteView.swift
+////  SwiftNote
+////
+////  Created by D F on 9/23/25.
+////
 
 import SwiftUI
 import SwiftData
@@ -15,8 +15,12 @@ struct NoteView: View {
     var note: Note?
     
     @State private var title = ""
-    @State private var content = ""
+    @State private var bodyText = ""
+    @State private var description = ""
     @State private var type: NoteType = .personal
+    
+    @State private var showValidationAlert = false
+    
     
     
     init(note: Note? = nil) {
@@ -42,13 +46,19 @@ struct NoteView: View {
                 .accessibilityLabel("Note Type")
                 .accessibilityHint("Select the type of note: Personal, Work, Study, or Subject")
                 
+                // Title
                 LabeledTextField(label: "Title", placeholder: "Enter title", text: $title)
                 
+                
+                // Description / summary
+                LabeledTextField(label: "Description", placeholder: "Enter a short description", text: $description)
+                
+                // Learning notes / body
                 LabeledTextEditor(
-                    label: "Content",
-                    placeholder: "Enter note content",
-                    text: $content,
-                    minHeight: 150
+                    label: "Learning Notes",
+                    placeholder: "What are you learning for this note?",
+                    text: $bodyText,
+                    minHeight: 200
                 )
                 
             }
@@ -67,7 +77,12 @@ struct NoteView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save") {
-                    saveNote()
+                    if title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ||
+                        description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                        showValidationAlert = true
+                    } else {
+                        saveNote()
+                    }
                 }
                 .accessibilityLabel("Save Note")
                 .accessibilityHint("Saves the note and closes this screen")
@@ -76,23 +91,33 @@ struct NoteView: View {
         .onAppear{
             if let note = note {
                 title = note.title
-                content = note.content
+                if let bText = note.bodyText {
+                    bodyText = bText
+                }
+                description = note.noteDescription
                 type = note.type
             }
         }
+        .alert("Missing Information", isPresented: $showValidationAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("Please enter both a title and a description before saving.")
+        }
+        
         
     }
     
     private func saveNote() {
         if let note = note {
             // Update existing note
-            noteVM.updateNote(note: note, title: title, content: content, type: type)
+            noteVM.updateNote(note: note, title: title, bodyText: bodyText, description: description,  type: type)
         } else {
             // Create new note
-            noteVM.addNote(title: title, content: content, type: type)
+            noteVM.addNote(title: title, bodyText: bodyText, description: description, type: type)
         }
         title = ""
-        content = ""
+        bodyText = ""
+        description = ""
         type = .personal
         dismiss()
     }
@@ -108,3 +133,5 @@ struct NoteView: View {
             .environment(NoteViewModel(context: context))
     }
 }
+
+

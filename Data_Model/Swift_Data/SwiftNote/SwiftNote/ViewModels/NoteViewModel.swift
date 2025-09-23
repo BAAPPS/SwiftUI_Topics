@@ -20,8 +20,8 @@ class NoteViewModel{
     }
     
     // MARK: - Create
-    func addNote(title: String, content: String, type: NoteType = .personal, isFavorite: Bool = false){
-        let note = Note(title: title, content: content,createdAt: .now, isFavorite: isFavorite, type: type)
+    func addNote(title: String, bodyText: String, description: String, type: NoteType = .personal, isFavorite: Bool = false){
+        let note = Note(title: title, bodyText: bodyText, noteDescription: description,  createdAt: .now, isFavorite: isFavorite, type: type)
         context.insert(note)
         save()
     }
@@ -29,13 +29,17 @@ class NoteViewModel{
     
     // MARK: Update
     
-    func updateNote(note: Note, title:String, content: String, type: NoteType ) {
+    func updateNote(note: Note, title:String, bodyText: String, description: String, type: NoteType ) {
         note.title = title
-        note.content = content
+        note.bodyText = bodyText
+        note.noteDescription = description
         note.type = type
         
         save()
     }
+    
+    
+ 
     
     func toggleFavorite(_ note: Note){
         note.isFavorite.toggle()
