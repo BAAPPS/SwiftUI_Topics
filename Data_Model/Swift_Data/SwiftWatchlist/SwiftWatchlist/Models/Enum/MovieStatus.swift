@@ -8,16 +8,26 @@
 import Foundation
 
 enum MovieStatus: String, CaseIterable, Identifiable, Codable {
-    case toWatch = "To Watch"
-    case watching = "Watching"
-    case watched = "Watched"
+    case toWatch = "toWatch"
+    case watching = "watching"
+    case watched = "watched"
     
     var id: String { rawValue }
-    var icon: String {
+    
+    var displayName: String {
         switch self {
-        case .toWatch: "⏳"
-        case .watching: "▶️"
-        case .watched: "✅"
+        case .toWatch: return "To Watch"
+        case .watching: return "Watching"
+        case .watched: return "Watched"
         }
     }
+    
+    var icon: String {
+        switch self {
+        case .toWatch: return "⏳"
+        case .watching: return "▶️"
+        case .watched: return "✅"
+        }
+    }
+    
 }

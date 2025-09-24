@@ -1,0 +1,464 @@
+{
+    "results": [
+        {
+            "title": "Demon Slayer: Kimetsu no Yaiba Infinity Castle",
+            "releaseYear": 2025,
+            "status": "toWatch",
+            "createdAt": "2025-07-18T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/j7MKdRIwfJejNlJQG1hzjFJmtlH.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/sUsVimPdA1l162FvdBIlmKBlWHx.jpg",
+            "overview": "The Demon Slayer Corps are drawn into the Infinity Castle, where Tanjiro, Nezuko, and the Hashira face terrifying Upper Rank demons in a desperate fight as the final battle against Muzan Kibutsuji begins.",
+            "genres": [
+                { "type": "Animation" },
+                { "type": "Action" },
+                { "type": "Fantasy" },
+                { "type": "Thriller" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "Japan" },
+                { "name": "Anime" }
+            ],
+            "rating": {
+                "value": 7.8,
+                "review": "TMDb user score",
+                "createdAt": "2025-07-18T00:00:00Z"
+            }
+        },
+        {
+            "title": "War of the Worlds",
+            "releaseYear": 2025,
+            "status": "toWatch",
+            "createdAt": "2025-07-29T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/iZLqwEwUViJdSkGVjePGhxYzbDb.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/yvirUYrva23IudARHn3mMGVxWqM.jpg",
+            "overview": "Will Radford is a top analyst for Homeland Security who tracks potential threats through a mass surveillance program, until one day an attack by an unknown entity leads him to question whether the government is hiding something from him... and from the rest of the world.",
+            "genres": [
+                { "type": "Science Fiction" },
+                { "type": "Thriller" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "US" },
+                { "name": "Suspense" }
+            ],
+            "rating": {
+                "value": 4.4,
+                "review": "TMDb user score",
+                "createdAt": "2025-07-29T00:00:00Z"
+            }
+        },
+        {
+            "title": "Aztec Batman: Clash of Empires",
+            "releaseYear": 2025,
+            "status": "toWatch",
+            "createdAt": "2025-09-18T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/9KSboWOt09J72aMY4x8SS1IaOHK.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/s0Mlo5w4INp3bUdsJo3RaSSMXWz.jpg",
+            "overview": "In the time of the Aztec empire, tragedy strikes Yohualli Coatl when his father is murdered by Spanish conquistadors. To warn King Moctezuma and his high priest, Yoka, of imminent danger, Yohualli escapes to Tenochtitlán. There, he trains in the temple of the bat god Tzinacan with his mentor, developing equipment and weaponry to confront the Spanish invasion and avenge his father’s death. Along the way, he encounters key figures like the fierce Jaguar Woman and the conquistador Hernán Cortés.",
+            "genres": [
+                { "type": "Animation" },
+                { "type": "Action" },
+                { "type": "Adventure" },
+                { "type": "Fantasy" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "Spain" },
+                { "name": "Superhero" }
+            ],
+            "rating": {
+                "value": 8.1,
+                "review": "TMDb user score",
+                "createdAt": "2025-09-18T00:00:00Z"
+            }
+        },
+        {
+            "title": "Nobody 2",
+            "releaseYear": 2025,
+            "status": "toWatch",
+            "createdAt": "2025-08-13T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/mEW9XMgYDO6U0MJcIRqRuSwjzN5.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/svXVRoRSu6zzFtCzkRsjZS7Lqpd.jpg",
+            "overview": "Former assassin Hutch Mansell takes his family on a nostalgic vacation to a small-town theme park, only to be pulled back into violence when they clash with a corrupt operator, a crooked sheriff, and a ruthless crime boss.",
+            "genres": [
+                { "type": "Action" },
+                { "type": "Thriller" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "US" },
+                { "name": "Sequel" }
+            ],
+            "rating": {
+                "value": 7.2,
+                "review": "TMDb user score",
+                "createdAt": "2025-08-13T00:00:00Z"
+            }
+        },
+        {
+            "title": "The Conjuring: Last Rites",
+            "releaseYear": 2025,
+            "status": "toWatch",
+            "createdAt": "2025-09-03T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/fq8gLtrz1ByW3KQ2IM3RMZEIjsQ.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/29ES27icY5CzTcMhlz1H4SdQRod.jpg",
+            "overview": "Paranormal investigators Ed and Lorraine Warren take on one last terrifying case involving mysterious entities they must confront.",
+            "genres": [
+                { "type": "Horror" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "US" },
+                { "name": "Paranormal" }
+            ],
+            "rating": {
+                "value": 6.6,
+                "review": "TMDb user score",
+                "createdAt": "2025-09-03T00:00:00Z"
+            }
+        },
+        {
+            "title": "Weapons",
+            "releaseYear": 2025,
+            "status": "toWatch",
+            "createdAt": "2025-08-04T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/Q2OajDi2kcO6yErb1IAyVDTKMs.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/cpf7vsRZ0MYRQcnLWteD5jK9ymT.jpg",
+            "overview": "When all but one child from the same class mysteriously vanish on the same night at exactly the same time, a community is left questioning who or what is behind their disappearance.",
+            "genres": [
+                { "type": "Horror" },
+                { "type": "Mystery" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "US" }
+            ],
+            "rating": {
+                "value": 7.4,
+                "review": "TMDb user score",
+                "createdAt": "2025-08-04T00:00:00Z"
+            }
+        },
+        {
+            "title": "As Good as Dead",
+            "releaseYear": 2022,
+            "status": "toWatch",
+            "createdAt": "2022-12-16T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/or8y8JFF0vR3N9ap0Vdhf9tfTxQ.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/qqQPxxRQqfLrq0ubfDQCwhJHZ91.jpg",
+            "overview": "An ex-cop in self-imposed witness protection in Mexico becomes a target when a fight video of his apprentice goes viral.",
+            "genres": [
+                { "type": "Action" },
+                { "type": "Crime" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "US" }
+            ],
+            "rating": {
+                "value": 6.4,
+                "review": "TMDb user score",
+                "createdAt": "2022-12-16T00:00:00Z"
+            }
+        },
+        {
+            "title": "Superman",
+            "releaseYear": 2025,
+            "status": "toWatch",
+            "createdAt": "2025-07-09T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/eU7IfdWq8KQy0oNd4kKXS0QUR08.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/wPLysNDLffQLOVebZQCbXJEv6E6.jpg",
+            "overview": "Superman, a journalist in Metropolis, embarks on a journey to reconcile his Kryptonian heritage with his human upbringing as Clark Kent.",
+            "genres": [
+                { "type": "Sci-Fi" },
+                { "type": "Adventure" },
+                { "type": "Action" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "US" },
+                { "name": "Superhero" }
+            ],
+            "rating": {
+                "value": 7.5,
+                "review": "TMDb user score",
+                "createdAt": "2025-07-09T00:00:00Z"
+            }
+        },
+        {
+            "title": "The Naked Gun",
+            "releaseYear": 2025,
+            "status": "toWatch",
+            "createdAt": "2025-07-30T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/kzeBfhXMRWiykBsqoL3UbfaM0S.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/rmwQ8GsdQ1M3LtemNWLErle2nBU.jpg",
+            "overview": "Only one man has the particular set of skills... to lead Police Squad and save the world: Lt. Frank Drebin Jr.",
+            "genres": [
+                { "type": "Comedy" },
+                { "type": "Action" },
+                { "type": "Crime" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "US" }
+            ],
+            "rating": {
+                "value": 6.7,
+                "review": "TMDb user score",
+                "createdAt": "2025-07-30T00:00:00Z"
+            }
+        },
+        {
+            "title": "Gunman",
+            "releaseYear": 2025,
+            "status": "toWatch",
+            "createdAt": "2025-06-12T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/bwP4UJZjjfAVOuTAWT8W8J2AKtG.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/eBw5Vso0K3r8Dzycxz0E0lgC40z.jpg",
+            "overview": "A former hitman accepts a minor job for his former boss. However, in a corrupt neighborhood, nothing is what it seems, and he quickly gets caught in a web of unexpected events. A race against time and his own destiny.",
+            "genres": [
+                { "type": "Thriller" },
+                { "type": "Action" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "Spain" }
+            ],
+            "rating": {
+                "value": 8.3,
+                "review": "TMDb user score",
+                "createdAt": "2025-06-12T00:00:00Z"
+            }
+        },
+        {
+            "title": "Humane",
+            "releaseYear": 2024,
+            "status": "toWatch",
+            "createdAt": "2024-04-26T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/mwI1OarF7BVWwn5O1Ng73UhyctP.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/ecOvKaoM1hwQbp0uTnULGrSV32e.jpg",
+            "overview": "In the wake of an environmental collapse that has forced humanity to shed 20% of its population, a family dinner erupts into chaos when a father's plan to enlist in the government's new euthanasia program goes horribly awry.",
+            "genres": [
+                { "type": "Horror" },
+                { "type": "Sci-Fi" },
+                { "type": "Thriller" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "US" }
+            ],
+            "rating": {
+                "value": 5.393,
+                "review": "TMDb user score",
+                "createdAt": "2024-04-26T00:00:00Z"
+            }
+        },
+        {
+            "title": "Red Sonja",
+            "releaseYear": 2025,
+            "status": "toWatch",
+            "createdAt": "2025-07-31T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/xSD0q1FiuZkvHuy7uscOLbmd1hR.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/iuN0GTmdn8pFzs4x0xTgoahwhDN.jpg",
+            "overview": "A young girl rises from the ashes of tragedy to become the most feared warrior woman of all time: the She-Devil with a Sword.",
+            "genres": [
+                { "type": "Adventure" },
+                { "type": "Action" },
+                { "type": "Fantasy" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "US" }
+            ],
+            "rating": {
+                "value": 5.677,
+                "review": "TMDb user score",
+                "createdAt": "2025-07-31T00:00:00Z"
+            }
+        },
+        {
+            "title": "Mission: Impossible - The Final Reckoning",
+            "releaseYear": 2025,
+            "status": "toWatch",
+            "createdAt": "2025-05-17T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/538U9snNc2fpnOmYXAPUh3zn31H.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg",
+            "overview": "Ethan Hunt and team continue their search for the terrifying AI known as the Entity — which has infiltrated intelligence networks all over the globe — with the world's governments and a mysterious ghost from Hunt's past on their trail. Joined by new allies and armed with the means to shut the Entity down for good, Hunt is in a race against time to prevent the world as we know it from changing forever.",
+            "genres": [
+                { "type": "Action" },
+                { "type": "Adventure" },
+                { "type": "Thriller" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "US" }
+            ],
+            "rating": {
+                "value": 7.284,
+                "review": "TMDb user score",
+                "createdAt": "2025-05-17T00:00:00Z"
+            }
+        },
+        {
+            "title": "Together",
+            "releaseYear": 2025,
+            "status": "toWatch",
+            "createdAt": "2025-07-28T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/uBB1aMga5ngZxsUQL5k36zeW3pB.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/m52XidzKx94bKlToZfEXUnL3pdy.jpg",
+            "overview": "With a move to the countryside already testing the limits of a couple's relationship, a supernatural encounter begins an extreme transformation of their love, their lives, and their flesh.",
+            "genres": [
+                { "type": "Horror" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "US" }
+            ],
+            "rating": {
+                "value": 7.176,
+                "review": "TMDb user score",
+                "createdAt": "2025-07-28T00:00:00Z"
+            }
+        },
+        {
+            "title": "Jurassic World Rebirth",
+            "releaseYear": 2025,
+            "status": "toWatch",
+            "createdAt": "2025-07-01T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/zNriRTr0kWwyaXPzdg1EIxf0BWk.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/1RICxzeoNCAO5NpcRMIgg1XT6fm.jpg",
+            "overview": "Five years after the events of Jurassic World Dominion, covert operations expert Zora Bennett is contracted to lead a skilled team on a top-secret mission to secure genetic material from the world's three most massive dinosaurs. When Zora's operation intersects with a civilian family whose boating expedition was capsized, they all find themselves stranded on an island where they come face-to-face with a sinister, shocking discovery that's been hidden from the world for decades.",
+            "genres": [
+                { "type": "Sci-Fi" },
+                { "type": "Adventure" },
+                { "type": "Action" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "US" }
+            ],
+            "rating": {
+                "value": 6.399,
+                "review": "TMDb user score",
+                "createdAt": "2025-07-01T00:00:00Z"
+            }
+        },
+        {
+            "title": "How to Train Your Dragon",
+            "releaseYear": 2025,
+            "status": "toWatch",
+            "createdAt": "2025-06-06T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/79PNOxNXSe5e0bhEj11QJPlsdCN.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/53dsJ3oEnBhTBVMigWJ9tkA5bzJ.jpg",
+            "overview": "On the rugged isle of Berk, where Vikings and dragons have been bitter enemies for generations, Hiccup stands apart, defying centuries of tradition when he befriends Toothless, a feared Night Fury dragon. Their unlikely bond reveals the true nature of dragons, challenging the very foundations of Viking society.",
+            "genres": [
+                { "type": "Fantasy" },
+                { "type": "Family" },
+                { "type": "Action" },
+                { "type": "Adventure" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "US" }
+            ],
+            "rating": {
+                "value": 8.027,
+                "review": "TMDb user score",
+                "createdAt": "2025-06-06T00:00:00Z"
+            }
+        },
+        {
+            "title": "F1",
+            "releaseYear": 2025,
+            "status": "toWatch",
+            "createdAt": "2025-06-25T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/ZtcGMc204JsNqfjS9lU6udRgpo.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/9PXZIUsSDh4alB80jheWX4fhZmy.jpg",
+            "overview": "Racing legend Sonny Hayes is coaxed out of retirement to lead a struggling Formula 1 team—and mentor a young hotshot driver—while chasing one more chance at glory.",
+            "genres": [
+                { "type": "Action" },
+                { "type": "Drama" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "US" }
+            ],
+            "rating": {
+                "value": 7.825,
+                "review": "TMDb user score",
+                "createdAt": "2025-06-25T00:00:00Z"
+            }
+        },
+        {
+            "title": "KPop Demon Hunters",
+            "releaseYear": 2025,
+            "status": "toWatch",
+            "createdAt": "2025-06-20T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/w3Bi0wygeFQctn6AqFTwhGNXRwL.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/22AouvwlhlXbe3nrFcjzL24bvWH.jpg",
+            "overview": "When K-pop superstars Rumi, Mira and Zoey aren't selling out stadiums, they're using their secret powers to protect their fans from supernatural threats.",
+            "genres": [
+                { "type": "Animation" },
+                { "type": "Comedy" },
+                { "type": "Fantasy" },
+                { "type": "Music" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "US" }
+            ],
+            "rating": {
+                "value": 8.31,
+                "review": "TMDb user score",
+                "createdAt": "2025-06-20T00:00:00Z"
+            }
+        },
+        {
+            "title": "Get Fast",
+            "releaseYear": 2024,
+            "status": "toWatch",
+            "createdAt": "2024-12-12T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/JMlVj6X2F1PuDz9OyHShThzpa2.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/tDpTR7xhHu9cz1X4JAIRFwXyf6U.jpg",
+            "overview": "When The Thief’s partner is kidnapped after stealing millions in cash from a merciless drug lord named Nushi, he reluctantly teams up with an angst-ridden orphan to rescue him. Nushi enlists her most trusted hitman, The Cowboy, a lovable charmer who’s quick with his guns, to track down the Thief. Guns, cars, and explosions will give the newfound partners a head start, but how long will they be able to keep it up?",
+            "genres": [
+                { "type": "Action" },
+                { "type": "Crime" },
+                { "type": "Thriller" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "US" }
+            ],
+            "rating": {
+                "value": 6.038,
+                "review": "TMDb user score",
+                "createdAt": "2024-12-12T00:00:00Z"
+            }
+        },
+        {
+            "title": "Swiped",
+            "releaseYear": 2025,
+            "status": "toWatch",
+            "createdAt": "2025-09-09T00:00:00Z",
+            "backdropPath":"https://image.tmdb.org/t/p/w1066_and_h600_bestv2/zfaZ8m6NHzylqTumf94mDGtQwKM.jpg",
+            "posterPath": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/znxBfe14cefxx5Lu1tgNzggJagt.jpg",
+            "overview": "Whitney Wolfe uses extraordinary grit and ingenuity to break into the male-dominated tech industry.",
+            "genres": [
+                { "type": "History" },
+                { "type": "Drama" }
+            ],
+            "tags": [
+                { "name": "Movie" },
+                { "name": "US" }
+            ],
+            "rating": {
+                "value": 6.9,
+                "review": "TMDb user score",
+                "createdAt": "2025-09-09T00:00:00Z"
+            }
+        }
+    ]
+}
+

@@ -6,8 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var context
+    @State private var movieVM: MoviesViewModel
+    
+    init(context: ModelContext){
+        _movieVM = State(wrappedValue: MoviesViewModel(context: context))
+    }
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -20,5 +27,10 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    let container = try! ModelContainer(for: Movie.self)
+    let context = ModelContext(container)
+    
+    ContentView(context: context)
+        .environment(\.modelContext, context)
+    
 }
