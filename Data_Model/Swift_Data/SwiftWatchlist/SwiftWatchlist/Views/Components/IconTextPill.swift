@@ -12,7 +12,7 @@ struct IconTextPill: View {
     let icon: String       // SF Symbol or emoji
     let text: String
     let color: Color?
-    let font: Font        
+    let font: Font
     init(icon: String, text: String, color: Color? = nil, font: Font = .caption2) {
         self.icon = icon
         self.text = text
@@ -42,5 +42,15 @@ struct IconTextPill: View {
         .padding(.vertical, 8)
         .background((color ?? .gray).opacity(0.15))
         .cornerRadius(12)
+        .accessibilityElement(children: .ignore) // Ignore sub-elements, treat as one pill
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityAddTraits(.isStaticText) 
+    }
+    private var accessibilityLabel: String {
+        if UIImage(systemName: icon) != nil {
+            return "\(text), icon: \(icon)"
+        } else {
+            return "\(text), symbol: \(icon)"
+        }
     }
 }

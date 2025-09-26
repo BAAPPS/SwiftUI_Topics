@@ -14,33 +14,38 @@ struct HorizontalPillScroll<Data: Identifiable, Content: View>: View {
     let spacing: CGFloat
     let verticalPadding: CGFloat
     let horizontalPadding: CGFloat
-    
+    let accessibilityLabel: String? // Optional label for context
     
     init(
         items: [Data],
         spacing: CGFloat = 8,
         verticalPadding: CGFloat = 10,
         horizontalPadding: CGFloat = 5,
+        accessibilityLabel: String? = nil, // New
         @ViewBuilder content: @escaping (Data) -> Content
     ) {
         self.items = items
         self.spacing = spacing
         self.verticalPadding = verticalPadding
         self.horizontalPadding = horizontalPadding
+        self.accessibilityLabel = accessibilityLabel
         self.content = content
     }
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: spacing){
-                ForEach(items) {item in
+            HStack(spacing: spacing) {
+                ForEach(items) { item in
                     content(item)
+                        .accessibilityElement(children: .combine) // Group content for clarity
                 }
             }
             .padding(.vertical, verticalPadding)
             .padding(.horizontal, horizontalPadding)
-            // Ensure HStack is at least screen width so content centers when few items are present
             .frame(minWidth: UIScreen.main.bounds.width, alignment: .center)
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(accessibilityLabel ?? "Horizontal pill list")
+        .accessibilityHint("Swipe left or right to explore")
     }
 }
