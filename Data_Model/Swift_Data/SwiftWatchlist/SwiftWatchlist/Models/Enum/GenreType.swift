@@ -13,15 +13,26 @@ enum GenreType: String, CaseIterable, Identifiable, Codable {
     case drama = "Drama"
     case sciFi = "Sci-Fi"
     case horror = "Horror"
+    case animation = "Animation"
+    case fantasy = "Fantasy"
+    case thriller = "Thriller"
+    case romance = "Romance"
+    case documentary = "Documentary"
     
     var id: String { rawValue }
+    
     var icon: String {
         switch self {
-        case .action: "🎬"
-        case .comedy: "😂"
-        case .drama: "🎭"
-        case .sciFi: "👽"
-        case .horror: "👻"
+        case .action: return "🎬"
+        case .comedy: return "😂"
+        case .drama: return "🎭"
+        case .sciFi: return "👽"
+        case .horror: return "👻"
+        case .animation: return "🎨"
+        case .fantasy: return "🪄"
+        case .thriller: return "🕵️"  
+        case .romance: return "❤️"
+        case .documentary: return "🎥"
         }
     }
 }

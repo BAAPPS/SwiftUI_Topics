@@ -15,12 +15,13 @@ enum TagType: String, CaseIterable, Identifiable, Codable {
     case trending = "Trending"
     
     var id: String { rawValue }
+    
     var icon: String {
         switch self {
-        case .favorite: "❤️"
-        case .mustWatch: "🔥"
-        case .classics: "🏆"
-        case .trending: "📈"
+        case .favorite: return "❤️"
+        case .mustWatch: return "🔥"
+        case .classics: return "🏆"
+        case .trending: return "📈"
         }
     }
 }

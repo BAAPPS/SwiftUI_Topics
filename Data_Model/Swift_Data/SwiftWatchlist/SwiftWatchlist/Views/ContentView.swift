@@ -16,18 +16,22 @@ struct ContentView: View {
         _movieVM = State(wrappedValue: MoviesViewModel(context: context))
     }
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            MoviesListView()
+                .environment(movieVM)
+                .navigationDestination(for:Movie.self) { movie in
+                    MovieDetailView(movie: movie)
+                }
         }
-        .padding()
     }
 }
 
 #Preview {
-    let container = try! ModelContainer(for: Movie.self)
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(
+        for: Movie.self, Genre.self, Tag.self, Rating.self,
+        configurations: config
+    )
     let context = ModelContext(container)
     
     ContentView(context: context)
