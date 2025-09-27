@@ -12,6 +12,7 @@ import Kingfisher
 struct MoviesListView: View {
     @Environment(MoviesViewModel.self) var movieVM
     @Query(sort: \Movie.title) var movies: [Movie]
+ 
 
     var body: some View {
             List(movies) { movie in

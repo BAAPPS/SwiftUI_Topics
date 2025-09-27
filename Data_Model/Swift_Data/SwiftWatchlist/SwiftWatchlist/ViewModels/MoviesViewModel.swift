@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import CoreData
 
 @Observable
 class MoviesViewModel {
@@ -20,10 +21,64 @@ class MoviesViewModel {
         loadMoviesIfNeeded()
     }
     
-    private func loadMoviesIfNeeded() {
-        let request = FetchDescriptor<Movie>()
-        let existingMovies = (try? context.fetch(request)) ?? []
+    
+    // MARK: - Create, Update, Delete Movies
+    
+    // Create Movies
+    func addMovie(
+        title: String,
+        releaseYear: Int? = nil,
+        status: MovieStatus = .toWatch,
+        overview: String,
+        backdropPath: String,
+        posterPath: String,
+        genres: [Genre] = [],
+        tags: [Tag] = [],
+        ratingValue: Double? = nil,
+        ratingReview: String? = nil
+    ) {
+        if movieExists(title: title, releaseYear: releaseYear) {
+            print("Skipping duplicate: \(title)")
+            return
+        }
         
+        let movie = Movie(
+            title: title,
+            releaseYear: releaseYear,
+            status: status,
+            overview: overview,
+            backdropPath: backdropPath,
+            posterPath: posterPath
+        )
+        
+        movie.genres = genres
+        movie.tags = tags
+        
+        if let ratingValue = ratingValue {
+            let rating = Rating(value: ratingValue, review: ratingReview)
+            movie.rating = rating
+            rating.movie = movie
+        }
+        
+        context.insert(movie)
+        
+        do {
+            try context.save()
+            movies.append(movie) // keep local array updated
+            print("Movie added: \(movie.title)")
+        } catch {
+            print("Failed to save new movie: \(error.localizedDescription)")
+        }
+        
+    }
+    
+    
+    
+    
+    
+    // MARK: - Private Helpers
+    
+    private func loadMoviesIfNeeded() {
         guard let response: MovieResponse = Bundle.main.decode("Movies.json") else {
             print("Failed to decode Movies.json")
             return
@@ -33,7 +88,7 @@ class MoviesViewModel {
         
         for m in response.results {
             // Check if movie already exists
-            if existingMovies.contains(where: { $0.title == m.title && $0.releaseYear == m.releaseYear }) {
+            if movieExists(title: m.title, releaseYear: m.releaseYear) {
                 print("Skipping duplicate: \(m.title)")
                 continue
             }
@@ -83,7 +138,7 @@ class MoviesViewModel {
     }
     
     
-    func resetDatabase() {
+    private func resetDatabase() {
         do {
             try context.delete(model: Movie.self)
             try context.delete(model: Genre.self)
@@ -96,5 +151,20 @@ class MoviesViewModel {
         }
     }
     
+    private func movieExists(title: String, releaseYear: Int?) -> Bool {
+        let normalized = title.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        
+        // Broad fetch (could filter by releaseYear if provided)
+        var descriptor = FetchDescriptor<Movie>()
+        if let year = releaseYear {
+            descriptor = FetchDescriptor(predicate: #Predicate { $0.releaseYear == year })
+        }
+        
+        let candidates = (try? context.fetch(descriptor)) ?? []
+        
+        return candidates.contains { movie in
+            movie.title.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == normalized
+        }
+    }
     
 }

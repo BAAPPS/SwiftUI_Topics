@@ -11,13 +11,14 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var context
     @State private var movieVM: MoviesViewModel
+    let movieViewMode = MovieViewMode()
     
     init(context: ModelContext){
         _movieVM = State(wrappedValue: MoviesViewModel(context: context))
     }
     var body: some View {
         NavigationStack {
-            MoviesListView()
+            MoviesListGridView()
                 .environment(movieVM)
                 .navigationDestination(for:Movie.self) { movie in
                     MovieDetailView(movie: movie)
@@ -33,8 +34,8 @@ struct ContentView: View {
         configurations: config
     )
     let context = ModelContext(container)
-    
     ContentView(context: context)
         .environment(\.modelContext, context)
+        .environment(MovieViewMode())
     
 }
