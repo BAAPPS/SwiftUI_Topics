@@ -16,9 +16,7 @@ struct MoviesListGridView: View {
     
     @State private var addMoviesClicked = false
     @State private var sortAscending = true
-    
-    
-    
+
     var body: some View {
         VStack {
             
@@ -64,6 +62,16 @@ struct MoviesListGridView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
+            
+            ToolbarItem(placement: .topBarLeading){
+                NavigationLink(value: "Watchlist") {
+                    Image(systemName: "clock.fill")
+                }
+                .accessibilityLabel("Watchlist")
+                .accessibilityHint("Opens your watchlist")
+                
+            }
+            
             // We use a ZStack with conditional Text views and `.transition(.opacity)`
             // because `.navigationTitle` changes don't animate by default.
             // This forces SwiftUI to treat the title as a view insertion/removal,

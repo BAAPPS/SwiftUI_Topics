@@ -12,11 +12,16 @@ import SwiftData
 class Movie {
     var title: String
     var releaseYear: Int?
-    var status: MovieStatus
+    var statusRaw: String
     var createdAt: Date
     var overview: String
     var backdropPath: String
     var posterPath: String
+    
+    var status: MovieStatus {
+        get { MovieStatus(rawValue: statusRaw) ?? .toWatch }
+        set { statusRaw = newValue.rawValue }
+    }
     
     // Relationships
     @Relationship(deleteRule: .nullify) var genres: [Genre] = []
@@ -33,7 +38,7 @@ class Movie {
          posterPath: String) {
         self.title = title
         self.releaseYear = releaseYear
-        self.status = status
+        self.statusRaw = status.rawValue
         self.createdAt = createdAt
         self.overview = overview
         self.backdropPath = backdropPath
@@ -47,7 +52,7 @@ extension Movie {
             let m = Movie(
                 title: "Demon Slayer",
                 releaseYear: 2025,
-                status: .toWatch,
+                status: .watched,
                 overview: "...",
                 backdropPath: "...",
                 posterPath: "..."

@@ -26,6 +26,12 @@ struct ContentView: View {
                             .environment(movieVM)
                     }
                 }
+                .navigationDestination(for: String.self) { destination in
+                                 if destination == "Watchlist" {
+                                     WatchListView()
+                                         .environment(movieVM)
+                                 }
+                             }
             
         }
     }
