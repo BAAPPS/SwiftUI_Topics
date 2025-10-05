@@ -36,9 +36,7 @@ Each sub-project focuses on a specific type of local data modeling challenge:
 
 * [SwiftNote](./SwiftNote) → Build a note-taking app with SwiftData. Practice creating **notes, categories, and tags**, handling relationships, and syncing data with SwiftUI lists and detail views.
 
-<!--* [TodoManager](./TodoManager) → Model a **task management system** with priorities, due dates, and status flags. Practice sorting, filtering, and updating tasks in real-time.-->
-<!---->
-<!--* [MovieLibrary](./MovieLibrary) → Persist **movies, actors, and genres** locally. Practice **nested relationships**, querying with conditions, and linking data to SwiftUI grids and detail views.-->
+* [SwiftWatchlist](./SwiftWatchlist) → Build a movie watchlist app with SwiftData. Practice modeling movies, genres, tags, and ratings, implementing MVVM architecture, and managing navigation with NavigationStack for viewing, sorting, and adding new movies.
 
 ---
 
