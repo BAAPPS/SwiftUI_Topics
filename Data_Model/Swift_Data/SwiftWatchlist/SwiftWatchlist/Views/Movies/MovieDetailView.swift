@@ -35,9 +35,11 @@ struct MovieDetailView: View {
                     dividerModifier()
                     
                     if let rating = movie.rating {
-                        StarRatingView(rating: rating.value, starSize: 16)
-                            .accessibilityElement(children: .ignore)
-                            .accessibilityLabel("Rating: \(rating.value) stars")
+                        StarRatingView(
+                              rating: rating.value,
+                              starSize: 16,
+                              showNumeric: true
+                          )
                     }
                     
                 }
