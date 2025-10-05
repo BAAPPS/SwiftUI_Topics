@@ -7,9 +7,11 @@
 
 import SwiftUI
 import Kingfisher
+import SwiftData
 
 struct MovieDetailView: View {
-    let movie: Movie
+    @Environment(MoviesViewModel.self) var moviesVM
+    @Bindable var movie: Movie
     var body: some View {
         VStack{
             KFImage(URL(string: movie.backdropPath))
@@ -37,7 +39,7 @@ struct MovieDetailView: View {
                             .accessibilityElement(children: .ignore)
                             .accessibilityLabel("Rating: \(rating.value) stars")
                     }
-   
+                    
                 }
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel(releaseRatingAccessibilityLabel)
@@ -54,7 +56,7 @@ struct MovieDetailView: View {
                     }
                 }
                 
-    
+                
                 // MARK: Overview
                 ScrollView {
                     Text(movie.overview)
@@ -66,16 +68,49 @@ struct MovieDetailView: View {
                 }
                 .padding(.vertical, 10)
                 
-    
-                // MARK: Status
-                IconTextPill(
-                    icon: movie.status.icon,
-                    text: movie.status.displayName,
-                    color: .purple,
-                    font: .system(size: 18, weight: .bold)
-                )
-                .padding(.top, 10)
                 
+                // MARK: - Watchlist Action Bar
+                VStack(spacing: 12) {
+                    HStack {
+                        Text("Status:")
+                            .font(.headline)
+                            .foregroundColor(.purple)
+                        Text(movie.status.displayName)
+                            .font(.headline)
+                            .foregroundColor(.blue)
+                    }
+                    
+                    HStack(spacing: 16) {
+                        if movie.status == .toWatch {
+                            Button {
+                                moviesVM.addToWatchinglist(movie)
+                            } label: {
+                                Label("Start Watching", systemImage: "play.circle.fill")
+                            }
+                            .buttonStyle(.borderedProminent)
+                        }
+                        
+                        if movie.status == .watching {
+                            Button {
+                                moviesVM.addToWatched(movie)
+                            } label: {
+                                Label("Mark as Watched", systemImage: "checkmark.circle.fill")
+                            }
+                            .buttonStyle(.borderedProminent)
+                        }
+                        
+                        if movie.status == .watched {
+                            Button {
+                                moviesVM.removeFromWatchlist(movie)
+                            } label: {
+                                Label("Remove", systemImage: "trash.circle.fill")
+                            }
+                            .buttonStyle(.bordered)
+                        }
+                    }
+                }
+                .padding(.vertical)
+
             }
             .accessibilityElement(children: .contain)
             
@@ -106,7 +141,14 @@ struct MovieDetailView: View {
 }
 
 #Preview {
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(
+        for: Movie.self, Genre.self, Tag.self, Rating.self,
+        configurations: config
+    )
+    let context = ModelContext(container)
     NavigationStack {
         MovieDetailView(movie: .exampleMovie)
+            .environment(MoviesViewModel(context: context))
     }
 }

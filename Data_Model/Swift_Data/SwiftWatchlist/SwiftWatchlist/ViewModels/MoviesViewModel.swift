@@ -12,11 +12,10 @@ import CoreData
 @Observable
 class MoviesViewModel {
     private let context: ModelContext
-    
-    
+
     var movies: [Movie] = []
     
-    init(context: ModelContext) {
+    init(context: ModelContext, skipJsonLoad: Bool = false) {
         self.context = context
         loadMoviesIfNeeded()
     }
@@ -72,28 +71,74 @@ class MoviesViewModel {
         
     }
     
+    // MARK: - Update Movie Status
+    
+    func cycleMovieStatus(for movie: Movie) {
+        let allStatuses = MovieStatus.allCases
+        guard let currentIndex = allStatuses.firstIndex(of: movie.status) else { return }
+        
+        let nextIndex = (currentIndex + 1) % allStatuses.count
+        movie.status = allStatuses[nextIndex]
+        
+        saveMovieChanges(movie)
+        refreshMovies()
+    }
     
     
+    // MARK: - Update Watch List
+    
+    func addToWatchinglist(_ movie: Movie) {
+        movie.status = .watching
+        saveMovieChanges(movie)
+    }
+    
+    func addToWatched(_ movie: Movie) {
+        movie.status = .watched
+        saveMovieChanges(movie)
+    }
+    
+    func removeFromWatchlist(_ movie: Movie) {
+        movie.status = .toWatch
+        saveMovieChanges(movie)
+    }
+    
+
+    
+
     
     
     // MARK: - Private Helpers
     
+    private func saveMovieChanges(_ movie: Movie) {
+        do {
+            try context.save()
+            print("Updated status for: \(movie.title) to \(movie.status.displayName)")
+        } catch {
+            print("Failed to save movie status: \(error.localizedDescription)")
+        }
+    }
+    
+    private func refreshMovies() {
+        do {
+            self.movies = try context.fetch(FetchDescriptor<Movie>())
+        } catch {
+            print("Failed to refresh movies: \(error)")
+        }
+    }
     private func loadMoviesIfNeeded() {
+        let existingMovies: [Movie] = (try? context.fetch(FetchDescriptor<Movie>())) ?? []
+        guard existingMovies.isEmpty else {
+            print("Movies already exist — skipping JSON load.")
+            self.movies = existingMovies
+            return
+        }
+        
         guard let response: MovieResponse = Bundle.main.decode("Movies.json") else {
             print("Failed to decode Movies.json")
             return
         }
         
-        print("Decoded \(response.results.count) movies")
-        
         for m in response.results {
-            // Check if movie already exists
-            if movieExists(title: m.title, releaseYear: m.releaseYear) {
-                print("Skipping duplicate: \(m.title)")
-                continue
-            }
-            
-            // Insert movie
             let movie = Movie(
                 title: m.title,
                 releaseYear: m.releaseYear,
@@ -104,10 +149,7 @@ class MoviesViewModel {
                 posterPath: m.posterPath
             )
             
-            // Map genres
             movie.genres = m.genres.map { Genre(type: GenreType(rawValue: $0.type) ?? .action) }
-            
-            // Map tags
             movie.tags = m.tags.map {
                 if let type = $0.type {
                     return Tag(content: .predefined(type))
@@ -118,7 +160,6 @@ class MoviesViewModel {
                 }
             }
             
-            // Map rating
             if let r = m.rating {
                 let rating = Rating(value: r.value, review: r.review, createdAt: r.createdAt)
                 movie.rating = rating
@@ -126,16 +167,18 @@ class MoviesViewModel {
             }
             
             context.insert(movie)
-            movies.append(movie)
         }
         
         do {
             try context.save()
-            print("Movies saved successfully!")
+            self.movies = try context.fetch(FetchDescriptor<Movie>())
+            print("Movies loaded and saved successfully!")
         } catch {
             print("Failed to save movies: \(error.localizedDescription)")
         }
     }
+    
+    
     
     
     private func resetDatabase() {

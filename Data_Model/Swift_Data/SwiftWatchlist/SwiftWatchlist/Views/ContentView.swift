@@ -12,7 +12,6 @@ struct ContentView: View {
     @Environment(\.modelContext) private var context
     @State private var movieVM: MoviesViewModel
     let movieViewMode = MovieViewMode()
-    
     init(context: ModelContext){
         _movieVM = State(wrappedValue: MoviesViewModel(context: context))
     }
@@ -20,9 +19,14 @@ struct ContentView: View {
         NavigationStack {
             MoviesListGridView()
                 .environment(movieVM)
-                .navigationDestination(for:Movie.self) { movie in
-                    MovieDetailView(movie: movie)
+                .environment(movieViewMode)
+                .navigationDestination(for: Movie.self) { movie in
+                    if let persistedMovie = movieVM.movies.first(where: { $0.id == movie.id }) {
+                        MovieDetailView(movie: persistedMovie)
+                            .environment(movieVM)
+                    }
                 }
+            
         }
     }
 }
@@ -37,5 +41,4 @@ struct ContentView: View {
     ContentView(context: context)
         .environment(\.modelContext, context)
         .environment(MovieViewMode())
-    
 }
