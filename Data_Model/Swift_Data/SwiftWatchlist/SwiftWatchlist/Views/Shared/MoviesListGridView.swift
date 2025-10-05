@@ -11,8 +11,14 @@ import SwiftData
 struct MoviesListGridView: View {
     @Environment(MoviesViewModel.self) var moviesVM
     @Environment(MovieViewMode.self) var movieViewMode
+    @State private var previousMode: MovieViewMode.ViewMode = .list
+    
     
     @State private var addMoviesClicked = false
+    @State private var sortAscending = true
+    
+    
+    
     var body: some View {
         VStack {
             
@@ -42,11 +48,15 @@ struct MoviesListGridView: View {
             Group {
                 switch movieViewMode.currentMode {
                 case .grid:
-                   MovieGridView()
-                        .transition(.opacity.combined(with: .slide))
+                    MovieGridView(sortAscending: sortAscending)
+                        .id(sortAscending)
+                        .transition(movieViewMode.currentMode.transition())
+                        .animation(.easeInOut(duration: 0.25), value: sortAscending)
                 case .list:
-                    MoviesListView()
-                        .transition(.opacity.combined(with: .slide))
+                    MoviesListView(sortAscending: sortAscending)
+                        .id(sortAscending)
+                        .transition(movieViewMode.currentMode.transition())
+                        .animation(.easeInOut(duration: 0.25), value: sortAscending)
                 }
             }
             .animation(.easeInOut(duration: 0.3), value: movieViewMode.currentMode)
@@ -71,7 +81,28 @@ struct MoviesListGridView: View {
                     }
                 }
                 .animation(.easeInOut(duration: 0.3), value: movieViewMode.currentMode)
+                .onChange(of: movieViewMode.currentMode) {_, newMode in
+                    previousMode = newMode == .grid ? .list : .grid
+                }
+                
             }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    // Explicit Animation
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        sortAscending.toggle()
+                    }
+                } label: {
+                    Image(systemName: sortAscending ? "arrow.up" : "arrow.down")
+                    // Implicit Animation
+                    // .animation(.spring(), value: sortAscending)
+                }
+                .accessibilityLabel("Sort movies")
+                .accessibilityHint("Toggles between ascending and descending order")
+            }
+            
+            
             ToolbarItem(placement:.navigationBarTrailing){
                 Button(action: {
                     addMoviesClicked = true
@@ -84,7 +115,7 @@ struct MoviesListGridView: View {
             }
         }
         .navigationDestination(isPresented: $addMoviesClicked) {
-                MovieCreationView()
+            MovieCreationView()
                 .environment(moviesVM)
         }
     }

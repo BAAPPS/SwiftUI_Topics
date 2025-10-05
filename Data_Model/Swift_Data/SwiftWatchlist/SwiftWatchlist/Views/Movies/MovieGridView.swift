@@ -11,15 +11,20 @@ import Kingfisher
 
 struct MovieGridView: View {
     @Environment(MoviesViewModel.self) var movieVM
-    @Query(sort: \Movie.title) var movies: [Movie]
+    @Query var movies: [Movie]
+    var sortAscending: Bool
 
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible())
     ]
     
+    init(sortAscending: Bool) {
+        _movies = Query(sort: [SortDescriptor(\Movie.title, order: sortAscending ? .forward : .reverse)])
+        self.sortAscending = sortAscending
+    }
     
-    
+
     var body: some View {
         ScrollView {
             LazyVGrid(columns:columns) {
@@ -62,6 +67,7 @@ struct MovieGridView: View {
 }
 
 #Preview {
+    @Previewable @State var sortAscending: Bool = true
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(
         for: Movie.self, Genre.self, Tag.self, Rating.self,
@@ -69,7 +75,8 @@ struct MovieGridView: View {
     )
     let context = ModelContext(container)
     
-    MovieGridView()
+    
+    MovieGridView(sortAscending: sortAscending)
         .environment(\.modelContext, context)
         .environment(MoviesViewModel(context:context))
     

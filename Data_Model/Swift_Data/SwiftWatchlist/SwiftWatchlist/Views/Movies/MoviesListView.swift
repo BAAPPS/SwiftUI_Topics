@@ -11,8 +11,15 @@ import Kingfisher
 
 struct MoviesListView: View {
     @Environment(MoviesViewModel.self) var movieVM
-    @Query(sort: \Movie.title) var movies: [Movie]
- 
+    @Query var movies: [Movie]
+    var sortAscending: Bool
+    
+    init(sortAscending: Bool) {
+        _movies = Query(sort: [SortDescriptor(\Movie.title, order: sortAscending ? .forward : .reverse)])
+        self.sortAscending = sortAscending
+    }
+    
+    
 
     var body: some View {
             List(movies) { movie in
@@ -71,6 +78,7 @@ struct MoviesListView: View {
     }
 
 #Preview {
+    @Previewable @State var sortAscending: Bool = true
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(
         for: Movie.self, Genre.self, Tag.self, Rating.self,
@@ -78,7 +86,7 @@ struct MoviesListView: View {
     )
     let context = ModelContext(container)
     
-    MoviesListView()
+    MoviesListView(sortAscending: sortAscending)
         .environment(\.modelContext, context)
         .environment(MoviesViewModel(context: context))
 }
