@@ -27,11 +27,11 @@ struct ContentView: View {
                     }
                 }
                 .navigationDestination(for: String.self) { destination in
-                                 if destination == "Watchlist" {
-                                     WatchListView()
-                                         .environment(movieVM)
-                                 }
-                             }
+                    if destination == "Watchlist" {
+                        WatchListView()
+                            .environment(movieVM)
+                    }
+                }
             
         }
     }

@@ -8,11 +8,13 @@
 import Foundation
 
 
-enum TagType: String, CaseIterable, Identifiable, Codable {
+enum TagType: String, CaseIterable, Identifiable, Codable, CustomStringConvertible {
     case favorite = "Favorite"
     case mustWatch = "Must Watch"
     case classics = "Classics"
     case trending = "Trending"
+    
+    var description: String { rawValue }
     
     var id: String { rawValue }
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum GenreType: String, CaseIterable, Identifiable, Codable {
+enum GenreType: String, CaseIterable, Identifiable, Codable, CustomStringConvertible {
     case action = "Action"
     case comedy = "Comedy"
     case drama = "Drama"
@@ -19,6 +19,7 @@ enum GenreType: String, CaseIterable, Identifiable, Codable {
     case romance = "Romance"
     case documentary = "Documentary"
     
+    var description: String { rawValue }
     var id: String { rawValue }
     
     var icon: String {
@@ -30,9 +31,11 @@ enum GenreType: String, CaseIterable, Identifiable, Codable {
         case .horror: return "👻"
         case .animation: return "🎨"
         case .fantasy: return "🪄"
-        case .thriller: return "🕵️"  
+        case .thriller: return "🕵️"
         case .romance: return "❤️"
         case .documentary: return "🎥"
         }
     }
 }
+
+
