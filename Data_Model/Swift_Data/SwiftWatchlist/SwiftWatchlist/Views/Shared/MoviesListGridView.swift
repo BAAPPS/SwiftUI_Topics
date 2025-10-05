@@ -42,7 +42,7 @@ struct MoviesListGridView: View {
             Group {
                 switch movieViewMode.currentMode {
                 case .grid:
-                    Text("Grid View Coming Soon...")
+                   MovieGridView()
                         .transition(.opacity.combined(with: .slide))
                 case .list:
                     MoviesListView()
