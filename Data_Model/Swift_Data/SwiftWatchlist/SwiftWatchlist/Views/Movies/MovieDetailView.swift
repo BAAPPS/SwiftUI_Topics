@@ -30,13 +30,14 @@ struct MovieDetailView: View {
                         IconTextRow(systemName: "calendar", text: "\(String(releaseDate))")
                     }
                     
-                    dividerModifer()
+                    dividerModifier()
                     
                     if let rating = movie.rating {
                         StarRatingView(rating: rating.value, starSize: 16)
                             .accessibilityElement(children: .ignore)
                             .accessibilityLabel("Rating: \(rating.value) stars")
                     }
+   
                 }
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel(releaseRatingAccessibilityLabel)
@@ -53,15 +54,19 @@ struct MovieDetailView: View {
                     }
                 }
                 
-                
+    
                 // MARK: Overview
-                Text(movie.overview)
-                    .font(.system(size: 17, weight: .medium))
-                    .foregroundStyle(Color.black.opacity(0.8))
-                    .padding()
-                    .lineSpacing(10)
-                    .accessibilityLabel("Overview: \(movie.overview)")
+                ScrollView {
+                    Text(movie.overview)
+                        .font(.system(size: 17, weight: .medium))
+                        .foregroundStyle(Color.black.opacity(0.8))
+                        .padding()
+                        .lineSpacing(10)
+                        .accessibilityLabel("Overview: \(movie.overview)")
+                }
+                .padding(.vertical, 10)
                 
+    
                 // MARK: Status
                 IconTextPill(
                     icon: movie.status.icon,
@@ -69,6 +74,7 @@ struct MovieDetailView: View {
                     color: .purple,
                     font: .system(size: 18, weight: .bold)
                 )
+                .padding(.top, 10)
                 
             }
             .accessibilityElement(children: .contain)

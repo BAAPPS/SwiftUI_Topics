@@ -39,7 +39,7 @@ struct OverlayEffectModifier: ViewModifier {
 
 
 extension View{
-    func dividerModifer(height: CGFloat = 25, color: Color = .gray) -> some View {
+    func dividerModifier(height: CGFloat = 25, color: Color = .gray) -> some View {
         self.modifier(DividerModifier(height: height, color: color))
     }
     
