@@ -11,6 +11,7 @@ import Kingfisher
 
 struct MovieGridView: View {
     @Environment(MoviesViewModel.self) var movieVM
+    @Query(sort: \Movie.title) var movies: [Movie]
 
     let columns = [
         GridItem(.flexible()),
@@ -22,7 +23,7 @@ struct MovieGridView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns:columns) {
-                ForEach(movieVM.movies) { movie  in
+                ForEach(movies) { movie  in
                     ZStack{
                         KFImage(URL(string: movie.posterPath))
                             .resizable()
@@ -69,6 +70,7 @@ struct MovieGridView: View {
     let context = ModelContext(container)
     
     MovieGridView()
+        .environment(\.modelContext, context)
         .environment(MoviesViewModel(context:context))
     
 }

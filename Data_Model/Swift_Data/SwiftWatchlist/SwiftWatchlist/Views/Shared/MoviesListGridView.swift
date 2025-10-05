@@ -99,6 +99,7 @@ struct MoviesListGridView: View {
     let context = ModelContext(container)
     NavigationStack {
         MoviesListGridView()
+            .environment(\.modelContext, context)
             .environment(MoviesViewModel(context: context))
             .environment(MovieViewMode())
     }
