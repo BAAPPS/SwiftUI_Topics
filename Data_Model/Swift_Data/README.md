@@ -38,6 +38,16 @@ Each sub-project focuses on a specific type of local data modeling challenge:
 
 * [SwiftWatchlist](./SwiftWatchlist) → Build a movie watchlist app with SwiftData. Practice modeling movies, genres, tags, and ratings, implementing MVVM architecture, and managing navigation with NavigationStack for viewing, sorting, and adding new movies.
 
+* [SwiftSettingsManager](./SwiftSettingsManager) → Build an app-wide **settings manager** using SwiftData and SwiftUI. Practice:
+
+  * Creating **user preferences** for theme, accent color, and font size.
+  * Using **environment keys** to pass theme and accent color throughout the app.
+  * Implementing **ThemedView<Content: View>** for dynamic UI theming.
+  * Building a reusable **NavBarView<Content: View>** with customizable back button, dynamic title, and consistent styling.
+  * Binding SwiftData-backed settings to **Pickers, Toggles, and Sliders**.
+  * Applying **live UI updates** and app-wide theming without restarting the app.
+  * Managing **accessibility** for all interactive controls.
+
 ---
 
 ## Why This Challenge?
