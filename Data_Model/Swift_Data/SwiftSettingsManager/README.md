@@ -58,51 +58,51 @@ This challenge was chosen to:
 * Learn to structure a small SwiftUI project in a **scalable, maintainable way**.
 
 ---
-<!---->
-<!--## What I Learned-->
-<!---->
-<!--* How to define **SwiftData models** and persist data efficiently.-->
-<!--* How to fetch, observe, and update data with **@Query** and **@Environment(.modelContext)**.-->
-<!--* How to bind SwiftData-backed settings to SwiftUI controls (Pickers, Toggles, Sliders).-->
-<!--* How to implement **live UI updates** using SwiftUI and reactive state.-->
-<!--* Best practices for **MVVM in SwiftUI** and separating business logic from UI.-->
-<!--* Strategies for **app-wide theming** and user preference management.-->
-<!---->
-<!------->
-<!---->
-<!--## What I Would Do Differently-->
-<!---->
-<!--* Implement **multiple user profiles** so each user can have separate settings.-->
-<!--* Add **CloudKit sync** for cross-device persistence.-->
-<!--* Expand theme management to **live preview** without restarting the app.-->
-<!--* Include **custom color palettes** for greater personalization.-->
-<!--* Add unit tests to verify persistence and theme application logic.-->
-<!---->
-<!------->
-<!---->
-<!--## App Showcase-->
-<!---->
-<!--### Theme Selection-->
-<!---->
-<!--Easily switch between **System**, **Light**, or **Dark** themes.-->
-<!--![Theme Selection](https://github.com/user-attachments/assets/theme-selection-placeholder.png)-->
-<!---->
-<!--### Accent Color-->
-<!---->
-<!--Pick your favorite accent color to personalize the app.-->
-<!--![Accent Color Picker](https://github.com/user-attachments/assets/accent-color-placeholder.png)-->
-<!---->
-<!--### Font Size Adjustment-->
-<!---->
-<!--Adjust font size dynamically and see immediate preview changes.-->
-<!--![Font Size Slider](https://github.com/user-attachments/assets/font-size-placeholder.png)-->
-<!---->
-<!--### Notification Toggle-->
-<!---->
-<!--Enable or disable notifications for your profile.-->
-<!--![Notifications Toggle](https://github.com/user-attachments/assets/notifications-placeholder.png)-->
-<!---->
-<!--### Persistent Settings-->
-<!---->
-<!--All changes are automatically stored and persist after app restarts.-->
-<!---->
+
+## What I Learned
+
+* How to define **SwiftData models** and persist data efficiently.
+* How to fetch, observe, and update data with **@Query** and **@Environment(.modelContext)**.
+* How to bind SwiftData-backed settings to SwiftUI controls (Pickers, Toggles, Sliders).
+* How to implement **live UI updates** using SwiftUI and reactive state.
+* Best practices for **MVVM in SwiftUI** and separating business logic from UI.
+* Strategies for **app-wide theming** and user preference management.
+
+---
+
+## What I Would Do Differently
+
+* Implement **multiple user profiles** so each user can have separate settings.
+* Add **CloudKit sync** for cross-device persistence.
+* Expand theme management to **live preview** without restarting the app.
+* Include **custom color palettes** for greater personalization.
+* Add unit tests to verify persistence and theme application logic.
+
+---
+
+## App Showcase
+
+### Theme Selection
+
+Easily switch between **System**, **Light**, or **Dark** themes.
+![Theme Selection](https://github.com/user-attachments/assets/theme-selection-placeholder.png)
+
+### Accent Color
+
+Pick your favorite accent color to personalize the app.
+![Accent Color Picker](https://github.com/user-attachments/assets/accent-color-placeholder.png)
+
+### Font Size Adjustment
+
+Adjust font size dynamically and see immediate preview changes.
+![Font Size Slider](https://github.com/user-attachments/assets/font-size-placeholder.png)
+
+### Notification Toggle
+
+Enable or disable notifications for your profile.
+![Notifications Toggle](https://github.com/user-attachments/assets/notifications-placeholder.png)
+
+### Persistent Settings
+
+All changes are automatically stored and persist after app restarts.
+
