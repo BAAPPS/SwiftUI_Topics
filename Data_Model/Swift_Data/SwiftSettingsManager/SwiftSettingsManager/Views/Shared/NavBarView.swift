@@ -8,9 +8,6 @@
 import SwiftUI
 import SwiftData
 
-import SwiftUI
-import SwiftData
-
 struct NavBarView<Content: View>: View {
     @Environment(SettingsViewModel.self) var settingsVM
     @Environment(\.dismiss) private var dismiss
