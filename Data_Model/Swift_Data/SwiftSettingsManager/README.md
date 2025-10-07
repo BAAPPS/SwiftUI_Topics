@@ -8,9 +8,9 @@
 * [Technologies Used](#technologies-used)
 * [Features](#features)
 * [Why This Challenge?](#why-this-challenge)
-<!--* [What I Learned](#what-i-learned)-->
-<!--* [What I Would Do Differently](#what-i-would-do-differently)-->
-<!--* [App Showcase](#app-showcase)-->
+* [What I Learned](#what-i-learned)
+* [What I Would Do Differently](#what-i-would-do-differently)
+* [App Showcase](#app-showcase)
 
 ---
 
@@ -62,11 +62,14 @@ This challenge was chosen to:
 ## What I Learned
 
 * How to define **SwiftData models** and persist data efficiently.
-* How to fetch, observe, and update data with **@Query** and **@Environment(.modelContext)**.
+* How to fetch, observe, and update data with **@Environment(.modelContext)**.
 * How to bind SwiftData-backed settings to SwiftUI controls (Pickers, Toggles, Sliders).
 * How to implement **live UI updates** using SwiftUI and reactive state.
 * Best practices for **MVVM in SwiftUI** and separating business logic from UI.
 * Strategies for **app-wide theming** and user preference management.
+* How to create **custom EnvironmentKeys** to inject app-wide settings (`theme`, `accentColor`) into any SwiftUI view.
+* How to build a **reusable `NavBarView<Content: View>`** for a custom navigation bar that supports back buttons, dynamic titles, theming, and accessibility.
+* How to use **`ThemedView<Content: View>`** as a wrapper to apply theme colors and accent colors consistently across all screens.
 
 ---
 
@@ -76,7 +79,8 @@ This challenge was chosen to:
 * Add **CloudKit sync** for cross-device persistence.
 * Expand theme management to **live preview** without restarting the app.
 * Include **custom color palettes** for greater personalization.
-* Add unit tests to verify persistence and theme application logic.
+* Add **unit tests** to verify persistence and theme application logic.
+* Create **more reusable environment keys** for app-wide settings like theme, accent color, and font size.
 
 ---
 
@@ -85,24 +89,25 @@ This challenge was chosen to:
 ### Theme Selection
 
 Easily switch between **System**, **Light**, or **Dark** themes.
-![Theme Selection](https://github.com/user-attachments/assets/theme-selection-placeholder.png)
+![Theme Selection](https://github.com/user-attachments/assets/7fee0957-fae8-447a-9fbc-4e147da6968d)
 
 ### Accent Color
 
 Pick your favorite accent color to personalize the app.
-![Accent Color Picker](https://github.com/user-attachments/assets/accent-color-placeholder.png)
+![Accent Color Picker](https://github.com/user-attachments/assets/a53e000d-3d2c-4adc-abc3-c0bbf4deee4e)
 
 ### Font Size Adjustment
 
 Adjust font size dynamically and see immediate preview changes.
-![Font Size Slider](https://github.com/user-attachments/assets/font-size-placeholder.png)
+![Font Size Slider](https://github.com/user-attachments/assets/035f6bea-e2b0-4258-b80f-57969654e267)
 
 ### Notification Toggle
 
 Enable or disable notifications for your profile.
 ![Notifications Toggle](https://github.com/user-attachments/assets/notifications-placeholder.png)
 
-### Persistent Settings
+### Settings View 
 
-All changes are automatically stored and persist after app restarts.
+Choose a setting from the settings list.
 
+![Settings View](https://github.com/user-attachments/assets/547752c7-4548-4ba7-8532-f0d86d618d57)
