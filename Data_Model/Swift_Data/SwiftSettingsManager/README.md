@@ -89,22 +89,26 @@ This challenge was chosen to:
 ### Theme Selection
 
 Easily switch between **System**, **Light**, or **Dark** themes.
+
 ![Theme Selection](https://github.com/user-attachments/assets/7fee0957-fae8-447a-9fbc-4e147da6968d)
 
 ### Accent Color
 
 Pick your favorite accent color to personalize the app.
+
 ![Accent Color Picker](https://github.com/user-attachments/assets/a53e000d-3d2c-4adc-abc3-c0bbf4deee4e)
 
 ### Font Size Adjustment
 
 Adjust font size dynamically and see immediate preview changes.
+
 ![Font Size Slider](https://github.com/user-attachments/assets/035f6bea-e2b0-4258-b80f-57969654e267)
 
 ### Notification Toggle
 
 Enable or disable notifications for your profile.
-![Notifications Toggle](https://github.com/user-attachments/assets/notifications-placeholder.png)
+
+![Notifications Toggle](https://github.com/user-attachments/assets/6a960694-7109-48ff-b587-fe453e28b1ae)
 
 ### Settings View 
 
