@@ -16,7 +16,7 @@ final class SettingsViewModel{
     
     var settings: AppSettings
     
-    init(context: ModelContext) {
+    private init(context: ModelContext) {
         self.context = context
         if let existing = try? context.fetch(FetchDescriptor<AppSettings>()).first {
             settings = existing
@@ -27,6 +27,13 @@ final class SettingsViewModel{
             save(debugDescription: "New Settings Created: \(newSettings)")
         }
     }
+    
+    // MARK: - Singleton initializer
+    static func initialize(context: ModelContext) {
+        guard shared == nil else { return } // only once
+        shared = SettingsViewModel(context: context)
+    }
+
     
     // MARK: - Update Methods
     
@@ -40,8 +47,8 @@ final class SettingsViewModel{
         save()
     }
     
-    func toggleNotifications() {
-        settings.notificationsEnabled.toggle()
+    func updateNotifications(to isOn: Bool) {
+        settings.notificationsEnabled = isOn
         save()
     }
     

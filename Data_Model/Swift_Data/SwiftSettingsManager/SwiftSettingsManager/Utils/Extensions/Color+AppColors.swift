@@ -15,9 +15,8 @@ extension Color {
     
 
     // MARK: - Secondary colors
-    static let secondaryDark = Color(hex: "#23292e")
+    static let secondaryDark = Color(hex: "#44515a")
     static let secondaryLight = Color(hex: "#eceff2")
-    
     
     // MARK: - Accent Colors
     
@@ -27,4 +26,7 @@ extension Color {
     // MARK: - Text Colors
     static let textDark = Color(hex: "#f9f7f3")
     static let textLight = Color(hex: "#353d45")
+    
+    // MARK: - Icon Colors
+    static let primaryIcon = Color(hex: "#23292e")
 }

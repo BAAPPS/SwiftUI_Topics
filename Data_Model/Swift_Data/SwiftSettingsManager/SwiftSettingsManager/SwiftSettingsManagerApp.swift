@@ -13,15 +13,9 @@ import SwiftData
 struct SwiftSettingsManagerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentViewProvider()
+            ContentView()
                 .modelContainer(for: AppSettings.self)
         }
     }
 }
 
-struct ContentViewProvider:View{
-    @Environment(\.modelContext) private var context
-      var body: some View {
-          ContentView(context: context)
-      }
-}

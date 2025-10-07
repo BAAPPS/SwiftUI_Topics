@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 // MARK: - Theme Enum
-enum Theme: String, CaseIterable, Codable, Identifiable {
+enum Theme: String, CaseIterable, Codable, Identifiable, Hashable {
     case system, dark, light
     var id: String {rawValue}
     
@@ -18,6 +18,14 @@ enum Theme: String, CaseIterable, Codable, Identifiable {
         case .dark: return .primaryDark
         case .light: return .primaryLight
         case .system: return Color(uiColor: .systemBackground)
+        }
+    }
+    
+    var secondaryBackgroundColor: Color {
+        switch self {
+        case .dark: return .secondaryDark
+        case .light: return .secondaryLight
+        case .system: return Color(uiColor: .secondarySystemBackground)
         }
     }
     
@@ -32,7 +40,7 @@ enum Theme: String, CaseIterable, Codable, Identifiable {
 
 
 // MARK: - Accent Color Enum
-enum AccentColor: String, CaseIterable, Codable, Identifiable {
+enum AccentColor: String, CaseIterable, Codable, Identifiable, Hashable {
     case sky, aqua
     
     var id: String { rawValue }
