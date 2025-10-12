@@ -9,16 +9,11 @@ import SwiftUI
 import SwiftData
 
 struct ProductDetailsView: View {
+    @Environment(CartViewModel.self) var cartVM
     private let MAXLIMIT = 5
     let product: Product
     @State private var quantity: Int = 1
     @State private var addToCart = false
-    @State private var cartVM: CartViewModel
-    
-    init(product: Product, context: ModelContext) {
-        self.product = product
-        _cartVM = State(wrappedValue: CartViewModel(cart: Cart(), context: context))
-    }
 
     var body: some View {
         ScrollView {
@@ -199,6 +194,6 @@ struct ProductDetailsView: View {
         rating: dummyRating
     )
     
-    ProductDetailsView(product: dummyProduct, context: context)
+    ProductDetailsView(product: dummyProduct)
         .environment(\.modelContext, context)
 }

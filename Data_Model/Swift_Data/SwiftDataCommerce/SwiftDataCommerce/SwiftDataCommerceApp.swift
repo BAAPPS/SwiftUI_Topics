@@ -43,7 +43,7 @@ struct SwiftDataCommerceApp: App {
     var body: some Scene {
         WindowGroup {
             let context = ModelContext(container)
-            ContentView()
+            ContentView(context: context)
                 .environment(\.modelContext, context)
         }
     }

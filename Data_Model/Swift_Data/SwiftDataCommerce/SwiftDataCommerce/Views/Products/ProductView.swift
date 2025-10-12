@@ -10,6 +10,7 @@ import SwiftData
 
 struct ProductView: View {
     @Environment(\.modelContext) private var context
+    @Environment(CartViewModel.self) var cartVM
     @State private var productVM: ProductViewModel?
     @Query(sort: \Product.category, order: .forward) private var products:[Product]
     
@@ -47,7 +48,8 @@ struct ProductView: View {
                         }
                     }
                     .navigationDestination(for: Product.self) { product in
-                        ProductDetailsView(product: product, context: context)
+                        ProductDetailsView(product: product)
+                            .environment(cartVM)
                     }
                 }
             }
