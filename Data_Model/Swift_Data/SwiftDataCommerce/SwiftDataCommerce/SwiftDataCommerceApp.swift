@@ -15,11 +15,15 @@ struct SwiftDataCommerceApp: App {
     init() {
         do {
 #if DEBUG
-            // --- DEV MODE ---
-            print("Running DEV mode (in-memory store)")
-            let config = ModelConfiguration(isStoredInMemoryOnly: true)
+            // --- DEV MODE (persistent for learning) ---
+            // Previously used in-memory store for testing (did NOT persist).
+            //  let config = ModelConfiguration(isStoredInMemoryOnly: true)
+            // Now using persistent store to keep data between app launches.
+            // Files created: default.store, default.store-shm, default.store-wal
+            let config = ModelConfiguration(isStoredInMemoryOnly: false)
 #else
             // --- PROD MODE ---
+            // Ensure backup of existing production store before loading
             backupProdStore()
             print("Running PROD mode (persistent default.store)")
             let config = ModelConfiguration(isStoredInMemoryOnly: false)

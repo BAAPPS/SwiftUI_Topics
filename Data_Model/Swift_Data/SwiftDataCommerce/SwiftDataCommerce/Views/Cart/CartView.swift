@@ -10,23 +10,89 @@ import SwiftData
 
 struct CartView: View {
     @Environment(CartViewModel.self) var cartVM
+    private let MAX_QUANTITY = 5
+    
+    
     var body: some View {
         List {
             ForEach(cartVM.items, id: \.self) { item in
-                HStack {
+                VStack(alignment:.leading, spacing:5) {
+                    let quantityBinding = Binding(
+                        get: { String(item.quantity) },
+                        set: { newValue in
+                            if let intValue = Int(newValue) {
+                                cartVM.updateQuantity(for: item, quantity: min(intValue, MAX_QUANTITY))
+                            }
+                        }
+                    )
+                    
                     Text(item.product.title)
+                        .lineLimit(1)
+                        .padding(.top, 5)
+                    
                     Spacer()
-                    Text("\(item.quantity) x $\(item.product.price, specifier: "%.2f")")
+                    
+                    HStack{
+                        HStack {
+                            Button(role: .destructive) {
+                                cartVM.clearItem(item)
+                            } label: {
+                                Image(systemName:"trash")
+                            }
+                            .foregroundColor(.red)
+                            HStack{
+                                Text("Qty")
+                                    .font(.subheadline)
+                                
+                                TextField("", text: quantityBinding)
+                                    .frame(width: 50)
+                                    .textFieldStyle(.roundedBorder)
+                                    .keyboardType(.numberPad)
+                                    .foregroundStyle(item.quantity == MAX_QUANTITY ? Color.red : Color.black)
+                                    .fontWeight(.bold)
+                                
+                                
+                                Text("Max(\(MAX_QUANTITY))")
+                                    .font(.caption)
+                                    .foregroundStyle(Color.red)
+                                    .opacity(item.quantity == MAX_QUANTITY ? 1 : 0)
+                            }
+                        }
+                        
+                        Spacer()
+                        
+                        Text("$\(Double(item.quantity) * item.product.price, specifier: "%.2f")")
+                            .frame(width: 80, alignment: .trailing)
+                        
+                    }
+                }
+                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    Button(role: .destructive) {
+                        cartVM.removeItem(item)
+                    } label: {
+                        Label("Remove", systemImage: "trash")
+                    }
                 }
             }
             
             HStack {
                 Text("Total:")
+                    .fontWeight(.bold)
                 Spacer()
                 Text("$\(cartVM.totalPrice, specifier: "%.2f")")
+                    .fontWeight(.bold)
             }
         }
         .navigationTitle("Cart")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    cartVM.clearCart()
+                } label: {
+                    Label("Clear All", systemImage: "trash.circle")
+                }
+            }
+        }
     }
 }
 
@@ -37,38 +103,11 @@ struct CartView: View {
         configurations: config
     )
     let context = ModelContext(container)
-    let previewCart = Cart()
     
-    let dummyRating1 = Rating(rating: 4.2, count: 259)
-    let product1 = Product(
-        id: 1,
-        productDescription: "21.5 inches Full HD (1920 x 1080) widescreen IPS display...",
-        category: "electronics",
-        image: "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_t.png",
-        price: 599,
-        title: "Acer SB220Q 21.5\" Full HD IPS",
-        rating: dummyRating1
-    )
-    
-    let dummyRating2 = Rating(rating: 3.8, count: 120)
-    let product2 = Product(
-        id: 2,
-        productDescription: "High performance wireless mouse with ergonomic design...",
-        category: "electronics",
-        image: "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
-        price: 49,
-        title: "Logitech Wireless Mouse",
-        rating: dummyRating2
-    )
-    
-    // Insert CartItems into context and link to previewCart
-    let item1 = CartItem(quantity: 2, product: product1, cart: previewCart)
-    let item2 = CartItem(quantity: 1, product: product2, cart: previewCart)
-    context.insert(item1)
-    context.insert(item2)
-    
-    let cartVM = CartViewModel(cart: previewCart, context: context)
-    return CartView()
-        .environment(\.modelContext, context)
-        .environment(cartVM)
+    let cartVM = CartViewModel(context: context)
+   return NavigationStack {
+        CartView()
+            .environment(\.modelContext, context)
+            .environment(cartVM)
+    }
 }

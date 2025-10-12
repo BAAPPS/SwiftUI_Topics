@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var cartVM: CartViewModel
     
     init(context: ModelContext) {
-        _cartVM = State(wrappedValue: CartViewModel(cart: Cart(), context: context))
+        _cartVM = State(wrappedValue: CartViewModel(context: context))
     }
     var body: some View {
         NavigationStack {

@@ -60,7 +60,7 @@ struct TabContentView: View {
     context.insert(item1)
     context.insert(item2)
     
-    let cartVM = CartViewModel(cart: previewCart, context: context)
+    let cartVM = CartViewModel(context: context)
     return TabContentView(selectedTab: $selectedTab)
         .environment(\.modelContext,context)
         .environment(cartVM)

@@ -16,14 +16,27 @@ final class CartViewModel {
     
     var items: [CartItem] { cart.items }
     
-  
+    
     var totalPrice: Double {
         cart.totalPrice
     }
     
-    init(cart: Cart, context: ModelContext) {
-        self.cart = cart
+    // MARK: - Init
+    init(context: ModelContext) {
         self.context = context
+        
+        // Try to fetch existing cart from persistent store
+        if let existingCart = try? context.fetch(FetchDescriptor<Cart>()).first {
+            self.cart = existingCart
+            print("✅ Loaded existing cart from store.")
+        } else {
+            // Create a new one if none exist
+            let newCart = Cart()
+            context.insert(newCart)
+            try? context.save()
+            self.cart = newCart
+            print("🆕 Created new cart and saved to persistent store.")
+        }
     }
     
     // MARK: - Cart Operations
@@ -40,19 +53,16 @@ final class CartViewModel {
         save()
     }
     
-    /// Updates quantity of an existing cart item
     func updateQuantity(for item: CartItem, quantity: Int, maxQuantity: Int = 5) {
         item.quantity = min(quantity, maxQuantity)
         save()
     }
     
-    /// Removes a cart item
     func removeItem(_ item: CartItem) {
         context.delete(item)
         save()
     }
     
-    /// Clears all items from the cart
     func clearCart() {
         for item in cart.items {
             context.delete(item)
@@ -60,12 +70,18 @@ final class CartViewModel {
         save()
     }
     
+    func clearItem(_ item: CartItem){
+        context.delete(item)
+        save()
+    }
+    
     // MARK: - Private Save Helper
     private func save() {
         do {
             try context.save()
+            print("💾 Cart saved successfully.")
         } catch {
-            print("Error saving cart: \(error.localizedDescription)")
+            print("⚠️ Error saving cart: \(error.localizedDescription)")
         }
     }
 }
