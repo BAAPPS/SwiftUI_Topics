@@ -47,7 +47,7 @@ struct ProductView: View {
                         }
                     }
                     .navigationDestination(for: Product.self) { product in
-                        ProductDetailsView(product: product)
+                        ProductDetailsView(product: product, context: context)
                     }
                 }
             }
@@ -57,10 +57,12 @@ struct ProductView: View {
 #Preview {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(
-        for: Product.self,
+        for: Product.self, Rating.self, Cart.self, CartItem.self,
         configurations: config
     )
     let context = ModelContext(container)
+    NavigationStack {
         ProductView()
             .environment(\.modelContext, context)
+    }
 }

@@ -11,12 +11,9 @@ import SwiftData
 @Model
 final class CartItem {
     var quantity: Int
-    
-    // Each CartItem belongs to one Product
     @Relationship var product: Product
     
-    // Each CartItem belongs to one Cart (inverse relationship)
-    @Relationship(inverse: \Cart.items) var cart: Cart
+    @Relationship var cart: Cart
     
     init(quantity: Int, product: Product, cart: Cart) {
         self.quantity = quantity

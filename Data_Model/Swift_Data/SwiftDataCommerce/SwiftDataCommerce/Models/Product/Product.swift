@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 final class Product {
-    var id: Int
+    @Attribute(.unique) var id: Int
     var productDescription: String
     var category: String
     var image: String

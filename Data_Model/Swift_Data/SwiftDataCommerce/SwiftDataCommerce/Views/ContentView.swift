@@ -21,9 +21,9 @@ struct ContentView: View {
 
 #Preview {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: Product.self, configurations: config)
+    let container = try! ModelContainer(for: Product.self,Rating.self, Cart.self, CartItem.self, configurations: config)
     let context = ModelContext(container)
     
-    ContentView()
+   ContentView()
         .environment(\.modelContext, context)
 }

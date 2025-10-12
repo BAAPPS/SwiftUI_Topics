@@ -6,11 +6,20 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ProductDetailsView: View {
+    private let MAXLIMIT = 5
     let product: Product
     @State private var quantity: Int = 1
-    private let MAXLIMIT = 5
+    @State private var addToCart = false
+    @State private var cartVM: CartViewModel
+    
+    init(product: Product, context: ModelContext) {
+        self.product = product
+        _cartVM = State(wrappedValue: CartViewModel(cart: Cart(), context: context))
+    }
+
     var body: some View {
         ScrollView {
             VStack{
@@ -130,6 +139,21 @@ struct ProductDetailsView: View {
                 }
                 .padding(.top, 25)
                 
+                VStack{
+                    Button(action: {
+                        cartVM.addToCart(product: product, quantity: quantity)
+                        addToCart = true
+                    }) {
+                       Text("Add to cart")
+                            .foregroundStyle(.white)
+                    }
+                    .padding()
+                    .frame(width:300)
+                    .background(Color.blue)
+                    .cornerRadius(10)
+                }
+                .padding(.top, 10)
+                
                 Divider()
                 
                 VStack(alignment:.leading, spacing: 5){
@@ -148,15 +172,26 @@ struct ProductDetailsView: View {
             }
             .padding()
         }
+        .navigationDestination(isPresented: $addToCart) {
+            CartView()
+                .environment(cartVM)
+        }
         
     }
 }
 
 #Preview {
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(
+        for: Product.self, Rating.self, Cart.self, CartItem.self,
+        configurations: config
+    )
+    let context = ModelContext(container)
+    
     let dummyRating = Rating(rating: 4.2, count: 259)
     let dummyProduct = Product(
         id: 1,
-        productDescription: "21. 5 inches Full HD (1920 x 1080) widescreen IPS display And Radeon free Sync technology. No compatibility for VESA Mount Refresh Rate: 75Hz - Using HDMI port Zero-frame design | ultra-thin | 4ms response time | IPS panel Aspect ratio - 16: 9. Color Supported - 16. 7 million colors. Brightness - 250 nit Tilt angle -5 degree to 15 degree. Horizontal viewing angle-178 degree. Vertical viewing angle-178 degree 75 hertz",
+        productDescription: "21.5 inches Full HD (1920 x 1080) widescreen IPS display And Radeon FreeSync technology...",
         category: "electronics",
         image: "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_t.png",
         price: 599,
@@ -164,5 +199,6 @@ struct ProductDetailsView: View {
         rating: dummyRating
     )
     
-    ProductDetailsView(product: dummyProduct)
+    ProductDetailsView(product: dummyProduct, context: context)
+        .environment(\.modelContext, context)
 }
