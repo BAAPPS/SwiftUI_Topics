@@ -37,9 +37,12 @@ struct ProductView: View {
                                 .font(.title2)
                                 .bold()
                                 .padding(.leading)
-                            
+                            // Use persistentModelID instead of product.id for SwiftData models in ForEach/LazyVGrid.
+                            // This ensures unique, stable identifiers across SwiftUI collection views (LazyVGrid, ForEach, etc.),
+                            // preventing duplicate-ID warnings and allowing SwiftUI to correctly track each Product
+                            // even when items are added, removed, or updated in the underlying ModelContext.
                             LazyVGrid(columns: columns) {
-                                ForEach(group.products, id:\.id) { product in
+                                ForEach(group.products, id:\.persistentModelID) { product in
                                     NavigationLink(value:product) {
                                         ProductCardView(product: product)
                                     }
