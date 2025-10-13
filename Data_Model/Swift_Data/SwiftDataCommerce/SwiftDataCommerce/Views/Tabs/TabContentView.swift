@@ -9,16 +9,28 @@ import SwiftUI
 import SwiftData
 
 struct TabContentView: View {
-    @Binding var selectedTab: AppTab
+    @Environment(\.modelContext) private var context
     @Environment(CartViewModel.self) var cartVM
+    @Binding var selectedTab: AppTab
     var body: some View {
-        switch selectedTab {
-        case .home:
-            ProductView()
-                .environment(cartVM)
-        case .cart:
-            CartView()
-                .environment(cartVM)
+        Group{
+            
+            switch selectedTab {
+            case .home:
+                ProductView()
+                    .environment(cartVM)
+                    .environment(\.modelContext, context)
+            case .cart:
+                CartView()
+                    .environment(cartVM)
+                    .environment(\.modelContext, context)
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Tab content for \(selectedTab.title)")
+        .onChange(of: selectedTab) {_, newTab in
+            // VoiceOver will announce the new tab content
+            UIAccessibility.post(notification: .layoutChanged, argument: nil)
         }
     }
 }

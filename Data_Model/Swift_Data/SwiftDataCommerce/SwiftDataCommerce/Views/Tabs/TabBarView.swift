@@ -23,6 +23,7 @@ struct TabBarView: View {
                         Image(systemName: tab.icons)
                             .font(.system(size: 22))
                             .foregroundColor(selectedTab == tab ? .white.opacity(0.8) : .white)
+                            .accessibilityHidden(true)
                         Text(tab.title)
                             .font(.subheadline)
                             .foregroundColor(selectedTab == tab ? .white.opacity(0.8) : .white)
@@ -33,10 +34,15 @@ struct TabBarView: View {
                         Color.white.opacity(selectedTab == tab ? 0.1 : 0)
                     )
                 }
+                .accessibilityLabel(tab.title)
+                .accessibilityAddTraits(.isButton)
+                .accessibilityHint(selectedTab == tab ? "Selected" : "Tap to select")
                 
             }
         }
         .background(Color.black.opacity(0.7))
+        .accessibilityElement(children: .contain)
+        .accessibilityAddTraits(.isTabBar)
     }
 }
 

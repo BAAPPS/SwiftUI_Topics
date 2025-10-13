@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var context
     @State private var cartVM: CartViewModel
     
     init(context: ModelContext) {
@@ -18,6 +19,7 @@ struct ContentView: View {
         NavigationStack {
             CustomTabBarView()
                 .environment(cartVM)
+                .environment(\.modelContext, context)
         }
         // Change default blue coloring to own colors due to ScrollView
         .buttonStyle(PlainButtonStyle())

@@ -14,54 +14,60 @@ struct ProductDetailsView: View {
     let product: Product
     @State private var quantity: Int = 1
     @State private var addToCart = false
-
+    
     var body: some View {
         ScrollView {
             VStack{
-                Text(product.title)
-                    .font(.title3)
-                    .fontWeight(.regular)
-                
-                if let ratingValue = product.rating?.rating,
-                   let count = product.rating?.count{
+                VStack{
+                    Text(product.title)
+                        .font(.title3)
+                        .fontWeight(.regular)
                     
-                    HStack {
-                        StarRatingView(rating: ratingValue, starSize: 14)
-                        Text("(\(count))")
-                            .font(.caption)
-                            .fontWeight(.medium)
-                            .foregroundColor(.black.opacity(0.5))
-                    }
-                    .padding(.horizontal, 8)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                } else {
-                    Text("No rating yet")
-                        .font(.caption)
-                        .foregroundColor(.gray)
+                    if let ratingValue = product.rating?.rating,
+                       let count = product.rating?.count{
+                        
+                        HStack {
+                            StarRatingView(rating: ratingValue, starSize: 14)
+                            Text("(\(count))")
+                                .font(.caption)
+                                .fontWeight(.medium)
+                                .foregroundColor(.black.opacity(0.5))
+                        }
                         .padding(.horizontal, 8)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    } else {
+                        Text("No rating yet")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                            .padding(.horizontal, 8)
+                    }
+                    
+                    AsyncImage(url: URL(string: product.image)) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(maxWidth: .infinity)
+                            .accessibilityHidden(true)
+                    } placeholder: {
+                        ProgressView()
+                            .accessibilityHidden(true)
+                    }
+                    .padding(8)
+                    
+                    HStack(spacing: 2) {
+                        Text("$")
+                            .font(.system(size: 16, weight:.regular))
+                            .foregroundColor(.black.opacity(0.7))
+                            .baselineOffset(2) // nudges the $ vertically
+                        Text(product.price, format: .number.precision(.fractionLength(0...2)))
+                            .font(.title)
+                            .fontWeight(.bold)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(productHeaderDescription)
                 
-                AsyncImage(url: URL(string: product.image)) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: .infinity)
-                        .accessibilityHidden(true)
-                } placeholder: {
-                    ProgressView()
-                }
-                .padding(8)
-                
-                HStack(spacing: 2) {
-                    Text("$")
-                        .font(.system(size: 16, weight:.regular))
-                        .foregroundColor(.black.opacity(0.7))
-                        .baselineOffset(2) // nudges the $ vertically
-                    Text(product.price, format: .number.precision(.fractionLength(0...2)))
-                        .font(.title)
-                        .fontWeight(.bold)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Divider()
                 
@@ -80,6 +86,9 @@ struct ProductDetailsView: View {
                                 .foregroundColor(quantity > 1 ? .blue : .gray)
                         }
                         .offset(x:5)
+                        .accessibilityLabel("Decrease quantity")
+                        .accessibilityHint("Decreases quantity by 1")
+                        .disabled(quantity <= 1)
                         
                         Divider()
                             .frame(width: 1, height: 44)
@@ -93,6 +102,8 @@ struct ProductDetailsView: View {
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(quantity == MAXLIMIT ? .red: .black)
                                 .animation(.none, value: quantity)
+                                .accessibilityLabel("Quantity")
+                                .accessibilityValue("\(quantity)")
                             
                             if quantity == MAXLIMIT {
                                 Text("Limit \(MAXLIMIT)")
@@ -105,6 +116,8 @@ struct ProductDetailsView: View {
                                     .frame(width: 70)
                                     .offset(x: -5, y: -35)
                                     .transition(.scale)
+                                    .accessibilityLabel("Max limit quantity reached")
+                                    .accessibilityValue("\(MAXLIMIT)")
                             }
                             
                             
@@ -126,6 +139,9 @@ struct ProductDetailsView: View {
                                 .foregroundColor(quantity < MAXLIMIT ? .blue : .gray)
                         }
                         .offset(x:-5)
+                        .accessibilityLabel("Increase quantity")
+                        .accessibilityHint("Increases quantity by 1")
+                        .disabled(quantity >= MAXLIMIT)
                     }
                     .background(
                         RoundedRectangle(cornerRadius: 10)
@@ -139,15 +155,19 @@ struct ProductDetailsView: View {
                         cartVM.addToCart(product: product, quantity: quantity)
                         addToCart = true
                     }) {
-                       Text("Add to cart")
+                        Text("Add to cart")
                             .foregroundStyle(.white)
                     }
                     .padding()
                     .frame(width:300)
                     .background(Color.blue)
                     .cornerRadius(10)
+                    .accessibilityLabel("Add \(quantity) \(product.title) to cart")
+                    .accessibilityHint("Tap to add the product to your shopping cart")
+                    
                 }
                 .padding(.top, 10)
+                
                 
                 Divider()
                 
@@ -162,6 +182,8 @@ struct ProductDetailsView: View {
                         .padding(.top, 10)
                 }
                 .padding(.top, 10)
+                .accessibilityElement(children: .combine)
+                             
                 
                 Spacer()
             }
@@ -172,6 +194,21 @@ struct ProductDetailsView: View {
                 .environment(cartVM)
         }
         
+    }
+    
+    // MARK: - Accessibility Description for header
+    private var productHeaderDescription: String {
+        var parts: [String] = []
+        parts.append(product.title)
+        parts.append(String(format: "Price: $%.2f", product.price))
+        
+        if let ratingValue = product.rating?.rating,
+           let count = product.rating?.count {
+            parts.append(String(format: "Rated %.1f stars from %d reviews", ratingValue, count))
+        } else {
+            parts.append("No rating yet")
+        }
+        return parts.joined(separator: ", ")
     }
 }
 
@@ -194,6 +231,8 @@ struct ProductDetailsView: View {
         rating: dummyRating
     )
     
+    let cartVM = CartViewModel(context: context)
     ProductDetailsView(product: dummyProduct)
         .environment(\.modelContext, context)
+        .environment(cartVM)
 }

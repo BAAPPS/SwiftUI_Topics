@@ -17,9 +17,12 @@ struct ProductCardView: View {
                     .cornerRadius(8)
                 
                 AsyncImage(url: URL(string: product.image)) { image in
-                    image.resizable()
+                    image
+                        .resizable()
+                        .accessibilityHidden(true)
                 } placeholder: {
                     ProgressView()
+                        .accessibilityHidden(true)
                 }
                 .frame(width: 150, height: 150)
                 .padding(8)
@@ -29,6 +32,7 @@ struct ProductCardView: View {
             Text(product.title)
                 .lineLimit(1)
                 .padding(.horizontal, 8)
+                .accessibilityHidden(true)
             
             if let ratingValue = product.rating?.rating,
                let count = product.rating?.count{
@@ -42,11 +46,13 @@ struct ProductCardView: View {
                 }
                 .padding(.horizontal, 8)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .accessibilityHidden(true)
             } else {
                 Text("No rating yet")
                     .font(.caption)
                     .foregroundColor(.gray)
                     .padding(.horizontal, 8)
+                    .accessibilityHidden(true)
             }
             
             HStack(spacing: 2) {
@@ -60,9 +66,30 @@ struct ProductCardView: View {
             }
             .padding(.horizontal, 8)
             .frame(maxWidth: .infinity, alignment: .leading)
+            .accessibilityHidden(true)
             
         }
         .padding(.vertical, 10)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(accessibilityDescription)
+        .accessibilityAddTraits(.isButton)
+        .accessibilityHint("Tap to view product details")
+    }
+    
+    // MARK: - Accessibility Description
+    private var accessibilityDescription: String {
+        var parts: [String] = []
+        parts.append(product.title)
+        parts.append(String(format: "Price: $%.2f", product.price))
+        
+        if let ratingValue = product.rating?.rating,
+           let count = product.rating?.count {
+            parts.append(String(format: "Rated %.1f stars from %d reviews", ratingValue, count))
+        } else {
+            parts.append("No rating yet")
+        }
+        
+        return parts.joined(separator: ", ")
     }
 }
 

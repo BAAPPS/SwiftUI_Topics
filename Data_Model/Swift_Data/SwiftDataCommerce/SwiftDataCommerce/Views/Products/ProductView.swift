@@ -29,33 +29,35 @@ struct ProductView: View {
     ]
     
     var body: some View {
-            ContextViewModelLoader { (vm: ProductViewModel) in
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 10) {
-                        ForEach(groupedProductsSorted,id:\.category) { group in
-                            Text(group.category.capitalized)
-                                .font(.title2)
-                                .bold()
-                                .padding(.leading)
-                            // Use persistentModelID instead of product.id for SwiftData models in ForEach/LazyVGrid.
-                            // This ensures unique, stable identifiers across SwiftUI collection views (LazyVGrid, ForEach, etc.),
-                            // preventing duplicate-ID warnings and allowing SwiftUI to correctly track each Product
-                            // even when items are added, removed, or updated in the underlying ModelContext.
-                            LazyVGrid(columns: columns) {
-                                ForEach(group.products, id:\.persistentModelID) { product in
-                                    NavigationLink(value:product) {
-                                        ProductCardView(product: product)
-                                    }
+        ContextViewModelLoader { (vm: ProductViewModel) in
+            ScrollView {
+                VStack(alignment: .leading, spacing: 10) {
+                    ForEach(groupedProductsSorted,id:\.category) { group in
+                        Text(group.category.capitalized)
+                            .font(.title2)
+                            .bold()
+                            .padding(.leading)
+                            .accessibilityLabel("Products in category \(group.category.capitalized)")
+                            .accessibilityAddTraits(.isHeader)
+                        // Use persistentModelID instead of product.id for SwiftData models in ForEach/LazyVGrid.
+                        // This ensures unique, stable identifiers across SwiftUI collection views (LazyVGrid, ForEach, etc.),
+                        // preventing duplicate-ID warnings and allowing SwiftUI to correctly track each Product
+                        // even when items are added, removed, or updated in the underlying ModelContext.
+                        LazyVGrid(columns: columns) {
+                            ForEach(group.products, id:\.persistentModelID) { product in
+                                NavigationLink(value:product) {
+                                    ProductCardView(product: product)
                                 }
                             }
                         }
                     }
-                    .navigationDestination(for: Product.self) { product in
-                        ProductDetailsView(product: product)
-                            .environment(cartVM)
-                    }
+                }
+                .navigationDestination(for: Product.self) { product in
+                    ProductDetailsView(product: product)
+                        .environment(cartVM)
                 }
             }
+        }
     }
 }
 
@@ -66,8 +68,10 @@ struct ProductView: View {
         configurations: config
     )
     let context = ModelContext(container)
+    let cartVM = CartViewModel(context: context)
     NavigationStack {
         ProductView()
             .environment(\.modelContext, context)
+            .environment(cartVM)
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct CustomTabBarView: View {
+    @Environment(\.modelContext) private var context
     @Environment(CartViewModel.self) var cartVM
     @State private var selectedTab: AppTab = .home
 
@@ -16,6 +17,7 @@ struct CustomTabBarView: View {
         ZStack{
             TabContentView(selectedTab: $selectedTab)
                 .environment(cartVM)
+                .environment(\.modelContext, context)
             
             VStack{
                 Spacer()

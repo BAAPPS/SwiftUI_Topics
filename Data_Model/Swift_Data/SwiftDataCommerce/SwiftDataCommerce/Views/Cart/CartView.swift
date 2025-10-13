@@ -26,11 +26,14 @@ struct CartView: View {
                         }
                     )
                     
-                    Text(item.product.title)
-                        .lineLimit(1)
-                        .padding(.top, 5)
+                    HStack {
+                        Text(item.product.title)
+                            .lineLimit(1)
+                            .padding(.top, 5)
+                            .accessibilityHidden(true)
+                        Spacer()
+                    }
                     
-                    Spacer()
                     
                     HStack{
                         HStack {
@@ -40,9 +43,13 @@ struct CartView: View {
                                 Image(systemName:"trash")
                             }
                             .foregroundColor(.red)
+                            .accessibilityLabel("Remove \(item.product.title) from cart")
+                            .accessibilityHint("Tap to remove this item from your cart")
+                            
                             HStack{
                                 Text("Qty")
                                     .font(.subheadline)
+                                    .accessibilityHidden(true)
                                 
                                 TextField("", text: quantityBinding)
                                     .frame(width: 50)
@@ -50,28 +57,40 @@ struct CartView: View {
                                     .keyboardType(.numberPad)
                                     .foregroundStyle(item.quantity == MAX_QUANTITY ? Color.red : Color.black)
                                     .fontWeight(.bold)
+                                    .accessibilityLabel("Quantity for \(item.product.title)")
+                                    .accessibilityValue("\(item.quantity)")
+                                    .accessibilityHint("Enter a quantity up to \(MAX_QUANTITY)")
+                                
                                 
                                 
                                 Text("Max(\(MAX_QUANTITY))")
                                     .font(.caption)
                                     .foregroundStyle(Color.red)
                                     .opacity(item.quantity == MAX_QUANTITY ? 1 : 0)
+                                    .accessibilityHidden(true)
                             }
                         }
                         
-                        Spacer()
-                        
-                        Text("$\(Double(item.quantity) * item.product.price, specifier: "%.2f")")
-                            .frame(width: 80, alignment: .trailing)
+                        HStack {
+                            Spacer()
+                            
+                            Text("$\(Double(item.quantity) * item.product.price, specifier: "%.2f")")
+                                .frame(width: 80, alignment: .trailing)
+                                .accessibilityLabel("Price for \(item.product.title)")
+                                .accessibilityValue("$\(Double(item.quantity) * item.product.price, specifier: "%.2f")")
+                        }
                         
                     }
                 }
+                .accessibilityElement(children: .combine)
+                
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     Button(role: .destructive) {
                         cartVM.removeItem(item)
                     } label: {
                         Label("Remove", systemImage: "trash")
                     }
+                    .accessibilityLabel("Remove \(item.product.title) from cart")
                 }
             }
             
@@ -82,6 +101,9 @@ struct CartView: View {
                 Text("$\(cartVM.totalPrice, specifier: "%.2f")")
                     .fontWeight(.bold)
             }
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("Total price")
+            .accessibilityValue("$\(cartVM.totalPrice, specifier: "%.2f")")
         }
         .navigationTitle("Cart")
         .toolbar {
@@ -91,6 +113,8 @@ struct CartView: View {
                 } label: {
                     Label("Clear All", systemImage: "trash.circle")
                 }
+                .accessibilityLabel("Clear all items from cart")
+                .accessibilityHint("Double tap to remove all items from your shopping cart")
             }
         }
     }
@@ -105,7 +129,7 @@ struct CartView: View {
     let context = ModelContext(container)
     
     let cartVM = CartViewModel(context: context)
-   return NavigationStack {
+    return NavigationStack {
         CartView()
             .environment(\.modelContext, context)
             .environment(cartVM)
