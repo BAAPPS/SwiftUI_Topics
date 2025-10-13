@@ -23,35 +23,36 @@
 * Render live Markdown previews with syntax highlighting.
 * Organize snippets by language, tags, and date.
 
-> **Disclaimer:** This project is currently a **mini learning app** focused on experimenting with **SwiftData** and **MarkdownUI**. It is not intended as a production-ready app at this stage. However, the architecture and modular design allow it to be expanded into a full-featured snippet manager in the future.
+> **Disclaimer:** This project is currently a **mini learning app** focused on experimenting with **SwiftData** and creating a **custom Markdown parser**. It is not intended as a production-ready app at this stage. However, the architecture and modular design allow it to be expanded into a full-featured snippet manager in the future.
 
-This project serves both as a **practical tool** for referencing code snippets and as a **hands-on playground** to learn SwiftUI, SwiftData, and app architecture fundamentals. It is intentionally **modular and extendable**, so new features like search, export, or cloud sync can be added seamlessly in the future.
+This project serves both as a **practical tool** for referencing code snippets and as a **hands-on playground** to learn SwiftUI, SwiftData, and app architecture fundamentals. Creating your own Markdown parser ensures a **future-proof solution**, giving you full control over syntax, rendering, and extensibility.
 
 ---
 
 ## Technologies Used
 
-| Technology               | Purpose                                              |
-| ------------------------ | ---------------------------------------------------- |
-| **SwiftUI**              | Declarative UI framework for modern iOS interfaces   |
-| **SwiftData**            | Apple’s ORM-like persistence layer for model storage |
-| **MarkdownUI**           | Live Markdown parsing and rendering                  |
-| **MVVM Architecture**    | Clean separation of business logic and presentation  |
-| **Xcode Previews**       | Rapid iteration for UI and model testing             |
-| **Combine** *(optional)* | Reactive programming for state changes               |
+| Technology                 | Purpose                                              |
+| -------------------------- | ---------------------------------------------------- |
+| **SwiftUI**                | Declarative UI framework for modern iOS interfaces   |
+| **SwiftData**              | Apple’s ORM-like persistence layer for model storage |
+| **Custom Markdown Parser** | Full control over Markdown syntax and rendering      |
+| **MVVM Architecture**      | Clean separation of business logic and presentation  |
+| **Xcode Previews**         | Rapid iteration for UI and model testing             |
+| **Combine** *(optional)*   | Reactive programming for state changes               |
 
 ---
 
 ## Features
 
 * **Paste and Save Snippets**: Multi-line text input with automatic Markdown code block wrapping.
-* **Markdown Preview**: Live preview of pasted content with syntax highlighting.
+* **Markdown Preview**: Live preview of pasted content rendered with your own Markdown parser.
 * **Language Selection**: User-selectable programming language for code blocks.
 * **SwiftData Persistence**: Snippets are stored locally for later reference.
 * **Organizational Tags**: Assign categories or tags to snippets (future extension).
 * **Search & Filter**: Quickly locate snippets by title, language, or tag (planned).
 * **Copy / Share**: Copy snippet content to clipboard or export as `.md` (planned).
 * **Extensible Design**: Future support for multi-device sync, favorites, and versioning.
+* **Custom Markdown**: Support for headers (#, ##, ###), code blocks (```), lists (-), and shortcodes ([[Component]]) for embedding SwiftUI views.
 
 ---
 
@@ -60,9 +61,10 @@ This project serves both as a **practical tool** for referencing code snippets a
 This project was designed to solve a **personal developer problem**: maintaining a centralized, searchable reference for code snippets and notes. Unlike off-the-shelf apps like Notion or Obsidian, building your own snippet manager allows for:
 
 * Deep understanding of SwiftUI and SwiftData internals.
-* Hands-on experience with Markdown parsing, text handling, and code formatting.
+* Hands-on experience with **parsing and rendering Markdown manually**.
 * Exploration of real-world app architecture, state management, and user interaction.
 * A foundation for building larger, more complex productivity apps.
+* Future-proofing the codebase without relying on third-party Markdown libraries.
 
 <!------->
 <!---->
