@@ -9,9 +9,9 @@
 * [Technologies Used](#technologies-used)
 * [Features](#features)
 * [Why This Challenge?](#why-this-challenge)
-<!--* [What I Learned](#what-i-learned)-->
-<!--* [What I Would Do Differently](#what-i-would-do-differently)-->
-<!--* [App Showcase](#app-showcase)-->
+* [What I Learned](#what-i-learned)
+* [What I Would Do Differently](#what-i-would-do-differently)
+* [App Showcase](#app-showcase)
 
 ---
 
@@ -26,8 +26,7 @@ This app doesn’t require an internet connection — it loads sample JSON into 
 
 * SwiftData CRUD operations
 * Query filtering, sorting, and aggregation
-* Relationship management (`User`, `Product`, `CartItem`, `Order`)
-* Offline persistence patterns
+* Relationship management (`Product`, `CartItem`)
 
 ---
 
@@ -49,18 +48,14 @@ This app doesn’t require an internet connection — it loads sample JSON into 
 
 * **Product Browser** – Displays all products from locally stored FakeStore JSON
 * **Cart System** – Add or remove items, track quantities, and calculate totals
-* **User Profiles** – Each user maintains their own cart and order history
-* **Order History** – Simulates checkout flow by converting cart items to completed orders
-* **Offline-First Storage** – Works completely offline using SwiftData persistence
 
 ### Technical Highlights
 
 * **One-to-Many and Many-to-Many Relationships**
-  * `User` ↔ `CartItem` ↔ `Product`
-  * `User` ↔ `Order` ↔ `OrderItem` ↔ `Product`
+  * `Product` ↔ `CartItem` 
   
 * **SwiftData Queries**
-  * Sorting by price, filtering by user or category
+  * Sorting by category
   * Dynamic UI updates powered by `@Query`
   
 * **Seeding Local Data**
@@ -81,56 +76,51 @@ It also made it easier to test **decoding, seeding, and schema evolution** workf
 
 ---
 
-<!--## What I Learned-->
-<!---->
-<!--* ✅ How to design **one-to-many** and **many-to-many** data models in SwiftData-->
-<!--* ✅ How to decode remote JSON and seed it locally on first launch-->
-<!--* ✅ How to use `@Query` with predicates and sorting for dynamic views-->
-<!--* ✅ How to manage **delete rules**, **relationships**, and **context mutations**-->
-<!--* ✅ How to create an **offline-first architecture** using SwiftData as the single source of truth-->
-<!--* ✅ How to structure a modular SwiftUI + MVVM app for scalability-->
-<!---->
-<!------->
-<!---->
-<!--## What I Would Do Differently-->
-<!---->
-<!--* Implement **image caching** for better product loading performance-->
-<!--* Add **pagination** and **search filtering** for large datasets-->
-<!--* Introduce a **background sync system** to refresh data periodically-->
-<!--* Add **schema migrations** to test SwiftData’s model versioning in real scenarios-->
-<!--* Expand the system to support **multiple users** and authentication simulation-->
-<!---->
-<!------->
-<!---->
-<!--## App Showcase-->
-<!---->
-<!--### 🛒 Product Browser-->
-<!---->
-<!--Browse all locally stored FakeStore products with details and pricing.-->
-<!---->
-<!--![Product List](https://github.com/user-attachments/assets/abc12345-productlist)-->
-<!---->
-<!------->
-<!---->
-<!--### 🧍 User Cart-->
-<!---->
-<!--Add or remove products, adjust quantities, and view total price — all persisted automatically.-->
-<!---->
-<!--![Cart View](https://github.com/user-attachments/assets/def67890-cart)-->
-<!---->
-<!------->
-<!---->
-<!--### 📦 Order History-->
-<!---->
-<!--Simulate checkout flow, review past orders, and observe relational queries in action.-->
-<!---->
-<!--![Order History](https://github.com/user-attachments/assets/ghi90123-orders)-->
-<!---->
-<!------->
-<!---->
-<!--### 🎨 Theme Selection-->
-<!---->
-<!--Easily switch between **System**, **Light**, or **Dark** themes.-->
-<!---->
-<!--![Theme Selection](https://github.com/user-attachments/assets/7fee0957-fae8-447a-9fbc-4e147da6968d)-->
-<!---->
+## What I Learned
+
+* How to design **one-to-many** and **many-to-many** data models in SwiftData
+* How to decode remote JSON and seed it locally on first launch
+* How to use `@Query` with predicates and sorting for dynamic views
+* How to manage **delete rules**, **relationships**, and **context mutations**
+* How to structure a modular SwiftUI + MVVM app for scalability
+* How to use **persistentModelID** instead of **id** for SwiftData traversal
+* How to use `#if DEBUG / #else / #endif` to separate **Dev Mode** and **Prod Mode** logic —  for example, using an in-memory store during development and a persistent store in production
+* How to build a generic SwiftUI loader called **ContextViewModelLoader** that initializes a ViewModel with a ModelContext, calls its load() method, and injects it into the view once ready.
+---
+
+## What I Would Do Differently
+
+* Implement **image caching** for better product loading performance
+* Add **pagination** and **search filtering** for large datasets
+* Introduce a **background sync system** to refresh data periodically
+* Add **schema migrations** to test SwiftData’s model versioning in real scenarios
+* Implement `User` and `Order` system relationship with `Product` and `CartItem`
+
+---
+
+## App Showcase
+
+### Product Browser
+
+Browse all locally stored FakeStore products with details and pricing.
+
+![Product List](https://github.com/user-attachments/assets/4480291a-ec75-41aa-910a-cec2301fdc99)
+
+
+### Product Details
+
+Check each products details in depth with the ability to change **quantity** **Add to cart** functionality
+
+![Product Details](https://github.com/user-attachments/assets/095a7ad2-f820-4b79-9792-72c984a3aadc)
+
+
+### User Cart
+
+Add or remove products, adjust quantities, and view total price — all persisted automatically.
+
+![Cart View](https://github.com/user-attachments/assets/3109ae61-5d23-40f5-83dc-bc82de418b85)
+
+
+
+
+
