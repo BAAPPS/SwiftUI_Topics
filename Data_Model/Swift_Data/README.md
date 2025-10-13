@@ -38,29 +38,31 @@ Each sub-project focuses on a specific type of local data modeling challenge:
 
 * [SwiftWatchlist](./SwiftWatchlist) → Build a movie watchlist app with SwiftData. Practice modeling movies, genres, tags, and ratings, implementing MVVM architecture, and managing navigation with NavigationStack for viewing, sorting, and adding new movies.
 
-* [SwiftSettingsManager](./SwiftSettingsManager) → Build an app-wide **settings manager** using SwiftData and SwiftUI. 
+* [SwiftSettingsManager](./SwiftSettingsManager) → Build an app-wide **settings manager** using SwiftData and SwiftUI.
 
-Practice:
-    * Creating **user preferences** for theme, accent color, and font size.
-    * Using **environment keys** to pass theme and accent color throughout the app.
-    * Implementing **ThemedView<Content: View>** for dynamic UI theming.
-    * Building a reusable **NavBarView<Content: View>** with customizable back button, dynamic title, and consistent styling.
-    * Binding SwiftData-backed settings to **Pickers, Toggles, and Sliders**.
-    * Applying **live UI updates** and app-wide theming without restarting the app.
-    * Managing **accessibility** for all interactive controls.
+  Practice:
 
+  * Creating **user preferences** for theme, accent color, and font size.
+  * Using **environment keys** to pass theme and accent color throughout the app.
+  * Implementing **ThemedView<Content: View>** for dynamic UI theming.
+  * Building a reusable **NavBarView<Content: View>** with customizable back button, dynamic title, and consistent styling.
+  * Binding SwiftData-backed settings to **Pickers, Toggles, and Sliders**.
+  * Applying **live UI updates** and app-wide theming without restarting the app.
+  * Managing **accessibility** for all interactive controls.
 
 * [SwiftDataCommerce](./SwiftDataCommerce) → Build a **shopping app** using SwiftData and SwiftUI.
 
-Practice:
-    * Modeling products, categories, ratings, carts, and cart items.
-    * Implementing **ProductCardView** and **ProductDetailsView** with dynamic data.
-    * Managing a **shopping cart** with quantity limits, total price, and swipe-to-delete actions.
-    * Using **TabBarView** and **TabContentView** for navigation between Home and Cart.
-    * Applying **MVVM architecture** with environment objects for shared state.
-    * Handling **async images**, formatting prices, and displaying ratings.
-    * Implementing **full accessibility** for VoiceOver across buttons, tabs, lists, and interactive controls.
-    * Applying **live UI updates** and smooth animations for quantity changes and cart interactions.
+  Practice:
+
+  * Modeling products, categories, ratings, carts, and cart items.
+  * Implementing **ProductCardView** and **ProductDetailsView** with dynamic data.
+  * Managing a **shopping cart** with quantity limits, total price, and swipe-to-delete actions.
+  * Using **TabBarView** and **TabContentView** for navigation between Home and Cart.
+  * Applying **MVVM architecture** with environment objects for shared state.
+  * Handling **async images**, formatting prices, and displaying ratings.
+  * Implementing **full accessibility** for VoiceOver across buttons, tabs, lists, and interactive controls.
+  * Applying **live UI updates** and smooth animations for quantity changes and cart interactions.
+
 
 ---
 
