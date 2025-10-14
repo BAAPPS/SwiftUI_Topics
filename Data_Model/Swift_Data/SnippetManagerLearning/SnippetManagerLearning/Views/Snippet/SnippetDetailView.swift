@@ -23,8 +23,8 @@ struct SnippetDetailView: View {
                     .foregroundColor(.gray)
                 
                 Divider()
-    
-                CustomMarkdownView(blocks: snippetVM.markdownBlocks)
+                
+                CustomMarkdownView(blocks: MarkdownParser().parse(snippet.content))
                     .padding(.horizontal)
                 
             }

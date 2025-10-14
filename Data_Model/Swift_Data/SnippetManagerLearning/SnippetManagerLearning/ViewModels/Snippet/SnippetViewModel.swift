@@ -19,7 +19,6 @@ final class SnippetViewModel: ModelContextInitializable {
     
     var content: String = "" {
         didSet {
-            parseMarkdown()
             scheduleAutoSave()
         }
     }
@@ -27,6 +26,8 @@ final class SnippetViewModel: ModelContextInitializable {
     var language: Language = .swift {
         didSet { scheduleAutoSave() }
     }
+    
+    var placeholder: String = ""
     
     
     var markdownBlocks: [MarkdownBlock] = []
@@ -39,9 +40,11 @@ final class SnippetViewModel: ModelContextInitializable {
     var currentSnippet: Snippet? = nil
     
     
+    var currentTypingBlockType: TypingBlockType = .none
     
     
     // MARK: - Private properties
+    
     private let parser = MarkdownParser()
     
     // SwiftData context
@@ -49,6 +52,7 @@ final class SnippetViewModel: ModelContextInitializable {
     
     private var autoSaveTask: Task<Void, Never>?
     
+    private var lastChangeTime: Date?
     
     
     // MARK: - Init
@@ -57,75 +61,159 @@ final class SnippetViewModel: ModelContextInitializable {
         load()
     }
     
+    // MARK: - Toolbar actions
+    
+    func switchTypingBlock(to newType: TypingBlockType) {
+        if !content.isEmpty {
+            commitContentAsBlock()
+        }
+        
+        currentTypingBlockType = newType
+        
+        switch newType {
+        case .header(let level): placeholder = "Header \(level)"
+        case .paragraph: placeholder = "New Paragraph"
+        case .code: placeholder = "// insert code here"
+        case .component: placeholder = "Component"
+        case .none: placeholder = ""
+        }
+    }
     
     
-    // MARK: - Auto Save
+    
+    func commitContentAsBlock(resetType: Bool = true) {
+        let textToCommit = content.isEmpty ? placeholder : content
+        guard !textToCommit.isEmpty else { return }
+        
+        switch currentTypingBlockType {
+        case .header(let level):
+            markdownBlocks.append(.header(level: level, text: textToCommit))
+        case .paragraph:
+            markdownBlocks.append(.paragraph(text: textToCommit))
+        case .code(let language):
+            markdownBlocks.append(.code(language: language, context: textToCommit))
+        case .component:
+            markdownBlocks.append(.component(key: textToCommit))
+        case .none:
+            markdownBlocks.append(.paragraph(text: textToCommit))
+        }
+        
+        content = ""
+        placeholder = ""
+        if resetType {
+            currentTypingBlockType = .none
+        }
+    }
+    
     
     // MARK: - Auto Save
     private func scheduleAutoSave() {
+        lastChangeTime = Date()
+        
         autoSaveTask?.cancel()
         autoSaveTask = Task { [weak self] in
-            try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second debounce
             guard let self else { return }
+            
+            try? await Task.sleep(nanoseconds: 2_000_000_000)
+            guard let last = lastChangeTime, Date().timeIntervalSince(last) >= 2 else { return }
+            
             do {
-                try await self.saveSnippet()
-                // Print log with current time
-                let formatter = DateFormatter()
-                formatter.timeStyle = .medium
-                formatter.dateStyle = .short
-                print("Auto-saved snippet '\(self.title)' at \(formatter.string(from: Date()))")
+                // Only include typing buffer if we have a draft/existing snippet
+                try await saveSnippet(includeTypingBuffer: true)
             } catch {
                 print("Failed auto-save: \(error.localizedDescription)")
             }
         }
     }
-
     
     
     // MARK: - Parsing
     
-    private func parseMarkdown() {
-        markdownBlocks = parser.parse(content)
+    private func parseMarkdown(from text: String) {
+        markdownBlocks = parser.parse(text)
     }
     
     // MARK: - SwiftData CRUD
-    func saveSnippet() async throws {
-        if let snippet = currentSnippet {
-            // Update existing snippet
-            snippet.title = title
-            snippet.content = content
-            snippet.language = language
-            snippet.createdAt = Date()
-        } else {
-            // Create new snippet
-            let snippet = Snippet(title: title, content: content, language: language)
-            context.insert(snippet)
-            snippets.append(snippet)
-            currentSnippet = snippet
+    
+    func createDraft(context: ModelContext) {
+         // Only create a draft if there isn't a current snippet already
+         guard currentSnippet == nil else { return }
+
+         let draft = Snippet(title: "", content: "", language: language)
+         context.insert(draft)
+         currentSnippet = draft
+         snippets.append(draft)
+     }
+    
+    
+    func saveSnippet(includeTypingBuffer: Bool = false) async throws {
+        guard let snippet = currentSnippet else { return } // only update the draft
+        
+        var blocksToSave = markdownBlocks
+        if includeTypingBuffer && !content.isEmpty {
+            switch currentTypingBlockType {
+            case .header(let level):
+                blocksToSave.append(.header(level: level, text: content))
+            case .paragraph:
+                blocksToSave.append(.paragraph(text: content))
+            case .code(let lang):
+                blocksToSave.append(.code(language: lang, context: content))
+            case .component:
+                blocksToSave.append(.component(key: content))
+            case .none:
+                blocksToSave.append(.paragraph(text: content))
+            }
         }
+        
+        snippet.title = title
+        snippet.content = blocksToSave.map { block in
+            switch block {
+            case .header(let level, let text): return String(repeating: "#", count: level) + " " + text
+            case .paragraph(let text): return text
+            case .code(_, let context): return "```\n\(context)\n```"
+            case .component(let key): return "[[\(key)]]"
+            }
+        }.joined(separator: "\n")
+        
+        snippet.language = language
+        snippet.createdAt = Date()
+        
         try context.save()
     }
+    
     
     func loadSnippet(_ snippet: Snippet) {
         self.currentSnippet = snippet
         self.title = snippet.title
-        self.content = snippet.content
+        self.content = ""
         self.language = snippet.language
         self.createdAt = snippet.createdAt
-        parseMarkdown()
-        self.title = ""
-        self.content = ""
-        self.language = .swift
-        self.createdAt = Date()
+        parseMarkdown(from: snippet.content)
+    }
+    
+    
+    func resetSnippet() {
+        currentSnippet = nil
+        title = ""
+        content = ""
+        markdownBlocks = []
+        placeholder = ""
+        currentTypingBlockType = .none
     }
     
     func updateSnippet(_ snippet: Snippet) async throws {
         snippet.title = title
-        snippet.content = content
+        snippet.content = markdownBlocks.map { block in
+            switch block {
+            case .header(let level, let text): return String(repeating: "#", count: level) + " " + text
+            case .paragraph(let text): return text
+            case .code(_, let context): return "```\n\(context)\n```"
+            case .component(let key): return "[[\(key)]]"
+            }
+        }.joined(separator: "\n")
         snippet.language = language
         snippet.createdAt = Date()
         try context.save()
-        parseMarkdown()
     }
     
     func deleteSnippet(_ snippet: Snippet) async throws {
@@ -146,4 +234,5 @@ final class SnippetViewModel: ModelContextInitializable {
         }
     }
     
+
 }

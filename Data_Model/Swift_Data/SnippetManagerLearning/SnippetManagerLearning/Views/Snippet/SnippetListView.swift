@@ -33,6 +33,7 @@ struct SnippetListView: View {
                 ) {
                     Image(systemName: "plus")
                 }
+                .fixedSize()
             }
         }
         .navigationDestination(for: Snippet.self) {snippet in

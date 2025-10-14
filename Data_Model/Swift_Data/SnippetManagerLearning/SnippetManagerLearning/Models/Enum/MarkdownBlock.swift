@@ -7,9 +7,11 @@
 
 import Foundation
 
-enum MarkdownBlock{
+enum MarkdownBlock: Identifiable{
     case header(level: Int, text: String)
     case code(language: Language?, context: String)
     case paragraph(text: String)
     case component(key: String)
+    
+    var id: UUID { UUID() }
 }
