@@ -12,6 +12,10 @@ struct AutoResizingTextView: UIViewRepresentable {
     @Binding var text: String
     @Binding var height: CGFloat
     
+    
+    var blockType: TypingBlockType
+
+    
     var onHeader: (Int) -> Void
     var onParagraph: () -> Void
     var onCode: () -> Void
@@ -100,6 +104,12 @@ struct AutoResizingTextView: UIViewRepresentable {
             parent.text = textView.text
         }
         
+        func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+            // Enter just inserts a newline
+            return true
+        }
+
+
         @objc func doneTapped() {
             DispatchQueue.main.async {
                 UIView.performWithoutAnimation {

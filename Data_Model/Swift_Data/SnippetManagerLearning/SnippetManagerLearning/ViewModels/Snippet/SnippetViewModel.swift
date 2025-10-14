@@ -7,232 +7,178 @@
 
 import Foundation
 import SwiftUI
-import Combine
 import SwiftData
 
 @MainActor
 @Observable
 final class SnippetViewModel: ModelContextInitializable {
+
+    // MARK: - Snippet Metadata
     var title: String = "" {
         didSet { scheduleAutoSave() }
-    }
-    
-    var content: String = "" {
-        didSet {
-            scheduleAutoSave()
-        }
     }
     
     var language: Language = .swift {
         didSet { scheduleAutoSave() }
     }
     
-    var placeholder: String = ""
-    
-    
-    var markdownBlocks: [MarkdownBlock] = []
-    
     var createdAt: Date = Date()
-    
-    // Loaded snippets from SwiftData
-    var snippets: [Snippet] = []
+    var placeholder: String = "Start typing..."
     
     var currentSnippet: Snippet? = nil
+    var snippets: [Snippet] = []
+
+    // MARK: - Blocks
+    var blocks: [EditableBlock] = [
+        EditableBlock(type: .paragraph, text: "")
+    ]
     
-    
-    var currentTypingBlockType: TypingBlockType = .none
-    
-    
-    // MARK: - Private properties
-    
-    private let parser = MarkdownParser()
-    
-    // SwiftData context
+
+    var markdownBlocks: [MarkdownBlock] = []
+
+
+    // MARK: - SwiftData
     private let context: ModelContext
-    
+
     private var autoSaveTask: Task<Void, Never>?
-    
     private var lastChangeTime: Date?
-    
-    
+
     // MARK: - Init
     required init(context: ModelContext) {
         self.context = context
-        load()
+        loadSnippets()
     }
-    
-    // MARK: - Toolbar actions
-    
-    func switchTypingBlock(to newType: TypingBlockType) {
-        if !content.isEmpty {
-            commitContentAsBlock()
+
+    // MARK: - Block Handling
+    func switchType(for block: EditableBlock, to newType: TypingBlockType) {
+        // Commit the current line first
+        guard !block.text.isEmpty else {
+            // If empty, just switch placeholder/type
+            blocks[0].type = newType
+            return
         }
-        
-        currentTypingBlockType = newType
-        
-        switch newType {
-        case .header(let level): placeholder = "Header \(level)"
-        case .paragraph: placeholder = "New Paragraph"
-        case .code: placeholder = "// insert code here"
-        case .component: placeholder = "Component"
-        case .none: placeholder = ""
-        }
+
+        let committedBlock = block.toMarkdownBlock()
+        markdownBlocks.append(committedBlock)
+
+        // Reset single block with new type
+        blocks[0] = EditableBlock(type: newType, text: "")
     }
-    
-    
-    
-    func commitContentAsBlock(resetType: Bool = true) {
-        let textToCommit = content.isEmpty ? placeholder : content
-        guard !textToCommit.isEmpty else { return }
-        
-        switch currentTypingBlockType {
-        case .header(let level):
-            markdownBlocks.append(.header(level: level, text: textToCommit))
-        case .paragraph:
-            markdownBlocks.append(.paragraph(text: textToCommit))
-        case .code(let language):
-            markdownBlocks.append(.code(language: language, context: textToCommit))
-        case .component:
-            markdownBlocks.append(.component(key: textToCommit))
-        case .none:
-            markdownBlocks.append(.paragraph(text: textToCommit))
-        }
-        
-        content = ""
-        placeholder = ""
-        if resetType {
-            currentTypingBlockType = .none
-        }
-    }
-    
-    
+
+
+
     // MARK: - Auto Save
     private func scheduleAutoSave() {
         lastChangeTime = Date()
-        
+
         autoSaveTask?.cancel()
         autoSaveTask = Task { [weak self] in
             guard let self else { return }
-            
+
             try? await Task.sleep(nanoseconds: 2_000_000_000)
             guard let last = lastChangeTime, Date().timeIntervalSince(last) >= 2 else { return }
-            
+
+            await MainActor.run {
+                // All changes are in-place, so nothing extra needed
+            }
+
             do {
-                // Only include typing buffer if we have a draft/existing snippet
-                try await saveSnippet(includeTypingBuffer: true)
+                try await self.saveSnippet()
             } catch {
                 print("Failed auto-save: \(error.localizedDescription)")
             }
         }
     }
-    
-    
-    // MARK: - Parsing
-    
-    private func parseMarkdown(from text: String) {
-        markdownBlocks = parser.parse(text)
-    }
-    
-    // MARK: - SwiftData CRUD
-    
-    func createDraft(context: ModelContext) {
-         // Only create a draft if there isn't a current snippet already
-         guard currentSnippet == nil else { return }
 
-         let draft = Snippet(title: "", content: "", language: language)
-         context.insert(draft)
-         currentSnippet = draft
-         snippets.append(draft)
-     }
-    
-    
-    func saveSnippet(includeTypingBuffer: Bool = false) async throws {
-        guard let snippet = currentSnippet else { return } // only update the draft
-        
-        var blocksToSave = markdownBlocks
-        if includeTypingBuffer && !content.isEmpty {
-            switch currentTypingBlockType {
-            case .header(let level):
-                blocksToSave.append(.header(level: level, text: content))
-            case .paragraph:
-                blocksToSave.append(.paragraph(text: content))
-            case .code(let lang):
-                blocksToSave.append(.code(language: lang, context: content))
-            case .component:
-                blocksToSave.append(.component(key: content))
-            case .none:
-                blocksToSave.append(.paragraph(text: content))
-            }
+    // MARK: - Save / Reset
+    func saveSnippet() async throws {
+        guard let snippet = currentSnippet else { return }
+        guard let block = blocks.first else { return } // safe access
+
+        // Convert block to string manually
+        let content: String
+        switch block.type {
+        case .header(let level):
+            content = String(repeating: "#", count: level) + " " + block.text
+        case .paragraph:
+            content = block.text
+        case .code:
+            content = "```\n\(block.text)\n```"
+        case .component:
+            content = "[[\(block.text)]]"
+        case .none:
+            content = block.text
         }
-        
-        snippet.title = title
-        snippet.content = blocksToSave.map { block in
-            switch block {
-            case .header(let level, let text): return String(repeating: "#", count: level) + " " + text
-            case .paragraph(let text): return text
-            case .code(_, let context): return "```\n\(context)\n```"
-            case .component(let key): return "[[\(key)]]"
-            }
-        }.joined(separator: "\n")
-        
+
+        snippet.content = content
         snippet.language = language
+        snippet.title = title
         snippet.createdAt = Date()
-        
         try context.save()
     }
-    
-    
-    func loadSnippet(_ snippet: Snippet) {
-        self.currentSnippet = snippet
-        self.title = snippet.title
-        self.content = ""
-        self.language = snippet.language
-        self.createdAt = snippet.createdAt
-        parseMarkdown(from: snippet.content)
-    }
-    
-    
+
+
     func resetSnippet() {
         currentSnippet = nil
         title = ""
-        content = ""
-        markdownBlocks = []
-        placeholder = ""
-        currentTypingBlockType = .none
+        language = .swift
+        blocks = [EditableBlock(type: .paragraph, text: "")]
+        placeholder = "Start typing..."
     }
-    
-    func updateSnippet(_ snippet: Snippet) async throws {
-        snippet.title = title
-        snippet.content = markdownBlocks.map { block in
-            switch block {
-            case .header(let level, let text): return String(repeating: "#", count: level) + " " + text
-            case .paragraph(let text): return text
-            case .code(_, let context): return "```\n\(context)\n```"
-            case .component(let key): return "[[\(key)]]"
-            }
-        }.joined(separator: "\n")
-        snippet.language = language
-        snippet.createdAt = Date()
-        try context.save()
+
+    // MARK: - Load / Drafts
+    func createDraft(context: ModelContext) {
+        guard currentSnippet == nil else { return }
+        let draft = Snippet(title: "", content: "", language: language)
+        context.insert(draft)
+        currentSnippet = draft
+        snippets.append(draft)
     }
-    
+
+    func loadSnippet(_ snippet: Snippet) {
+        currentSnippet = snippet
+        title = snippet.title
+        language = snippet.language
+        createdAt = snippet.createdAt
+        blocks = parseContentToBlocks(snippet.content)
+    }
+
     func deleteSnippet(_ snippet: Snippet) async throws {
         context.delete(snippet)
         try context.save()
-        if let index = snippets.firstIndex(of: snippet) {
-            snippets.remove(at: index)
+        if let idx = snippets.firstIndex(of: snippet) {
+            snippets.remove(at: idx)
         }
     }
-    // MARK: - SwiftData Load
-    func load() {
+
+    private func loadSnippets() {
         do {
-            // Fetch all Snippet objects
             let request = FetchDescriptor<Snippet>(sortBy: [SortDescriptor(\.createdAt, order: .forward)])
             snippets = try context.fetch(request)
         } catch {
             print("Failed to load snippets: \(error.localizedDescription)")
         }
     }
-    
 
+    // MARK: - Parsing Markdown to Blocks
+    private func parseContentToBlocks(_ content: String) -> [EditableBlock] {
+        // Simplified parser: split by double newlines, detect headers / code / component
+        let lines = content.components(separatedBy: "\n\n")
+        return lines.map { line in
+            if line.starts(with: "#") {
+                let level = line.prefix(while: { $0 == "#" }).count
+                let text = line.dropFirst(level).trimmingCharacters(in: .whitespaces)
+                return EditableBlock(type: .header(level: level), text: text)
+            } else if line.starts(with: "```") {
+                let code = line.replacingOccurrences(of: "```", with: "")
+                return EditableBlock(type: .code(language: .swift), text: code)
+            } else if line.starts(with: "[[") && line.hasSuffix("]]")  {
+                let key = String(line.dropFirst(2).dropLast(2))
+                return EditableBlock(type: .component, text: key)
+            } else {
+                return EditableBlock(type: .paragraph, text: line)
+            }
+        }
+    }
 }
+
