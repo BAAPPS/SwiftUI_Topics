@@ -64,6 +64,22 @@ Each sub-project focuses on a specific type of local data modeling challenge:
   * Applying **live UI updates** and smooth animations for quantity changes and cart interactions.
 
 
+* [SnippetManagerLearning](./SnippetManagerLearning) → Build a personal **code snippet manager** using SwiftUI and SwiftData.
+
+  Practice:
+
+  * Creating and managing **snippets** with title, content, and programming language.
+  * Implementing **draft creation and auto-save** functionality to prevent data loss.
+  * Designing a **Notion-like snippet editing interface** with `TextEditor`, editable blocks, and live Markdown preview.
+  * Using **@Bindable** and **environment objects** for reactive data flow between views.
+  * Managing **dynamic keyboard behavior** and resizing text editors to maintain smooth UX while typing.
+  * Parsing and rendering **Markdown** manually, including headers, code blocks, lists, and embedded components.
+  * Implementing **MVVM architecture** for clean separation of business logic and UI.
+  * Using **NavigationStack, toolbar items, and reusable views** for modular, scalable app navigation.
+  * Handling **SwiftData persistence**, including CRUD operations, relationships, and list updates.
+  * Preparing for future enhancements: tagging, search, export, theming, and multi-device sync.
+
+
 ---
 
 ## Why This Challenge?
