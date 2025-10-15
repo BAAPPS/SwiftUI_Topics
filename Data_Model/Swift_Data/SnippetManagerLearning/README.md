@@ -8,9 +8,9 @@
 * [Technologies Used](#technologies-used)
 * [Features](#features)
 * [Why This Challenge?](#why-this-challenge)
-<!--* [What I Learned](#what-i-learned)-->
-<!--* [What I Would Do Differently](#what-i-would-do-differently)-->
-<!--* [App Showcase](#app-showcase)-->
+* [What I Learned](#what-i-learned)
+* [What I Would Do Differently](#what-i-would-do-differently)
+* [App Showcase](#app-showcase)
 
 ---
 
@@ -66,54 +66,87 @@ This project was designed to solve a **personal developer problem**: maintaining
 * A foundation for building larger, more complex productivity apps.
 * Future-proofing the codebase without relying on third-party Markdown libraries.
 
-<!------->
-<!---->
-<!--## What I Learned-->
-<!---->
-<!--Through building **SnippetManagerLearning**, I gained experience with:-->
-<!---->
-<!--* **SwiftUI layouts and components**: `TextEditor`, `ScrollView`, `Picker`, `NavigationStack`.-->
-<!--* **Markdown rendering**: Integrating MarkdownUI and handling fenced code blocks dynamically.-->
-<!--* **Data persistence with SwiftData**: Defining models, CRUD operations, and state binding.-->
-<!--* **MVVM principles**: Separating business logic from UI for modularity and scalability.-->
-<!--* **User experience considerations**: Monospaced fonts for code, live previews, language selection.-->
-<!--* **Future-proofing an app**: Designing the architecture to easily add features like tags, search, export, and cloud sync.-->
-<!---->
-<!------->
-<!---->
-<!--## What I Would Do Differently-->
-<!---->
-<!--* **Automatic language detection**: Instead of selecting language manually, use heuristics to detect Swift, Python, JS, etc.-->
-<!--* **Better snippet organization**: Include folder-like vaults or nested categories for more complex workflows.-->
-<!--* **Enhanced Markdown support**: Add support for tables, images, and custom styling in preview.-->
-<!--* **Unit and UI Testing**: Integrate XCTest to test persistence, parsing, and UI flows.-->
-<!--* **Cross-platform support**: Expand to iPad/macOS with multi-column layouts and drag-and-drop.-->
-<!---->
-<!------->
+---
+
+## What I Learned
+
+Through building **SnippetManagerLearning**, I gained hands-on experience with several SwiftUI, SwiftData, and app architecture concepts:
+
+* **State Management & Bindable Data**: Learned how to use `@Bindable` and `@Environment` to connect views with a shared `ViewModel`, keeping UI and data in sync automatically.
+* **Auto-save and Draft Management**: Implemented auto-save behavior and draft creation for new snippets, ensuring users never lose their work.
+* **SwiftUI Layouts & Components**: Built complex layouts using `ScrollView`, `TextEditor`, `VStack`, `Picker`, and `NavigationStack`, creating a Notion-like snippet editing page.
+* **Keyboard Handling in SwiftUI**: Managed dynamic keyboard behavior to resize text editors and keep content accessible while typing.
+* **Markdown Rendering**: Created a custom Markdown parser to render live previews, including fenced code blocks, headers, lists, and embedded components.
+* **SwiftData Persistence**: Defined models, performed CRUD operations, and explored how data can persist locally while maintaining reactive UI updates.
+* **MVVM Architecture**: Separated business logic from UI, enabling cleaner, more maintainable, and scalable code.
+* **User Experience Considerations**: Learned how to present monospaced fonts for code, live previews, language selection, and intuitive editing flows similar to Notion.
+* **Reusable Views & Components**: Designed reusable, composable SwiftUI components (`EditableBlockView`, `CustomMarkdownView`) for modularity and future feature expansion.
+* **Navigation & Context Awareness**: Gained experience with passing data between views via environment objects, navigation destinations, and optional bindings.
+
+> Overall, this project reinforced the importance of **reactive data flow, modular architecture, and user-focused design** in SwiftUI apps while giving me a playground to experiment with advanced features like live Markdown rendering and draft management.
+
+---
+
+## What I Would Do Differently
+
+* **Automatic Language Detection**: Instead of manually selecting a programming language, implement heuristics or lightweight syntax analysis to automatically detect Swift, Python, JavaScript, etc.
+* **Enhanced Snippet Organization**: Introduce folder-like vaults, nested categories, or tagging systems to manage large numbers of snippets more effectively.
+* **Improved Markdown Support**: Extend the custom parser to handle tables, images, links, inline code, and additional Markdown features for richer previews.
+* **Undo/Redo & Versioning**: Add support for undo/redo operations or snapshot versioning for snippets, making editing safer and more robust.
+* **Unit and UI Testing**: Integrate XCTest to validate persistence, parsing, and UI behavior, ensuring long-term maintainability.
+* **Cross-Platform Support**: Expand the app to iPad and macOS with multi-column layouts, drag-and-drop snippets, and optimized editing experiences.
+* **Cloud Sync & Multi-Device Access**: Implement iCloud or CloudKit syncing to access snippets seamlessly across devices.
+* **Performance Optimization**: Optimize large snippet lists and Markdown rendering for smooth scrolling and minimal lag, especially with hundreds of code blocks.
+* **Enhanced User Experience**: Add features like snippet favorites, quick search, copy-to-clipboard shortcuts, and customizable themes for better usability.
+
+> These improvements would make the app feel more production-ready, while still keeping it modular and flexible for experimentation with new SwiftUI and SwiftData features.
+
+---
+
 
 ## App Showcase
-<!---->
-<!--### Product Browser-->
-<!---->
-<!--Browse all locally stored FakeStore products with details and pricing.-->
-<!---->
-<!--![Product List](https://github.com/user-attachments/assets/4480291a-ec75-41aa-910a-cec2301fdc99)-->
-<!---->
-<!---->
-<!--### Product Details-->
-<!---->
-<!--Check each products details in depth with the ability to change **quantity** **Add to cart** functionality-->
-<!---->
-<!--![Product Details](https://github.com/user-attachments/assets/095a7ad2-f820-4b79-9792-72c984a3aadc)-->
-<!---->
-<!---->
-<!--### User Cart-->
-<!---->
-<!--Add or remove products, adjust quantities, and view total price — all persisted automatically.-->
-<!---->
-<!--![Cart View](https://github.com/user-attachments/assets/3109ae61-5d23-40f5-83dc-bc82de418b85)-->
-<!---->
-<!---->
-<!---->
-<!---->
-<!---->
+
+
+### Snippet List
+
+Browse all your saved snippets in a clean, scrollable list. Each snippet shows the **title**, **programming language**, and **creation date** for quick reference. Swipe to delete snippets or tap on a snippet to view details.
+
+![Snippet List](https://github.com/user-attachments/assets/dd290076-0c72-45bb-bd2f-387c1c3c72c5)
+
+---
+
+### Snippet Detail
+
+View each snippet in a **Notion-like detail page** with live Markdown rendering. The detail page displays:
+
+* Snippet title and language
+* Markdown content preview
+* Code blocks rendered with proper formatting
+* Option to edit the snippet using the pencil toolbar
+
+![Snippet Detail](https://github.com/user-attachments/assets/9d1a7d4e-aaac-4d48-8a11-eca4973f8cd8)
+
+
+### Snippet Editor
+
+Edit or create new snippets in a **rich text editing environment**:
+
+* `TextEditor` for title and code blocks
+* Live Markdown preview
+* Language selection with a segmented picker
+* Auto-save functionality ensures no work is lost
+* Editable blocks to switch between paragraph, header, code, or component types
+
+![Snippet Editor](https://github.com/user-attachments/assets/a90b650e-ceea-42d7-91e3-511a350a0666)
+
+
+### Live Markdown Preview
+
+See your Markdown updates in **real time** while editing:
+
+* Code blocks wrapped in fenced ``` syntax
+* Headers, lists, and embedded components render immediately
+* Custom parser ensures full control over rendering
+
+![Markdown Preview](https://github.com/user-attachments/assets/7803fa12-9cd9-4160-9054-3908b8ca7d2f)
+
