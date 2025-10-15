@@ -29,11 +29,15 @@ struct SnippetListView: View {
         .navigationTitle("My Snippet")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: SnippetEditorView().environment(snippetVM)
+                NavigationLink(destination: SnippetEditorView(snippetToEdit: nil)
+                    .environment(snippetVM)
+                    .onAppear {
+                        snippetVM.resetSnippet()        // clear previous snippet data
+                        snippetVM.createDraft(context: context) // create a fresh snippet
+                    }
                 ) {
                     Image(systemName: "plus")
                 }
-                .fixedSize()
             }
         }
         .navigationDestination(for: Snippet.self) {snippet in

@@ -19,7 +19,7 @@ struct EditableBlock: Identifiable, Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-    
+
     func toMarkdownBlock() -> MarkdownBlock {
         switch type {
         case .header(let level): return .header(level: level, text: text)

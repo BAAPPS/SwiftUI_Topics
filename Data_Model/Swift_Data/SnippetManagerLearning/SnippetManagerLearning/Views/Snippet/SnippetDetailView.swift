@@ -11,6 +11,7 @@ import SwiftData
 struct SnippetDetailView: View {
     @Environment(SnippetViewModel.self) var snippetVM
     let snippet: Snippet
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
@@ -26,11 +27,23 @@ struct SnippetDetailView: View {
                 
                 CustomMarkdownView(blocks: MarkdownParser().parse(snippet.content))
                     .padding(.horizontal)
-                
             }
             .padding()
         }
-        .navigationTitle("Snippet")
+        .navigationTitle("\(snippet.title) Snippet")
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            snippetVM.loadSnippet(snippet)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink(destination: SnippetEditorView(snippetToEdit: snippet)
+                    .environment(snippetVM)
+                ) {
+                    Image(systemName: "pencil")
+                }
+            }
+        }
     }
 }
 

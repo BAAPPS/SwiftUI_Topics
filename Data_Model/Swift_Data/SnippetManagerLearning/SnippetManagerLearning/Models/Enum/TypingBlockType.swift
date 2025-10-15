@@ -13,7 +13,7 @@ enum TypingBlockType: Equatable {
     case code(language: Language?)
     case component
     case none
-    
+
     var displayName: String {
         switch self {
         case .header(let level): return "Header \(level)"

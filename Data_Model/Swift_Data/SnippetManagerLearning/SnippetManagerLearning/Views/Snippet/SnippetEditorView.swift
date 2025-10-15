@@ -75,9 +75,7 @@ struct SnippetEditorView: View {
             }
         }
         .onAppear {
-            if snippetToEdit == nil && snippetVM.currentSnippet == nil {
-                snippetVM.createDraft(context: context)
-            } else if let snippetToEdit {
+            if let snippetToEdit {
                 snippetVM.loadSnippet(snippetToEdit)
             }
         }
