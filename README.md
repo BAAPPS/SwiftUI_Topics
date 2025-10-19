@@ -47,7 +47,53 @@ SwiftUI_Topics/
 ### 📂 Data Models
 - [x] Local JSON
 - [x] Server JSON
-- [ ] Swift Data
+- [x] Swift Data
+
+### 🧱 Data Structures & Algorithms (Swift Focused)
+
+#### Arrays & Strings
+
+- [ ] Two Pointers
+- [ ] Sliding Window
+- [ ] Prefix Sum
+- [ ] Sorting Patterns
+- [ ] Binary Search
+
+#### Dictionaries & Sets
+
+- [ ] Hash Map / Lookup Pattern
+- [ ] Frequency Counting / Grouping
+- [ ] Set Operations (Union / Intersection / Subset)
+
+#### Linked List
+
+- [ ] Fast & Slow Pointer Pattern
+- [ ] Reversal Pattern
+- [ ] Merge / Split Pattern
+
+#### Stack & Queue
+
+- [ ] Stack (LIFO) Pattern
+- [ ] Queue / BFS Pattern
+
+#### Trees
+
+- [ ] DFS Pattern
+- [ ] BFS Pattern
+- [ ] Recursive Pattern
+
+#### Graphs
+
+- [ ] DFS / BFS Pattern
+- [ ] Topological Sort Pattern
+- [ ] Shortest Path Pattern
+
+#### Recursion & Dynamic Programming
+
+- [ ] Divide & Conquer Pattern
+- [ ] Memoization / Top-Down DP
+- [ ] Tabulation / Bottom-Up DP
+- [ ] Backtracking Pattern
 
 ### 🌐 Networking
 - [ ] URLSession
