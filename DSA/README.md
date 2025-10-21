@@ -1,129 +1,99 @@
-# Arrays & ArrayUtils in Swift
-
-This folder is dedicated to **learning and practicing Arrays in Swift**, along with creating a reusable **ArrayUtils** toolkit for common operations. It’s designed for both **learning Swift fundamentals** and **building mini projects** that reinforce array manipulation.
+# DSA Learning Folder
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
-1. [Overview](#-overview)
-<!--2. [Array Topics Toolkit](#-array-topics-toolkit)-->
-<!--3. [Functional Patterns Covered](#-functional-patterns-covered)-->
-<!--4. [Mini Project Ideas](#-mini-project-ideas)-->
-<!--5. [Suggested Workflow](#-suggested-workflow)-->
-<!--6. [Notes](#-notes)-->
-<!--7. [References](#-references)-->
+* [Overview](#overview)
+* [Folder Structure](#folder-structure)
+* [Learning Approach](#learning-approach)
+* [Data Structures](#data-structures)
+
+  * [Arrays](#arrays)
+
+  <!-- - [Strings](#strings)  
+  - [LinkedLists](#linkedlists) -->  
+<!--* [Best Practices](#best-practices)-->
+<!--* [Future Plans](#future-plans)-->
 
 ---
 
-## 📌 Overview
+## Overview
 
-**Arrays** are one of the most fundamental data structures in programming. In Swift, arrays are **ordered collections** of elements of the same type.
+This repository is dedicated to learning **Data Structures and Algorithms (DSA)** using **Swift**.
+Currently, the focus is on **Arrays**, with mini-projects built around each concept to solidify understanding. Future updates will include additional data structures like **Linked Lists, Stacks, Queues, Trees, Graphs**, and more.
 
-Key characteristics:
+---
 
-* Ordered: Elements are accessed by index
-* Mutable / Immutable: `var` arrays can be modified, `let` arrays cannot
-* Generic: Can store any type (`[Int]`, `[String]`, `[CustomClass]`)
+## Folder Structure
 
-This folder focuses on:
+```
+DSA/
+│
+├─ Arrays/
+├─ Strings/ (coming soon)
+├─ LinkedLists/ (coming soon)
+├─ Stacks/ (coming soon)
+├─ Queues/ (coming soon)
+└─ README.md
+```
+---
 
-1. **Deep diving into array concepts**
-2. **Practicing functional programming patterns**: `map`, `filter`, `reduce`, `sort`
-3. **Building mini projects** to apply array utilities
+## Learning Approach
+
+1. **Follow Swift Documentation:**
+   For each data structure, start by understanding the official Swift documentation and its core methods and properties.
+   Example for Arrays: [Swift Arrays Documentation](https://developer.apple.com/documentation/swift/array)
+
+2. **Playground Experiments:**
+   Test every concept in a Swift Playground. This hands-on approach helps solidify the behavior of methods and operations.
+
+3. **Mini-Projects:**
+   Build small, practical projects for each concept to see real-world usage.
+   Example: Implement a **Task Manager** using Arrays or **Shopping Cart** simulation.
+
+4. **Notes and Examples:**
+   Maintain a `README.md` inside each topic folder summarizing:
+
+   * What the method/concept does
+   * Complexity analysis (time/space)
+   * Example usage
+
+---
+
+## Data Structures
+
+### Arrays
+Arrays are ordered collections of elements and one of the most commonly used data structures in Swift.  
+For detailed topics, examples, and mini-projects, see the [Arrays Folder README](https://github.com/BAAPPS/SwiftUI_Topics/tree/main/DSA/Arrays).
+
+<!--### Strings-->
+<!--Strings are sequences of characters in Swift.  -->
+<!--For detailed topics, examples, and mini-projects, see the [Strings Folder README](./Strings/README.md).-->
+<!---->
+<!--### LinkedLists-->
+<!--LinkedLists are collections of nodes where each node points to the next.  -->
+<!--For detailed topics, examples, and mini-projects, see the [LinkedLists Folder README](./LinkedLists/README.md).-->
+
 
 <!------->
 <!---->
-<!--## 🛠Array Topics Toolkit-->
+<!--## Best Practices-->
 <!---->
-<!--`ArrayUtils.swift` contains reusable Swift functions and extensions for arrays, including:-->
+<!--* Always prefer **immutable arrays (`let`)** when modifications are not needed.-->
+<!--* Understand the **time complexity** of each array operation.-->
+<!--* Experiment with **higher-order functions** (`map`, `filter`, `reduce`) to write clean Swift code.-->
+<!--* Document mini-projects with:-->
 <!---->
-<!--### Example Functions-->
-<!---->
-<!--```swift-->
-<!--// Sum all elements-->
-<!--func sum(_ array: [Int]) -> Int {-->
-<!--    return array.reduce(0, +)-->
-<!--}-->
-<!---->
-<!--// Filter even numbers-->
-<!--func filterEven(_ array: [Int]) -> [Int] {-->
-<!--    return array.filter { $0 % 2 == 0 }-->
-<!--}-->
-<!---->
-<!--// Square all numbers-->
-<!--func square(_ array: [Int]) -> [Int] {-->
-<!--    return array.map { $0 * $0 }-->
-<!--}-->
-<!---->
-<!--// Sort array ascending-->
-<!--func sortAscending(_ array: [Int]) -> [Int] {-->
-<!--    return array.sorted()-->
-<!--}-->
-<!---->
-<!--// Find maximum-->
-<!--func maxValue(_ array: [Int]) -> Int? {-->
-<!--    return array.max()-->
-<!--}-->
-<!--```-->
+<!--  * Purpose-->
+<!--  * Key DSA concepts applied-->
+<!--  * Sample input/output-->
 <!---->
 <!------->
 <!---->
-<!--### 📈 Functional Patterns Covered-->
+<!--## Future Plans-->
 <!---->
-<!--| Pattern         | Purpose                               | Example                       |-->
-<!--| --------------- | ------------------------------------- | ----------------------------- |-->
-<!--| `map`           | Transform each element                | Square all numbers            |-->
-<!--| `filter`        | Select elements by condition          | Keep only even numbers        |-->
-<!--| `reduce`        | Aggregate values into a single result | Sum of all elements           |-->
-<!--| `sorted`        | Sort arrays ascending/descending      | Order tasks by priority       |-->
-<!--| `contains`      | Check if element exists               | Is 5 in array?                |-->
-<!--| `first(where:)` | Find first element matching condition | First task with high priority |-->
-<!---->
+<!--* Expand to other data structures: LinkedLists, Stacks, Queues, Trees, Graphs.-->
+<!--* Include **algorithm challenges** for each data structure (searching, sorting, traversals).-->
+<!--* Build **interconnected projects** using multiple data structures.-->
 <!------->
-<!---->
-<!--## 🏗 Mini Project Ideas-->
-<!---->
-<!--| Project                    | What it Teaches                      | Swift + DSA Focus                         |-->
-<!--| -------------------------- | ------------------------------------ | ----------------------------------------- |-->
-<!--| **Task Filter & Sort App** | Filter, sort, map tasks              | Arrays, Dictionary, map/filter/reduce     |-->
-<!--| **Number Stats Tracker**   | Sum, average, min, max, squares      | Arrays, functional patterns               |-->
-<!--| **Flashcard Quiz Order**   | Shuffle, filter unanswered questions | Arrays, `shuffled()`, functional patterns |-->
-<!---->
-<!------->
-<!---->
-<!--## 📝 Suggested Workflow-->
-<!---->
-<!--1. **Playground Deep Dive**-->
-<!---->
-<!--   * Implement array operations and test functions-->
-<!--   * Experiment with `map`, `filter`, `reduce`, and sorting-->
-<!---->
-<!--2. **Mini Project Implementation**-->
-<!---->
-<!--   * Apply the ArrayUtils functions in a small SwiftUI app-->
-<!--   * Display results visually (e.g., task list or number stats)-->
-<!---->
-<!--3. **LeetCode / Practice Problems**-->
-<!---->
-<!--   * Start with Easy problems using arrays-->
-<!--   * Apply `ArrayUtils` functions instead of writing new logic each time-->
-<!---->
-<!------->
-<!---->
-<!--## 🔧 Notes-->
-<!---->
-<!--* Arrays in Swift are **value types**, so mutations on copies don’t affect the original array unless declared as `inout` or using `var`-->
-<!--* Combining functional patterns (`map` → `filter` → `reduce`) makes array processing concise and readable-->
-<!--* Practicing arrays builds a **strong foundation** for more advanced topics like **Linked Lists, Stacks, Queues, and Graphs**-->
-<!---->
-<!------->
-<!---->
-<!--## 📚 References-->
-<!---->
-<!--* [Swift Array Documentation](https://developer.apple.com/documentation/swift/array)-->
-<!--* [Hacking with Swift – Arrays](https://www.hackingwithswift.com/quick-start/swiftui/arrays)-->
-<!--* [Swift by Sundell – Functional Array Methods](https://www.swiftbysundell.com/articles/functional-swift/)-->
-<!---->
-<!------->
-<!---->
