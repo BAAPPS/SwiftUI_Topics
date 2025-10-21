@@ -6,17 +6,6 @@
 
 * [Overview](#overview)
 * [Topics Covered](#topics-covered)
-
-  * [Creating Arrays](#creating-arrays)
-  * [Inspecting Arrays](#inspecting-arrays)
-  * [Accessing Elements](#accessing-elements)
-  * [Adding Elements](#adding-elements)
-  * [Combining Arrays](#combining-arrays)
-  * [Removing Elements](#removing-elements)
-  * [Finding Elements](#finding-elements)
-  * [Selecting Elements](#selecting-elements)
-  * [Excluding Elements](#excluding-elements)
-  
 <!--* [Mini-Project Ideas](#mini-project-ideas)-->
 <!--* [Best Practices](#best-practices)-->
 <!--* [Next Steps](#next-steps)-->
