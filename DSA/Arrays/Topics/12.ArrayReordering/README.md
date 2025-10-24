@@ -9,13 +9,17 @@
 3. [Reversing Collections](#reversing-collections)
 
    3.1 [reverse()](#reverse)
+   
    3.2 [reversed()](#reversed)
    
 4. [Shuffling Collections](#shuffling-collections)
 
    4.1 [shuffle()](#shuffle)
+   
    4.2 [shuffle(using:)](#shuffleusing)
+   
    4.3 [shuffled()](#shuffled)
+   
    4.4 [shuffled(using:)](#shuffledusing)
    
 5. [Partitioning Collections](#partitioning-collections)
