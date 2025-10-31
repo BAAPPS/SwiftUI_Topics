@@ -38,7 +38,8 @@ Instead of using nested loops, you “slide” a window of variable or fixed siz
 SlidingWindowConcepts/
 │
 ├── Basics/
-│   ├── PrintSubarrays.playground
+├── Fixed_Size/
+│
 └── README.md
 ```
 
