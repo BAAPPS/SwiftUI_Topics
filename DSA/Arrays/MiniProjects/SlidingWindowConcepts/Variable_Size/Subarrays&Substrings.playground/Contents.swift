@@ -33,15 +33,15 @@ func methodLabel(problem: String,  method: MethodType)  {
 
 /*
  Goal:
-    Given an array of positive integers and a target sum, find the length
-    of the smallest contiguous subarray whose sum is greater than or equal
-    to the target. If no such subarray exists, return 0.
+ Given an array of positive integers and a target sum, find the length
+ of the smallest contiguous subarray whose sum is greater than or equal
+ to the target. If no such subarray exists, return 0.
  
  Example:
-    Input: target = 7, nums = [2, 3, 1, 2, 4, 3]
-    Output: 2
-    Explanation: [4, 3] is the smallest subarray with sum ≥ 7.
-*/
+ Input: target = 7, nums = [2, 3, 1, 2, 4, 3]
+ Output: 2
+ Explanation: [4, 3] is the smallest subarray with sum ≥ 7.
+ */
 
 // MARK: Brute Force
 // Time Complexity: O(n²) → nested loops to check all possible subarrays
@@ -60,17 +60,17 @@ func smallestSubarraySumGreaterOrEqualTargetBF(_ nums: [Int], _ target: Int) -> 
             currentSum += nums[j]
             
             print("Current subarray: \(Array(nums[i...j])), Current sum: \(currentSum), Min length: \(minLength == Int.max ? "∞" : String(minLength))")
-                      
+            
             if currentSum >= target {
                 minLength = min(minLength, j - i + 1)
                 break  // no need to continue, we found smallest starting at i
             }
-          
+            
         }
     }
     
     return minLength == Int.max ? 0 : minLength
-   
+    
 }
 smallestSubarraySumGreaterOrEqualTargetBF([2, 3, 1, 2, 4, 3], 7)
 
@@ -107,15 +107,15 @@ smallestSubarraySumGreaterOrEqualTargetSW([2, 3, 1, 2, 4, 3], 7)
 
 /*
  Goal:
-    Given an array of positive integers and an integer k, find the length
-    of the longest contiguous subarray whose sum is less than or equal to k.
+ Given an array of positive integers and an integer k, find the length
+ of the longest contiguous subarray whose sum is less than or equal to k.
  
  Example:
-    Input: nums = [1, 2, 1, 0, 1, 1, 0], k = 4
-    Output: 5
-    Explanation: [1, 2, 1, 0, 0] (or similar) fits the condition.
-
-*/
+ Input: nums = [1, 2, 1, 0, 1, 1, 0], k = 4
+ Output: 5
+ Explanation: [1, 2, 1, 0, 0] (or similar) fits the condition.
+ 
+ */
 
 // MARK: Brute Force
 // Time Complexity: O(n²) → nested loops to check all possible subarrays
@@ -187,15 +187,15 @@ longestSubarraySumOfKSW([1, 2, 1, 0, 1, 1, 0], 4)
 
 /*
  Goal:
-    Given an array of integers and a target sum, find the length of the
-    longest contiguous subarray whose sum equals the target.
+ Given an array of integers and a target sum, find the length of the
+ longest contiguous subarray whose sum equals the target.
  
  Example:
-    Input: nums = [1, -1, 5, -2, 3], target = 3
-    Output: 4
-    Explanation: The subarray [1, -1, 5, -2] sums to 3.
-
-*/
+ Input: nums = [1, -1, 5, -2, 3], target = 3
+ Output: 4
+ Explanation: The subarray [1, -1, 5, -2] sums to 3.
+ 
+ */
 
 // MARK: Brute Force
 // Time Complexity: O(n²) → nested loops to check all possible subarrays
@@ -212,7 +212,7 @@ func longestSubarraySumOfTargetBF(_ nums:[Int], _ target: Int) -> Int {
         
         for j in i..<nums.count {
             currentSum += nums[j]
-
+            
             print("Current subarray: \(Array(nums[i...j])), Current sum: \(currentSum), Max length: \(maxLength)")
             
             if currentSum == target {
@@ -268,15 +268,15 @@ longestSubarraySumOfTargetSW([1, -1, 5, -2, 3], 3)
 
 /*
  Goal:
-    Count all contiguous subarrays that sum exactly to a given target.
+ Count all contiguous subarrays that sum exactly to a given target.
  
-
+ 
  Example:
-    Input: nums = [1, 1, 1], target = 2
-    Output: 2
-    Explanation: The subarrays [1,1] appear twice.
-
-*/
+ Input: nums = [1, 1, 1], target = 2
+ Output: 2
+ Explanation: The subarrays [1,1] appear twice.
+ 
+ */
 
 // MARK: Brute Force
 // Time Complexity: O(n²) → nested loops to check all possible subarrays
@@ -325,7 +325,7 @@ func countSubarraysSumOfTargetSW(_ nums: [Int], _ target: Int) -> Int {
         
         sumFrequency[prefixSum, default: 0] += 1
         
-       
+        
         print("Index: \(i), Num: \(num), PrefixSum: \(prefixSum), count: \(count), Map: \(sumFrequency)")
     }
     
@@ -339,16 +339,16 @@ countSubarraysSumOfTargetSW([1, 2, 1, 2, 1], 3)
 
 /*
  Goal:
-    Given an array of integers and integer k, find the length of the
-    longest contiguous subarray where the sum is divisible by k
+ Given an array of integers and integer k, find the length of the
+ longest contiguous subarray where the sum is divisible by k
  
  Example:
-    Input: nums = [2, 7, 6, 1, 4, 5], k = 3
-    Output: 4
-    Explanation: Subarray [7,6,1,4] sums to 18, divisible by 3.
-
-
-*/
+ Input: nums = [2, 7, 6, 1, 4, 5], k = 3
+ Output: 4
+ Explanation: Subarray [7,6,1,4] sums to 18, divisible by 3.
+ 
+ 
+ */
 
 
 // MARK: Brute Force
@@ -426,14 +426,14 @@ longestSubarraySumDivisibleByKSW([2, 7, 6, 1, 4, 5], 3)
 
 /*
  Goal:
-    Find the longest contiguous subarray whose sum is strictly less than a given target value.
+ Find the longest contiguous subarray whose sum is strictly less than a given target value.
  
  Example:
-    Input: nums = [1, 2, 3, 4, 5], target = 11
-    Output: 4
-    Explanation: [1, 2, 3, 4] sums to 10, which is < 11.
-
-*/
+ Input: nums = [1, 2, 3, 4, 5], target = 11
+ Output: 4
+ Explanation: [1, 2, 3, 4] sums to 10, which is < 11.
+ 
+ */
 
 
 // MARK: Brute Force
@@ -505,14 +505,14 @@ longestSubarraySumLessThanTargetSW([1, 2, 3, 4, 5], 11)
 
 /*
  Goal:
-    Given a string s, find the length of the longest substring without any repeating characters.
-  
+ Given a string s, find the length of the longest substring without any repeating characters.
+ 
  Example:
-    Input: s = "abcabcbb"
-    Output: 3
-    Explanation: "abc" is the longest substring with unique characters.
-
-*/
+ Input: s = "abcabcbb"
+ Output: 3
+ Explanation: "abc" is the longest substring with unique characters.
+ 
+ */
 
 // MARK: Brute Force
 // Time Complexity: O(n²) → nested loops to check all possible subarrays
@@ -568,7 +568,7 @@ func longestDistinctSubstringSW(_ s: String) -> Int {
         // Insert current character and update max length of substring
         seen.insert(ch)
         maxLength = max(maxLength, end - start + 1)
-
+        
         print("Window: \(Array(chars[start...end])), current char: \(ch), seen: \(seen), Max length: \(maxLength)")
     }
     
@@ -583,12 +583,12 @@ longestDistinctSubstringBF("abcabcbb")
 
 /*
  Goal:
-    Given a string s and integer k, return the length of the longest substring that contains at most k distinct characters.
+ Given a string s and integer k, return the length of the longest substring that contains at most k distinct characters.
  Example:
-    Input: s = "eceba", k = 2
-    Output: 3
-    Explanation: "ece" is the longest substring with 2 distinct characters.
-*/
+ Input: s = "eceba", k = 2
+ Output: 3
+ Explanation: "ece" is the longest substring with 2 distinct characters.
+ */
 
 // MARK: Brute Force
 // Time Complexity: O(n²) → nested loops to check all possible subarrays
@@ -609,7 +609,7 @@ func longestKDistinctCharactersBF(_ s: String, _ k: Int) -> Int {
             seen.insert(ch)
             
             print("current window: \(Array(chars[i...j])), current char: \(ch), seen: \(seen), max length: \(maxLength), current length > k: \( j - i + 1 > k) ")
-
+            
             // If more than k distinct characters, stop expanding
             if seen.count > k {
                 break
@@ -666,13 +666,13 @@ longestKDistinctCharactersSW("eceba", 2)
 
 /*
  Goal:
-    Given a string s and integer k, return the length of the longest substring containing exactly k distinct characters.
+ Given a string s and integer k, return the length of the longest substring containing exactly k distinct characters.
  
  Example:
-    Input: s = "aaabbcc", k = 2
-    Output: 5
-    Explanation: "aaabb" has exactly 2 distinct characters.
-*/
+ Input: s = "aaabbcc", k = 2
+ Output: 5
+ Explanation: "aaabb" has exactly 2 distinct characters.
+ */
 
 // MARK: Brute Force
 // Time Complexity: O(n²) → nested loops to check all possible subarrays
@@ -752,3 +752,266 @@ func  longestExactKDistinctCharactersSW(_ s: String, _ k: Int) -> Int {
 
 longestExactKDistinctCharactersSW("aaabbcc", 2)
 
+// MARK: - Longest Substring with At Most K Replacements
+
+/*
+ Goal:
+ Given a string s and integer k, find the length of the longest substring that can become all the same character by replacing at most k characters.
+ 
+ Example:
+ Input: s = "AABABBA", k = 1
+ Output: 4
+ Explanation: Replace one 'B' to get "AAAA" or "ABBA" → length 4
+ 
+ */
+
+// MARK: Brute Force
+// Time Complexity: O(n²) — nested loops to check all possible substrings, O(k) per window if computing maxFreq
+// Space Complexity: O(n) — array of characters plus map of size up to k
+
+methodLabel(problem: "Longest Substring with At Most K Replacements", method: .bruteForce)
+
+func longestKReplacementBF(_ s: String, _ k: Int) -> Int {
+    var maxLength = 0
+    var chars = Array(s)
+    
+    for i in 0..<chars.count {
+        var charCount: [Character: Int] = [:]
+        var maxFreq = 0
+        
+        for j in i..<chars.count {
+            let ch = chars[j]
+            charCount[ch, default: 0] += 1
+            
+            print("current window: \(Array(chars[i...j])), current char: \(ch), map: \(charCount), max length: \(maxLength), max Freq: \(maxFreq)")
+            
+            if let currentMax = charCount.values.max(), currentMax > maxFreq {
+                maxFreq = currentMax
+            }
+            
+            if ((j - i + 1) - maxFreq) <= k {
+                maxLength = max(maxLength, j - i + 1)
+            }
+            
+        }
+        
+    }
+    
+    return maxLength
+}
+
+longestKReplacementBF("AABABBA", 1)
+
+
+// MARK: Sliding Winodw
+// Time Complexity: O(n*k) worst-case, O(n) if maxFreq is optimized
+// Space Complexity: O(k) — at most k distinct characters stored
+
+methodLabel(problem: "Longest Substring with At Most K Replacements", method: .slidingWindow)
+
+func longestKReplacementSW(_ s: String, _ k: Int) -> Int {
+    var maxLength = 0
+    var maxFreq = 0
+    var charCount: [Character: Int] = [:]
+    var start =  0
+    let chars = Array(s)
+    
+    for end in 0..<chars.count {
+        let ch = chars[end]
+        charCount[ch, default: 0] += 1
+        
+        if let currentMax = charCount.values.max(), currentMax > maxFreq {
+            maxFreq = currentMax
+        }
+        
+        while ((end - start + 1) - maxFreq) > k {
+            let charStart = chars[start]
+            charCount[charStart]! -= 1
+            start += 1
+        }
+        
+        maxLength = max(maxLength, end - start + 1)
+        
+        print("Window: \(Array(chars[start...end])), current char: \(ch), map: \(charCount), Max length: \(maxLength), max Freq: \(maxFreq)")
+    }
+    
+    return maxLength
+}
+
+
+
+longestKReplacementSW("AABABBA", 1)
+
+
+// MARK: - Longest Substring Containing Only Vowels
+
+/*
+ Goal:
+ Given a string s, find the length of the longest substring consisting entirely of vowels.
+ 
+ Example:
+ Input: s = "earthproblem"
+ Output: 2
+ Explanation: "ea" is the longest vowel-only substring
+ 
+ */
+
+// MARK: Brute Force
+// Time Complexity: O(n²) — check all possible substrings
+// Space Complexity: O(n) — array of characters, vowels set is constant
+
+methodLabel(problem: "Longest Substring Containing Only Vowels", method: .bruteForce)
+
+func longestSubstringVowelsBF(_ s: String) -> Int {
+    var maxLength = 0
+    let vowels = Set("aeiouAEIOU")
+    let chars = Array(s)
+    
+    for i in 0..<chars.count {
+        for j in i..<chars.count {
+            let ch = chars[j]
+            
+            print("current window: \(Array(chars[i...j])), current char: \(ch), max length: \(maxLength)")
+            
+            if vowels.contains(ch) {
+                maxLength = max(maxLength, j - i + 1)
+            }else {
+                break
+            }
+            
+        }
+    }
+    
+    return maxLength
+}
+
+
+longestSubstringVowelsBF("earthproblem")
+
+
+// MARK: Sliding Window
+// Time Complexity: O(n) → single pass through the string
+// Space Complexity: O(n) → array of characters (vowels set is O(1))
+
+methodLabel(problem: "Longest Substring Containing Only Vowels", method: .slidingWindow)
+
+func longestSubstringVowelsSW(_ s: String) -> Int {
+    var maxLength = 0
+    var start = 0
+    let vowels = Set("aeiouAEIOU")
+    let chars = Array(s)
+    
+    for end in 0..<chars.count {
+        let ch = chars[end]
+        
+        //  vowel → expand window
+        if vowels.contains(ch) {
+            maxLength = max(maxLength, end - start + 1)
+        }else {
+            // not vowel → restart window immediately after the current character
+            start = end + 1
+        }
+        
+        if start <= end {
+            print("current window: \(Array(chars[start...end])), current char: \(ch), max length: \(maxLength)")
+        }
+    }
+    
+    
+    return maxLength
+    
+}
+
+longestSubstringVowelsSW("earthproblem")
+
+
+// MARK: - Longest Balanced Substring
+
+/*
+ Goal:
+ Given a string containing only 'a' and 'b', find the length of the longest substring with equal number of 'a's and 'b's.
+ Example:
+ Input: s = "aabbabba"
+ Output: 8
+ Explanation: Entire string is balanced.
+ 
+ */
+
+// MARK: Brute Force
+// Time Complexity:O (n²) → nested loops over all substrings
+// Space Complexity: O(n) → storing chars array, counters are O(1)
+
+methodLabel(problem: "Longest Balanced Substring", method: .bruteForce)
+
+
+func longestBalancedSubstringBF(_ s: String) -> Int {
+    var maxLength = 0
+    let chars = Array(s)
+    
+    for i in 0..<chars.count {
+        var countA = 0
+        var countB = 0
+        
+        for j in i..<chars.count {
+            let ch = chars[j]
+            
+            print("current window: \(Array(chars[i...j])), current char: \(ch), max length: \(maxLength)")
+            
+            if ch == "a" {
+                countA += 1
+            }
+            else {
+                countB += 1
+            }
+            
+            if countA == countB {
+                maxLength = max(maxLength, j - i + 1)
+            }
+            
+        }
+    }
+    
+    
+    return maxLength
+}
+
+
+longestBalancedSubstringBF("aabbabba")
+
+// MARK: - Longest Balanced Substring (Prefix Sum / Balance)
+
+/*
+ Note:
+    This is not a classic sliding window problem. We use prefix sum / balance to find the longest balanced substring efficiently.
+ 
+ Time Complexity: O(n) → single pass through the string
+ Space Complexity: O(n) → storing balance → first index in a dictionary
+ 
+*/
+
+func longestBalancedSubstringPrefix(_ s: String) -> Int {
+    var balance = 0                       // +1 for 'a', -1 for 'b'
+    var balanceIndex: [Int: Int] = [0: -1] // balance → first index seen
+    var maxLength = 0
+    let chars = Array(s)
+    
+    for (i, ch) in chars.enumerated() {
+        if ch == "a" {
+            balance += 1
+        } else { // ch == 'b'
+            balance -= 1
+        }
+        
+        if let firstIndex = balanceIndex[balance] {
+            maxLength = max(maxLength, i - firstIndex)
+        } else {
+            balanceIndex[balance] = i
+        }
+        
+        print("Index: \(i), Char: \(ch), Balance: \(balance), FirstIndex: \(balanceIndex[balance] ?? i), MaxLength: \(maxLength)")
+    }
+    
+    return maxLength
+}
+
+longestBalancedSubstringPrefix("aabbabba")
