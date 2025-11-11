@@ -37,33 +37,13 @@ Instead of using nested loops, you “slide” a window of variable or fixed siz
 ```
 SlidingWindowConcepts/
 │
-├── Basics/
+├── Basic/
 ├── Fixed_Size/
+├── Variable_Size/
+├── Advanced/
 │
 └── README.md
 ```
-
-<!--```-->
-<!--SlidingWindowConcepts/-->
-<!--│-->
-<!--├── Basics/-->
-<!--│   ├── PrintSubarrays.playground-->
-<!--│   ├── WindowAverages.playground-->
-<!--│-->
-<!--├── FixedSize/-->
-<!--│   ├── MaxSumSubarray.playground-->
-<!--│   ├── MinAverageSubarray.playground-->
-<!--│-->
-<!--├── VariableSize/-->
-<!--│   ├── SmallestSubarrayWithSum.playground-->
-<!--│   ├── LongestSubarrayUnderLimit.playground-->
-<!--│-->
-<!--├── Strings/-->
-<!--│   ├── LongestUniqueSubstring.playground-->
-<!--│   ├── FindAllAnagrams.playground-->
-<!--│-->
-<!--└── README.md-->
-<!--```-->
 
 Each `.playground` contains:
 
@@ -79,9 +59,10 @@ Each `.playground` contains:
 
 | Folder           | Focus                                  | Example Problems                                         |
 | ---------------- | -------------------------------------- | -------------------------------------------------------- |
-| **Basics**       | Learn how windows move and overlap     | Print subarrays, rolling averages                        |
+| **Basic**        | Learn how windows move and overlap     | Print subarrays, rolling averages                        |
 | **FixedSize**    | Fixed window length                    | Max sum subarray, min average subarray                   |
 | **VariableSize** | Expand/shrink window dynamically       | Smallest subarray ≥ sum, longest subarray ≤ limit        |
+| **Advanced**     | Optimized window operations            | Sum of min + max in window, first negative in window     |
 | **Strings**      | Apply to characters instead of numbers | Longest substring without repeating chars, find anagrams |
 
 ---
