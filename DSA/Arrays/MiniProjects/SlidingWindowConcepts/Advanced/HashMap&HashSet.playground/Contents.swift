@@ -444,3 +444,417 @@ func checkInclusionSW(_ s1: String, _ s2: String) -> Bool {
 }
 
 checkInclusionSW("ab", "eidbaooo") // true
+
+
+// MARK: - Problem 5: Count Occurrences of Anagrams
+
+/* Goal:
+ Given a text and a pattern, count the number of substrings of text that are anagrams of the pattern.
+ Example:
+ Input: text = "forxxorfxdofr", pattern = "for"
+ Output: 3
+ Explanation: "for", "orf", and "ofr" are anagrams.
+ */
+
+
+// MARK: Brute Force
+//Time Complexity: O(n * k) because for each starting point you build a window of size k; Worst-case → O(n²)
+//Space Complexity: O(1) or O(k) for the window map; Pattern map is also O(k)
+
+
+methodLabel("Problem 5: Count Occurrences of Anagrams", .bruteForce)
+
+
+func countAnagramsBF(_ text: String, _ pattern: String) -> Int {
+    var count = 0
+    var patternMap: [Character: Int] = [:]
+    let textArray = Array(text)
+    let patternArray = Array(pattern)
+    let k = patternArray.count
+    
+    if textArray.count < k { return 0 }
+    
+    for char in pattern {
+        patternMap[char, default: 0] += 1
+    }
+    
+    // Only valid windows
+    for i in 0...(textArray.count - k) {
+        var windowMap: [Character: Int] = [:]
+        // Fixed-size window
+        for j in i..<(i + k) {
+            let ch = textArray[j]
+            windowMap[ch, default: 0] += 1
+        }
+        
+        print("window: \(textArray[i..<i+k]), patternMap: \(patternMap), windowMap: \(windowMap), count: \(count)")
+        
+        
+        if windowMap == patternMap {
+            count += 1
+        }
+    }
+    return count
+}
+
+countAnagramsBF("forxxorfxdofr", "for")
+
+
+// MARK: Sliding Winodw
+//Time Complexity: O(n) — each character added once, removed once
+// Space Complexity: O(k) — map sizes depend on pattern length
+
+
+methodLabel("Problem 5: Count Occurrences of Anagrams", .slidingWindow)
+
+
+func countAnagramsSW(_ text: String, _ pattern: String) -> Int {
+    var count = 0
+    var patternMap: [Character: Int] = [:]
+    var textMap: [Character: Int] = [:]
+    var start = 0
+    let textArray = Array(text)
+    let patternArray = Array(pattern)
+    let k = patternArray.count
+    
+    if textArray.count < k { return 0 }
+    
+    for char in pattern {
+        patternMap[char, default: 0] += 1
+    }
+    
+    
+    for end in 0..<textArray.count  {
+        let ch = textArray[end]
+        textMap[ch, default: 0] += 1
+        
+        print("Added \(ch) → textMap:", textMap)
+        
+        
+        // If window size > k, shrink it
+        if end - start + 1 > k {
+            let leavingCh = textArray[start]
+            textMap[leavingCh]! -= 1
+            
+            print("Removed \(leavingCh) → textMap:", textMap)
+            
+            if textMap[leavingCh] == 0 {
+                textMap.removeValue(forKey: leavingCh)
+            }
+            
+            start += 1
+        }
+        
+        // When window size == k → compare
+        if end - start + 1 == k {
+            let window = String(textArray[start...end])
+            
+            print("Window [\(start)-\(end)] → \"\(window)\"")
+            print("Compare: textMap == patternMap ?", textMap == patternMap)
+            
+            if textMap == patternMap {
+                count += 1
+                print("→ MATCH FOUND! Count now:", count)
+            }
+        }
+    }
+    return count
+}
+
+
+countAnagramsSW("forxxorfxdofr", "for")
+
+
+// MARK: - Problem 6: Longest Substring with Exactly K Distinct Characters
+
+/* Goal:
+ Given a string s and integer k, return the length of the longest substring containing exactly k distinct characters.
+ Example:
+ Input: s = "aaabbcc", k = 2
+ Output: 5
+ Explanation: "aaabb" has exactly 2 distinct characters.
+ 
+ */
+
+
+// MARK: Brute Force
+//Time Complexity: O(n²) — For each starting index i of the substring, we potentially scan up to n characters to build a window and check distinct characters.
+//Space Complexity: O(k) — Each window uses a set or map to track distinct characters.
+
+methodLabel("Problem 6: Longest Substring with Exactly K Distinct Characters", .bruteForce)
+
+
+func longestKDistinctCharactersBF(_ s: String, _ k: Int) -> Int {
+    var maxLength = 0
+    let chars = Array(s)
+    
+    for i in 0..<chars.count {
+        var map: [Character: Int] = [:]
+        
+        for j in i..<chars.count {
+            let ch = chars[j]
+            
+            print("Window: \(chars[i...j]), Map: \(map)")
+            map[ch, default: 0] += 1
+            
+            let distinct = map.keys.count
+            
+            
+            if map.count == k {
+                let length = j - i + 1
+                maxLength = max(maxLength, length)
+                print("✓ VALID (exactly \(k) distinct) → new max: \(maxLength)")
+            }
+            
+            if distinct > k {
+                print("✗ TOO MANY distinct → break")
+                break
+            }
+            
+        }
+    }
+    
+    return maxLength
+}
+
+longestKDistinctCharactersBF("aaabbcc", 2)
+
+// MARK: Sliding Winodw
+// Time Complexity: O(n) — Each character is added and removed at most once from the map while sliding the window.
+// Space Complexity: O(k) — The map stores at most k + 1 distinct characters at any time (while the window may temporarily grow)
+// In worst case, the hash map grows to O(k).
+                                                                            
+methodLabel("Problem 6: Longest Substring with Exactly K Distinct Characters", .slidingWindow)
+
+
+func longestKDistinctCharactersSW(_ s: String, _ k: Int) -> Int {
+    
+    var maxLength = 0
+    var map: [Character: Int] = [:]
+    var start = 0
+    let chars = Array(s)
+    
+    for end in 0..<chars.count {
+        let ch = chars[end]
+        map[ch, default: 0] +=  1
+        
+        print("Added \(ch) → map:", map)
+        
+        /*
+         Will cause a fatal error: Index out of range
+         Sliding window is dynamic — every shrink changes the map
+         Freezing values = drifting window = pointer error = crash.
+         */
+//        let distinct = map.count
+
+        // shrink until valid
+        while map.count > k{
+            let leavingCh = chars[start]
+            map[leavingCh, default: 0] -= 1
+            print("Removed \(leavingCh) → map:", map)
+            if map[leavingCh] == 0 {
+                map.removeValue(forKey: leavingCh)
+            }
+            start += 1
+        }
+        
+        // Now window must have <= k distinct
+        if map.count == k {
+            let length = end - start + 1
+            maxLength = max(maxLength, length)
+            print("✓ VALID → maxLength =", maxLength)
+        }
+    }
+    
+    
+    
+    return maxLength
+}
+
+longestKDistinctCharactersSW("aaabbcc", 2)
+
+
+// MARK: -  Problem 7: Sliding Window Unique Characters
+
+/* Goal:
+    Given a string s, find the length of the longest substring containing all unique characters. Use a HashSet to track uniqueness within the sliding window.
+ Example:
+    Input: s = "pwwkew"
+    Output: 3
+    Explanation: "wke" is the longest substring with all unique characters.
+
+ 
+ */
+
+
+// MARK: Brute Force
+//Time Complexity: O(n²) — For each starting index i, you may scan up to n characters until a duplicate is found
+//Space Complexity: O(k) — Using a Set to track characters in the current window
+
+methodLabel("Problem 7: Sliding Window Unique Characters", .bruteForce)
+
+func longestSubstringUniqueCharactersBF(_ s: String) -> Int {
+    var maxLength = 0
+    let chars = Array(s)
+    
+    for i in 0..<chars.count {
+        var seen: Set<Character> = []
+        
+        for j in i..<chars.count {
+            let ch = chars[j]
+    
+            print("window: \(chars[i...j]), map: \(seen), max length: \(maxLength)")
+            
+            if seen.contains(ch) {
+                break
+            }
+            seen.insert(ch)
+            maxLength = max(maxLength, j - i + 1)
+            
+        }
+        
+    }
+    return maxLength
+
+}
+
+longestSubstringUniqueCharactersBF("pwwkew")
+
+// MARK: Sliding Window
+//Time Complexity: O(n) — Each character is inserted and removed at most once.
+//Space Complexity: O(k) — Size of the Set = length of the current unique substring.
+
+
+methodLabel("Problem 7: Sliding Window Unique Characters", .slidingWindow)
+
+
+func longestSubstringUniqueCharactersSW(_ s: String) -> Int {
+    
+    var maxLength = 0
+    var seen: Set<Character> = []
+    var start  = 0
+    let chars = Array(s)
+    
+    for end in 0..<chars.count {
+        let ch = chars[end]
+        
+        while seen.contains(ch) {
+            print("Duplicate \(ch) found, removing \(chars[start])")
+            seen.remove(chars[start])
+            start += 1
+        }
+        seen.insert(ch)
+        maxLength = max(maxLength, end - start + 1)
+        print("Window: \(chars[start...end]), Set: \(seen), Max length: \(maxLength)")
+    }
+    
+    return maxLength
+    
+}
+
+longestSubstringUniqueCharactersSW("pwwkew")
+
+
+// MARK: -  Problem 8: Longest Subarray with At Most K Distinct Elements (Array version)
+
+/* Goal:
+    Given an integer array nums and integer k, return the length of the longest contiguous subarray containing at most k distinct elements.
+ Example:
+    Input: nums = [1,2,1,2,3], k = 2
+    Output: 4
+    Explanation: Subarray [1,2,1,2] contains at most 2 distinct elements.
+ */
+
+
+// MARK: Brute Force
+/* Time Complexity: O(n²)
+    — The outer loop is O(n) and the inner loop can run up to O(n) for each i;
+    - Worst case: every element is unique, so inner loop runs fully for each i.
+   Space Complexity:  O(k)
+    — The map holds at most k distinct elements at any time;
+    - Worst case (all unique), O(n) for the map
+*/
+methodLabel("Problem 8: Longest Subarray with At Most K Distinct Elements (Array version)", .bruteForce)
+
+func longestAtMostKDistinctElementsBF(_ nums: [Int], _ k: Int) -> Int {
+    guard !nums.isEmpty, k > 0  else {return 0}
+    var maxLength = 0
+    
+    for i in 0..<nums.count {
+        var map:[Int:Int] = [:]
+        
+        for j in i..<nums.count {
+            let current = nums[j]
+            map[current, default: 0] += 1
+            
+            print("window: \(nums[i...j]), max length: \(maxLength), map: \(map)")
+            
+            if map.count <= k {
+                maxLength = max(maxLength, j - i + 1)
+            } else {
+                break
+            }
+            
+        }
+    }
+    
+    return maxLength
+}
+
+longestAtMostKDistinctElementsBF([1,2,1,2,3], 2)
+
+
+// MARK: Sliding Window
+/*
+ Time Complexity: O(n)
+    - Each element is added to the map once (when end moves)
+    - Each element is removed from the map once (when start moves)
+ Space Complexity: O(k)
+    - The window map only contains at most k distinct elements
+    - When it grows to k+1, you shrink until back to k
+    - Worst-case HashMap size = k
+ */
+
+methodLabel("Problem 8: Longest Subarray with At Most K Distinct Elements (Array version)", .slidingWindow)
+
+
+func longestAtMostKDistinctElementsSW(_ nums: [Int], _ k: Int) -> Int {
+    var maxLength = 0
+    var map: [Int: Int] = [:]
+    var start = 0
+    
+    for end in 0..<nums.count {
+        let current = nums[end]
+        map[current, default: 0] += 1
+        
+        print("Added \(current) → map:", map)
+        
+        // shrink window until valid
+        while map.count > k {
+            let leaving = nums[start]
+            map[leaving]! -= 1
+            
+            print("Too many distinct → removing \(leaving) from start index \(start)")
+            print("Updated map after decrement:", map)
+            
+            if map[leaving] == 0 {
+                map.removeValue(forKey: leaving)
+                print("   Removed \(leaving) completely (count was 0)")
+            }
+            
+            start += 1
+        }
+        
+        // window is now valid
+        let windowLength = end - start + 1
+        maxLength = max(maxLength, windowLength)
+        
+        print("VALID window \(nums[start...end]) → length = \(windowLength), max = \(maxLength)")
+    }
+    
+    return maxLength
+}
+
+
+longestAtMostKDistinctElementsSW([1,2,1,2,3], 2)
+
