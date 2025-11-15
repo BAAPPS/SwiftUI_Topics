@@ -236,7 +236,8 @@ methodLabel(problem: "Longest Subarray with Sum = Target", method: .slidingWindo
 func longestSubarraySumOfTargetSW(_ nums: [Int], _ target: Int) -> Int {
     var prefixSum = 0
     var maxLength = 0
-    var sumIndices: [Int: Int] = [:]  // prefixSum -> first index
+    var sumIndices: [Int: Int] = [:]
+    
     
     for (i, num) in nums.enumerated() {
         prefixSum += num
@@ -246,7 +247,7 @@ func longestSubarraySumOfTargetSW(_ nums: [Int], _ target: Int) -> Int {
             maxLength = max(maxLength, i + 1)
         }
         
-        // Case 2: subarray somewhere in middle sums to target
+    
         if let prevIndex = sumIndices[prefixSum - target] {
             maxLength = max(maxLength, i - prevIndex)
         }
