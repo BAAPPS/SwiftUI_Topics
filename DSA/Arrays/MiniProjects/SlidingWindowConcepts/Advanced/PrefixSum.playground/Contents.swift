@@ -308,3 +308,258 @@ func subarraySumMultipleOfKSW(_ nums: [Int], _ k: Int) -> Bool {
 
 
 subarraySumMultipleOfKSW([23, 2, 4, 6, 7], 6)
+
+
+// MARK: -  Problem 4: Number of Subarrays with Sum Divisible by K
+
+/* Goal:
+ Given an integer array nums and an integer k, return the number of non-empty subarrays with a sum divisible by k.
+ Example:
+ Input: nums = [4,5,0,-2,-3,1], k = 5
+ Output: 7
+ Explanation: 7 subarrays have sums divisible by 5.
+ */
+
+
+// MARK: Brute Force
+// Time Complexity: O(n²) → We check every possible subarray (i..j)
+// Space Complexity: O(1) → Only storing sum and count.
+
+methodLabel("Problem 4: Number of Subarrays with Sum Divisible by K", .bruteForce)
+
+
+func numberOfSubarraysDivisibleByKBF(_ nums: [Int], _ k: Int) -> Int {
+    guard !nums.isEmpty else {return 0}
+    
+    var count = 0
+    
+    for i in 0..<nums.count {
+        var currentSum = 0
+        for j in i..<nums.count {
+            let currentNum = nums[j]
+            
+            currentSum += currentNum
+            
+            print("window: \(nums[i...j]), current sum: \(currentSum), currentNum: \(currentNum), count: \(count)")
+            
+            if currentSum % k == 0 {
+                count += 1
+            }
+            
+        }
+    }
+    return count
+    
+}
+
+numberOfSubarraysDivisibleByKBF([4,5,0,-2,-3,1], 5)
+
+
+
+// MARK: Sliding Window
+// Time Complexity: O(n)
+// Space Complexity: O(k) (or O(n) worst case for negative values)
+
+methodLabel("Problem 4: Number of Subarrays with Sum Divisible by K", .slidingWindow)
+
+
+func numberOfSubarraysDivisibleByKSW(_ nums: [Int], _ k: Int) -> Int {
+    var count = 0
+    var runningSum = 0
+    
+    var remainderFreq: [Int: Int] = [0: 1]   // remainder 0 occurs once initially
+    
+    for num in nums {
+        runningSum += num
+        
+        // Normalize remainder for negative numbers
+        let mod = ((runningSum % k) + k) % k
+        
+        // If this remainder was seen before, add how many times
+        if let freq = remainderFreq[mod] {
+            count += freq
+        }
+        
+        // Store/update remainder frequency
+        remainderFreq[mod, default: 0] += 1
+    }
+    
+    return count
+}
+
+
+// MARK: -  Balanced 0 & 1 Problems
+// Using the 0 → -1 transform technique
+
+// MARK: Problem 5: Longest Subarray with Equal 0s and 1s
+
+/* Goal:
+ Given a binary array nums, find the length of the longest subarray with equal number of 0s and 1s. Use prefix sum transformation (0 → -1 trick).
+ Example:
+ Input: nums = [0,1,0]
+ Output: 2
+ Explanation: The subarray [0,1] or [1,0] is balanced.
+ */
+
+
+// MARK: Brute Force
+// Time Complexity: O(n²) → We check every possible subarray (i..j)
+// Space Complexity: O(1) → Only counters and maxLength stored
+
+methodLabel("Problem 5: Longest Subarray with Equal 0s and 1s", .bruteForce)
+
+
+func longestSubarrayEqual0sAnd1sBF(_ nums: [Int]) -> Int {
+    guard !nums.isEmpty else { return 0 }
+    var maxLength = 0
+    
+    
+    for i in 0..<nums.count {
+        var zeroCount = 0
+        var oneCount = 0
+        
+        for j in i..<nums.count {
+            let currentNum = nums[j]
+            if currentNum == 0 {
+                zeroCount += 1
+            } else {
+                oneCount += 1
+            }
+            
+            if zeroCount == oneCount {
+                maxLength = max(maxLength, j - i + 1)
+            }
+            
+            print("window: \(nums[i...j]), zero count: \(zeroCount), one count: \(oneCount), max length: \(maxLength)")
+        }
+    }
+    return maxLength
+}
+
+
+longestSubarrayEqual0sAnd1sBF([0,1,0])
+
+
+
+// MARK: Sliding Window
+// Time Complexity:
+// Space Complexity:
+
+methodLabel("Problem 5: Longest Subarray with Equal 0s and 1s", .slidingWindow)
+
+func longestSubarrayEqual0sAnd1sSW(_ nums: [Int]) -> Int {
+    var maxLength = 0
+    var prefixSum = 0
+    
+    // Base Case: prefix sum = 0 has index -1
+    // This allows subarrays starting at index 0 to be counted.
+    // Reason:
+    // If prefixSum(i) == 0, then prefixSum(i) - prefixSum(-1) = 0 → balanced
+    // So length = i - (-1) = i + 1
+    var firstIndex: [Int: Int] = [0: -1]
+    
+    for (i, num) in nums.enumerated() {
+        
+        // Convert 0 → -1 so balanced subarrays have sum == 0
+        prefixSum += (num == 0 ? -1 : 1)
+        
+        // If this prefixSum has been seen before,
+        // then the subarray between the first occurrence and now has sum 0.
+        if let prev = firstIndex[prefixSum] {
+            maxLength = max(maxLength, i - prev)
+        }
+        
+        // Store ONLY the first occurrence,
+        // because the earliest index gives the longest subarray.
+        if firstIndex[prefixSum] == nil {
+            firstIndex[prefixSum] = i
+        }
+        
+        print("i: \(i), num: \(num), prefixSum: \(prefixSum), firstIndex: \(firstIndex), maxLength: \(maxLength)")
+    }
+    
+    return maxLength
+}
+
+
+longestSubarrayEqual0sAnd1sSW([0,1,0])
+
+
+// MARK: Problem 6:  Count Balanced Subarrays
+
+/* Goal:
+    Count all subarrays containing the same number of 0s and 1s
+ Example:
+    Input: [0,0,1,0,1]
+    Output: 4
+    Explanation: balanced subarrays: [0,1], [0,1], [0,0,1,0,1], [0,1]
+
+ */
+
+
+// MARK: Brute Force
+// Time Complexity: O(n²) → We check every possible subarray (i..j)
+// Space Complexity: O(1) → Only counters and count is stored
+
+methodLabel("Problem 6: Count Balanced Subarrays", .bruteForce)
+
+
+func countBalancedSubarraysBF(_ nums: [Int]) -> Int {
+    var count = 0
+
+    for i in 0..<nums.count {
+        var zeroCount = 0
+        var oneCount = 0
+        
+        for j in i..<nums.count {
+            var currentNum = nums[j]
+           
+            if currentNum == 0 {
+                zeroCount += 1
+            }
+            else {
+                oneCount += 1
+            }
+            
+            if zeroCount == oneCount {
+                count += 1
+            }
+            
+            print("window: \(nums[i...j]), zero count: \(zeroCount), one count: \(oneCount), count: \(count)")
+        }
+    }
+    
+    return count
+}
+
+
+countBalancedSubarraysBF([0,0,1,0,1])
+
+// MARK: Sliding Window
+// Time Complexity: O(n) → Single pass over the array
+// Space Complexity: O(n) → Dictionary storing prefix sums
+
+methodLabel("Problem 6: Count Balanced Subarrays", .slidingWindow)
+
+func countBalancedSubarraysSW(_ nums: [Int]) -> Int {
+    var count = 0
+    var prefixSum = 0
+    var sumFrequency: [Int: Int] = [0: 1]
+    
+    for (i, num) in nums.enumerated() {
+        // Convert 0 -> -1, 1 stays as 1
+        prefixSum += (num == 0 ? -1 : 1)
+        
+        // How many times this prefixSum has occurred before
+        let freq = sumFrequency[prefixSum, default: 0]
+        count += freq
+        
+        print("Index: \(i), Num: \(num), PrefixSum: \(prefixSum), Freq: \(freq), Count: \(count), sumFrequency: \(sumFrequency)")
+        
+        sumFrequency[prefixSum, default: 0] += 1
+    }
+    
+    return count
+}
+
+countBalancedSubarraysSW([0,0,1,0,1])
