@@ -1,9 +1,9 @@
-//  Sliding Window – Group 7: Advanced – Prefix Sum
+//  Prefix Sum – Advanced / Implicit Sliding Window – Group 7: Advanced – Prefix Sum & Extreme Tracking
 //  ---------------------------------------------------------------
 //
 //  🎯 Concept Focus:
 //  Use **Prefix Sums** to precompute running totals and efficiently find
-//  subarray sums or patterns in O(1) time per query (after O(n) preprocessing).
+//  subarray sums or patterns in O(1) per query (after O(n) preprocessing).
 //  Often combined with hashmaps for counting or indexing relationships.
 //
 //  💡 Key Idea:
@@ -11,10 +11,21 @@
 //  When paired with HashMaps, you can quickly check how many earlier prefix
 //  sums satisfy conditions like `prefix[j] - k` existing.
 //
+//  🧩 Advanced Trick – Implicit Prefix Sum – Advanced / Implicit Sliding Window (Prefix Extreme):
+//  - For problems where the condition is an inequality (sum > 0 or sum < 0),
+//    a hashmap is not enough.
+//  - Track the **minimum or maximum prefix seen so far** along with its index.
+//  - The "window" is implicitly defined between the current index and this extreme index.
+//  - Example Problems:
+//      • Longest subarray with more 1s than 0s
+//      • Longest subarray with more 0s than 1s
+//      • Longest subarray with sum > k
+//  - This allows O(n) time and O(1) space solutions for problems that appear
+//    to require variable-length windows.
+//
 //  🧩 Pro Tip:
 //  Prefix sums shine when the window or range length varies —
 //  perfect for problems where you *don’t know the window size in advance*.
-//  They’re foundational for balance, sum, or difference tracking problems.
 
 
 import Cocoa
@@ -23,7 +34,7 @@ import Cocoa
 
 enum MethodType: String {
     case bruteForce = "💡 BRUTE FORCE"
-    case slidingWindow = "⚡️ SLIDING WINDOW"
+    case prefixSum = "⚡️ Prefix Sum – Advanced / Implicit Sliding Window"
 }
 
 func methodLabel(_ problem: String,  _ method: MethodType)  {
@@ -74,14 +85,14 @@ func subarraySumEqualsKBF(_ nums: [Int], _ k: Int) -> Int {
 subarraySumEqualsKBF([2, 1, 2, 1, 2], 3) // 4
 
 
-// MARK: Sliding Window
+// MARK: Prefix Sum – Advanced / Implicit Prefix Sum – Advanced / Implicit Sliding Window
 // Time Complexity: O(n)
 // Space Complexity: O(n)
 
 
-methodLabel("Problem 1: Subarray Sum Equals K", .slidingWindow)
+methodLabel("Problem 1: Subarray Sum Equals K", .prefixSum)
 
-func subarraySumEqualsKSW(_ nums: [Int], _ k: Int) -> Int {
+func subarraySumEqualsKPrefix(_ nums: [Int], _ k: Int) -> Int {
     var count = 0
     var sumFrequency: [Int: Int] = [0:1] // prefix sum 0 has one occurrence (base case)
     var prefixSum = 0
@@ -105,7 +116,7 @@ func subarraySumEqualsKSW(_ nums: [Int], _ k: Int) -> Int {
     
 }
 
-subarraySumEqualsKSW([2, 1, 2, 1, 2], 3) // 4
+subarraySumEqualsKPrefix([2, 1, 2, 1, 2], 3) // 4
 
 
 // MARK: -  Problem 2: Longest Subarray with Sum Equal to K
@@ -150,12 +161,12 @@ func longestSubarrayWithSumEqualToKBF(_ nums: [Int], _ k: Int) -> Int {
 longestSubarrayWithSumEqualToKBF([10, 5, 2, 7, 1, 9], 15)
 
 
-// MARK: Sliding Window
+// MARK: Prefix Sum – Advanced / Implicit Sliding Window
 // Time Complexity:
 // Space Complexity:
 
 
-methodLabel("Problem 2: Longest Subarray with Sum Equal to K", .slidingWindow)
+methodLabel("Problem 2: Longest Subarray with Sum Equal to K", .prefixSum)
 
 /*
  // ❌ Without base case:
@@ -184,7 +195,7 @@ methodLabel("Problem 2: Longest Subarray with Sum Equal to K", .slidingWindow)
  }
  */
 
-func longestSubarrayWithSumEqualToKSW(_ nums: [Int], _ k: Int) -> Int {
+func longestSubarrayWithSumEqualToKPrefix(_ nums: [Int], _ k: Int) -> Int {
     var maxLength = 0
     var prefixSum = 0
     
@@ -222,7 +233,7 @@ func longestSubarrayWithSumEqualToKSW(_ nums: [Int], _ k: Int) -> Int {
 
 
 
-longestSubarrayWithSumEqualToKSW([10, 5, 2, 7, 1, 9], 15)
+longestSubarrayWithSumEqualToKPrefix([10, 5, 2, 7, 1, 9], 15)
 
 
 
@@ -270,14 +281,14 @@ func subarraySumMultipleOfKBF(_ nums: [Int], _ k: Int) -> Bool {
 subarraySumMultipleOfKBF([23, 2, 4, 6, 7], 6)
 
 
-// MARK: Sliding Window
+// MARK: Prefix Sum – Advanced / Implicit Sliding Window
 // Time Complexity: O(n) — single pass through the array
 // Space Complexity: O(min(n, k)) — storing mod values
 
-methodLabel("Problem 3: Continuous Subarray Sum (Multiple of K)", .slidingWindow)
+methodLabel("Problem 3: Continuous Subarray Sum (Multiple of K)", .prefixSum)
 
 
-func subarraySumMultipleOfKSW(_ nums: [Int], _ k: Int) -> Bool {
+func subarraySumMultipleOfKPrefix(_ nums: [Int], _ k: Int) -> Bool {
     guard !nums.isEmpty, k > 0 else { return false }
     var sumIndices: [Int: Int] = [0:-1] // Base case: prefix sum 0 occurs before array
     var runningSum = 0
@@ -307,7 +318,7 @@ func subarraySumMultipleOfKSW(_ nums: [Int], _ k: Int) -> Bool {
 }
 
 
-subarraySumMultipleOfKSW([23, 2, 4, 6, 7], 6)
+subarraySumMultipleOfKPrefix([23, 2, 4, 6, 7], 6)
 
 
 // MARK: -  Problem 4: Number of Subarrays with Sum Divisible by K
@@ -356,14 +367,14 @@ numberOfSubarraysDivisibleByKBF([4,5,0,-2,-3,1], 5)
 
 
 
-// MARK: Sliding Window
+// MARK: Prefix Sum – Advanced / Implicit Sliding Window
 // Time Complexity: O(n)
 // Space Complexity: O(k) (or O(n) worst case for negative values)
 
-methodLabel("Problem 4: Number of Subarrays with Sum Divisible by K", .slidingWindow)
+methodLabel("Problem 4: Number of Subarrays with Sum Divisible by K", .prefixSum)
 
 
-func numberOfSubarraysDivisibleByKSW(_ nums: [Int], _ k: Int) -> Int {
+func numberOfSubarraysDivisibleByKPrefix(_ nums: [Int], _ k: Int) -> Int {
     var count = 0
     var runningSum = 0
     
@@ -441,13 +452,13 @@ longestSubarrayEqual0sAnd1sBF([0,1,0])
 
 
 
-// MARK: Sliding Window
+// MARK: Prefix Sum – Advanced / Implicit Sliding Window
 // Time Complexity:
 // Space Complexity:
 
-methodLabel("Problem 5: Longest Subarray with Equal 0s and 1s", .slidingWindow)
+methodLabel("Problem 5: Longest Subarray with Equal 0s and 1s", .prefixSum)
 
-func longestSubarrayEqual0sAnd1sSW(_ nums: [Int]) -> Int {
+func longestSubarrayEqual0sAnd1sPrefix(_ nums: [Int]) -> Int {
     var maxLength = 0
     var prefixSum = 0
     
@@ -482,7 +493,7 @@ func longestSubarrayEqual0sAnd1sSW(_ nums: [Int]) -> Int {
 }
 
 
-longestSubarrayEqual0sAnd1sSW([0,1,0])
+longestSubarrayEqual0sAnd1sPrefix([0,1,0])
 
 
 // MARK: Problem 6:  Count Balanced Subarrays
@@ -535,13 +546,13 @@ func countBalancedSubarraysBF(_ nums: [Int]) -> Int {
 
 countBalancedSubarraysBF([0,0,1,0,1])
 
-// MARK: Sliding Window
+// MARK: Prefix Sum – Advanced / Implicit Sliding Window
 // Time Complexity: O(n) → Single pass over the array
 // Space Complexity: O(n) → Dictionary storing prefix sums
 
-methodLabel("Problem 6: Count Balanced Subarrays", .slidingWindow)
+methodLabel("Problem 6: Count Balanced Subarrays", .prefixSum)
 
-func countBalancedSubarraysSW(_ nums: [Int]) -> Int {
+func countBalancedSubarraysPrefix(_ nums: [Int]) -> Int {
     var count = 0
     var prefixSum = 0
     var sumFrequency: [Int: Int] = [0: 1]
@@ -562,4 +573,306 @@ func countBalancedSubarraysSW(_ nums: [Int]) -> Int {
     return count
 }
 
-countBalancedSubarraysSW([0,0,1,0,1])
+countBalancedSubarraysPrefix([0,0,1,0,1])
+
+
+// MARK: Problem 7:  Longest Subarray With More 1s Than 0s
+
+/* Goal:
+    Given a binary array nums,track longest with sum > 0
+ Example:
+    Input: [1,0,1,1]
+    Output: 4  // whole array has more 1s than 0s
+
+ */
+
+
+// MARK: Brute Force
+// Time Complexity: O(n²) → We check every possible subarray (i..j)
+// Space Complexity: O(1) → Only counters and maxLength stored
+
+methodLabel("Problem 7: Longest Subarray With More 1s Than 0s", .bruteForce)
+
+
+func longestSubArrayWithMoreOnesThanZerosBF(_ nums: [Int]) -> Int {
+    var maxLength = 0
+    
+    for i in 0..<nums.count {
+        var currentSum = 0
+        
+        for j in i..<nums.count {
+            var currentNum = nums[j]
+            
+            currentSum += (currentNum == 1 ? 1 : -1)
+
+            print("window: \(nums[i...j]), current sum: \(currentSum), max length: \(maxLength)")
+            
+            if currentSum > 0 {
+                maxLength = max(maxLength, j - i + 1)
+            }
+            
+        }
+    }
+    
+    return maxLength
+}
+
+
+longestSubArrayWithMoreOnesThanZerosBF([1,0,1,1])
+
+
+// MARK: Prefix Sum – Advanced / Implicit Sliding Window
+// Time Complexity: O(n) → single pass, constant-time operations per element
+// Space Complexity: O(1) → only a few integer variables stored
+
+methodLabel("Problem 7: Longest Subarray With More 1s Than 0s", .prefixSum)
+
+func longestSubArrayWithMoreOnesThanZerosPrefix(_ nums: [Int]) -> Int {
+    var maxLength = 0
+    var runningSum = 0
+    var minPrefix = 0         // lowest prefix sum seen
+    var minIndex = -1         // index where lowest prefix sum occurred
+    
+    for i in 0..<nums.count {
+        runningSum += (nums[i] == 1 ? 1 : -1)
+        
+        // If current prefix is greater than the smallest prefix so far,
+        // then the subarray from (minIndex+1 ... i) has sum > 0
+        if runningSum > minPrefix {
+            maxLength = max(maxLength, i - minIndex)
+        }
+        
+        // Update lowest prefix sum & its index
+        if runningSum < minPrefix {
+            minPrefix = runningSum
+            minIndex = i
+        }
+        
+        print("i: \(i), num: \(nums[i]), prefix: \(runningSum), minPrefix: \(minPrefix), minIndex: \(minIndex), maxLength: \(maxLength)")
+    }
+    
+    return maxLength
+}
+
+
+longestSubArrayWithMoreOnesThanZerosPrefix([1,0,1,1])
+
+
+// MARK: Problem 8:  Longest Subarray With More 0s Than 1s
+
+/* Goal:
+    Given a binary array nums, track longest with sum <= 0
+ Example:
+    Input: [0,1,0,0,1,0,1]
+    Output: 2
+ */
+
+// MARK: Brute Force
+// Time Complexity: O(n²) → We check every possible subarray (i..j)
+// Space Complexity: O(1) → Only counters and maxLength stored
+
+methodLabel("Problem 8: Longest Subarray With More 0s Than 1s", .bruteForce)
+
+
+
+func longestSubArrayWithMoreZerosThanOnesBF(_ nums: [Int]) -> Int {
+    var maxLength = 0
+
+    for i in 0..<nums.count {
+        var currentSum = 0
+        
+        for j in i..<nums.count {
+            var currentNum = nums[j]
+            
+            currentSum += (currentNum == 0 ? -1 : 1)
+
+            print("window: \(nums[i...j]), current sum: \(currentSum), max length: \(maxLength)")
+            
+            if currentSum < 0 {
+                maxLength = max(maxLength, j - i + 1)
+            }
+        }
+    }
+    
+    return maxLength
+}
+
+longestSubArrayWithMoreZerosThanOnesBF([0,1,0,0,1,0,1])
+
+
+// MARK: Prefix Sum – Advanced / Implicit Sliding Window
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
+methodLabel("Problem 8: Longest Subarray With More 0s Than 1s", .prefixSum)
+
+
+func longestSubArrayWithMoreZerosThanOnesPrefix(_ nums: [Int]) -> Int {
+    var maxLength = 0
+    var prefix = 0
+
+    // Track the maximum prefix seen so far and its index
+    var maxPrefix = 0
+    var maxIndex = -1
+
+    for i in 0..<nums.count {
+        // 0 -> -1, 1 -> +1
+        prefix += (nums[i] == 0 ? -1 : 1)
+
+        // If current prefix is smaller than the largest previous prefix,
+        // then (maxIndex+1 .. i) has sum < 0 (more zeros than ones).
+        if prefix < maxPrefix {
+            maxLength = max(maxLength, i - maxIndex)
+        }
+
+        // Update the maximum prefix & its index when we find a new larger prefix
+        if prefix > maxPrefix {
+            maxPrefix = prefix
+            maxIndex = i
+        }
+
+        print("i: \(i), num: \(nums[i]), prefix: \(prefix), maxPrefix: \(maxPrefix), maxIndex: \(maxIndex), maxLength: \(maxLength)")
+    }
+
+    return maxLength
+}
+
+
+longestSubArrayWithMoreZerosThanOnesPrefix([0,1,0,0,1,0,1])
+
+
+// MARK: Problem 9:  Count Subarrays Where #1s - #0s = K
+
+/* Goal:
+    Find how many subarrays have (#1s - #0s) = k.
+    Since 0 counts as -1 and 1 counts as +1,
+    we convert:
+        1 → +1
+        0 → -1
+ Example:
+    Input: nums = [1,0,1], k = 1
+    Output: 3
+
+ Explanation (convert 0 → -1):
+     [1]         → sum = 1                 ✅ count = 1
+     [1,0]       → sum = 1 + (-1) = 0      ❌
+     [1,0,1]     → sum = 1 + (-1) + 1 = 1  ✅ count = 2
+     [0]         → sum = -1                ❌
+     [0,1]       → sum = -1 + 1 = 0        ❌
+     [1]         → sum = 1                 ✅ count = 3
+ */
+
+
+// MARK: Brute Force
+// Time Complexity: O(n²) → We check every possible subarray (i..j)
+// Space Complexity: O(1) → Only counters and maxLength stored
+
+methodLabel("Problem 9: Count Subarrays Where #1s - #0s = K", .bruteForce)
+
+func countSubarraySumEqualsKBF(_ nums: [Int], _ k: Int) -> Int {
+    var count = 0
+    
+    for i in 0..<nums.count {
+        var currentSum = 0
+        
+        for j in i..<nums.count {
+            let currentNum = nums[j]
+            
+            currentSum += (currentNum == 0 ? -1 : 1)
+            
+            if currentSum == k {
+                count += 1
+            }
+            
+            print("window: \(nums[i...j]), sum: \(currentSum), count: \(count)")
+        }
+    }
+    
+    return count
+}
+
+countSubarraySumEqualsKBF([1,0,1], 1)
+
+// MARK:  Prefix Sum – Advanced / Implicit Sliding Window
+// Time Complexity:
+// Space Complexity:
+
+methodLabel("Problem 9: Count Subarrays Where #1s - #0s = K", .prefixSum)
+
+func countSubarraySumEqualsKPrefix(_ nums: [Int], _ k: Int) -> Int {
+    var count  = 0
+    var prefixSum = 0
+    var sumFrequency: [Int:Int] = [0:1]
+    
+    for (i, num) in nums.enumerated() {
+        prefixSum += (num == 0 ? -1 : 1)
+        
+        let neededSum = prefixSum - k
+        let freq = sumFrequency[neededSum, default: 0]
+        count += freq
+        
+        sumFrequency[prefixSum, default: 0] += 1
+        
+        print("""
+            i: \(i), num: \(num)
+            prefixSum: \(prefixSum)
+            prefixSum - k: \(neededSum)
+            freq of neededSum: \(freq)
+            count so far: \(count)
+            sumFrequency: \(sumFrequency)
+            -----------------------------
+            """)
+    }
+    
+    return count
+}
+
+countSubarraySumEqualsKPrefix([1,0,1], 1)
+
+
+/*
+ SUMMARY: Choosing the Right Prefix Sum Technique
+
+ ------------------------------------------------
+ Use a Dictionary (Hash Map) when you need:
+ ------------------------------------------------
+    ✔ exact matches of prefix sums
+    ✔ subarray sum == target
+    ✔ count or find balanced subarrays (e.g., equal 0s and 1s)
+    ✔ detect when prefix[j] == prefix[i]
+
+ Why?
+    - Dictionary tells you the *first index* where a prefixSum occurs.
+    - Useful for conditions involving exact equality.
+
+ Examples:
+    - Count subarrays with sum K
+    - Longest subarray with sum 0
+    - Count balanced 0/1 subarrays
+    - Number of subarrays divisible by K
+
+ ------------------------------------------------
+ Use Min-Prefix Tracking when you need:
+ ------------------------------------------------
+    ✔ subarray sum > target
+    ✔ subarray sum < target
+    ✔ longest subarray with positive total
+    ✔ longest subarray where 1s > 0s
+    ✔ any condition with inequalities: prefix[j] > prefix[i]
+
+ Why?
+    - You must compare the current prefixSum to the *smallest (or largest)* prefix seen so far.
+    - A dictionary cannot efficiently answer inequality queries.
+    - minPrefix gives the best candidate starting point for a positive sum window.
+
+ Examples:
+    - Longest subarray with more 1s than 0s
+    - Longest subarray with positive sum
+    - Longest subarray with sum > K (after transformation)
+
+ ------------------------------------------------
+ KEY IDEA:
+    Dictionary → equality (==)
+    MinPrefix → inequality (< or >)
+ ------------------------------------------------
+ */
