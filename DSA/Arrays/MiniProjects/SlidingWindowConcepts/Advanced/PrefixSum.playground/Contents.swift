@@ -830,6 +830,413 @@ func countSubarraySumEqualsKPrefix(_ nums: [Int], _ k: Int) -> Int {
 countSubarraySumEqualsKPrefix([1,0,1], 1)
 
 
+// MARK: Problem 10: Find All Balanced Subarray Indices
+/* Goal:
+    Return all (start,end) pairs where the subarray has equal 0s and 1s.
+ Example:
+    Input: [0,1,1,0]
+    Output: [(0,1), (2,3), (0,3)]
+
+
+ */
+
+
+// MARK: Brute Force
+// Time Complexity: O(n²) → We check every possible subarray (i..j)
+// Space Complexity: O(R) → R = number of balanced subarray pairs returned
+
+methodLabel("Problem 10: Find All Balanced Subarray Indices", .bruteForce)
+
+
+func findAllBalancedSubarrayIndicesBF(_ nums: [Int]) -> [[Int]] {
+    var result: [[Int]] = []
+    
+    for i in 0..<nums.count {
+        var count = 0
+        
+        for j in i..<nums.count {
+            count += (nums[j] == 0 ? -1 : 1)
+            
+            print("window: \(nums[i...j]), count: \(count), result: \(result)")
+            
+            if count == 0 {
+                result.append([i,j])
+            }
+        
+        }
+    }
+    
+    return result
+}
+
+findAllBalancedSubarrayIndicesBF([0,1,1,0])
+
+
+
+// MARK:  Prefix Sum – Advanced / Implicit Sliding Window
+// Time Complexity: O(n²) → because we may output many pairs
+// Space Complexity: O(n + R) → hashmap + result pairs
+
+methodLabel("Problem 10: Find All Balanced Subarray Indices", .prefixSum)
+
+func findAllBalancedSubarrayIndicesPrefix(_ nums: [Int]) -> [[Int]] {
+    var result: [[Int]] = []
+    var prefixSum = 0
+    
+    // Store 0: [-1] so that a prefix sum of 0 at any real index forms a balanced subarray starting at index 0
+    var sumIndex: [Int: [Int]] = [0: [-1]]
+    
+    for i in 0..<nums.count {
+        let val = (nums[i] == 0 ? -1 : 1)
+        prefixSum += val
+        
+        print("\nIndex \(i), num: \(nums[i]) → mapped: \(val)")
+        print("Current prefix sum = \(prefixSum)")
+        
+        if let previous = sumIndex[prefixSum] {
+            print("Found previous prefix matches at indices: \(previous)")
+            for start in previous {
+                print("  → Balanced subarray found: (\(start + 1), \(i))")
+                result.append([start + 1, i])
+                print("  → indice appended: \(result)")
+            }
+        } else {
+            print("No previous prefix match found.")
+        }
+        
+        sumIndex[prefixSum, default: []].append(i)
+        print("Updated sumIndex[\(prefixSum)] = \(sumIndex[prefixSum]!)")
+        
+    }
+    
+    return result
+}
+
+
+findAllBalancedSubarrayIndicesPrefix([0,1,1,0])
+
+
+
+
+// MARK: Problem 11: Longest Balanced Subarray in a Binary String
+/* Goal:
+    Given a binary string (e.g., "001101"), find the length of the longest substring where the number of 0s and 1s are equal.
+    This is the string-based version of the balanced subarray problem, where '0' is treated as -1 and '1' as +1.
+ Example:
+    Input:  "001101"
+    Output: 6    // the entire string is balanced
+*/
+
+
+// MARK: Brute Force
+// Time Complexity: O(n²) → We check every possible subarray (i..j)
+// Space Complexity: O(1) → We're keeping track of the current length and max length
+
+methodLabel("Problem 11: Longest Balanced Subarray in a Binary String", .bruteForce)
+
+func longestBalancedBinaryStringBF(_ s: String) -> Int {
+    var maxLength = 0
+    let character = Array(s)
+    
+    for i in 0..<character.count {
+        var currentLength = 0
+        
+        for j in i..<character.count {
+            currentLength += (character[j] == "0") ? -1 : 1
+            
+            print("window: \(character[i...j]), currentLength: \(currentLength), max length: \(maxLength)")
+            
+            if currentLength == 0 {
+                maxLength = max(maxLength, j - i + 1)
+            }
+        }
+    }
+    
+    return maxLength
+}
+
+longestBalancedBinaryStringBF("001101")
+
+
+// MARK: Prefix Sum – Advanced / Implicit Sliding Window
+// Time Complexity: O(n) → single pass through string
+// Space Complexity: O(n) → hashmap storing first occurrence of prefix sums
+
+
+methodLabel("Problem 11: Longest Balanced Subarray in a Binary String", .prefixSum)
+
+func longestBalancedBinaryStringPrefix(_ s: String) -> Int {
+    var maxLength = 0
+    var prefixSum = 0
+    var firstIndex: [Int: Int] = [0: -1] // base case
+    let characters = Array(s)
+
+    
+    for i in 0..<characters.count {
+        prefixSum += (characters[i] == "0") ? -1 : 1
+        
+        print("\nIndex \(i), char: \(characters[i]), mapped: \((characters[i] == "0") ? -1 : 1)")
+        print("Current prefixSum: \(prefixSum)")
+        
+        if let prevIndex = firstIndex[prefixSum] {
+            let length = i - prevIndex
+            maxLength = max(maxLength, length)
+            print("  → Found previous prefix at index \(prevIndex). Current balanced length: \(length). maxLength: \(maxLength)")
+        } else {
+            firstIndex[prefixSum] = i
+            print("  → First occurrence of prefixSum \(prefixSum) at index \(i).")
+        }
+        
+        print("  → firstIndex map: \(firstIndex)")
+    }
+    
+    return maxLength
+}
+
+
+longestBalancedBinaryStringPrefix("001101")
+
+
+// MARK: Problem 12: Balanced Subarray Starting From Index 0
+/* Goal:  Find longest subarray starting specifically at index 0 with equal 0s and 1s.
+   
+ Example:
+    Input: [0,1,1,0,1]
+    Output: 4  // [0,1,1,0]
+
+*/
+
+
+// MARK: Brute Force
+// Time Complexity: O(n) → Single pass through the array/string
+// Space Complexity: O(1) → Only counters and maxLength are used
+methodLabel("Problem 12: Balanced Subarray Starting From Index 0", .bruteForce)
+
+
+func balancedSubarrayStartingFromIndex0BF(_ s: [Int]) -> Int {
+    var maxLength = 0
+    var zeroCount = 0
+    var oneCount = 0
+
+    for j in 0..<s.count {
+        if s[j] == 0 {
+            zeroCount += 1
+        } else {
+            oneCount += 1
+        }
+
+        if zeroCount == oneCount {
+            maxLength = j + 1
+        }
+
+        print("window: \(s[0...j]), zero: \(zeroCount), one: \(oneCount), maxLength: \(maxLength)")
+    }
+
+    return maxLength
+}
+
+balancedSubarrayStartingFromIndex0BF([0,1,1,0,1])
+
+
+// MARK: Prefix Sum – Advanced / Implicit Sliding Window
+// Time Complexity: O(n) → Single pass through the array/string
+// Space Complexity: O(1) → Only prefixSum  and maxLength are used
+
+methodLabel("Problem 12:  Balanced Subarray Starting From Index 0", .prefixSum)
+
+
+func balancedSubarrayStartingFromIndex0Prefix(_ s: [Int]) -> Int {
+    var maxLength = 0
+    var prefixSum = 0
+    
+    
+    for i in 0..<s.count {
+        prefixSum += (s[i] == 0 ? -1 : 1)
+        
+        if prefixSum == 0 {
+            maxLength = i + 1
+        }
+        
+        print("window: \(s[0...i]),  preifx sum: \(prefixSum), maxLength: \(maxLength)")
+    }
+    
+    return maxLength
+}
+
+
+
+balancedSubarrayStartingFromIndex0Prefix([0,1,1,0,1])
+
+
+// MARK: Problem 13:  Smallest Balanced Subarray
+/* Goal:
+ Find the shortest subarray with equal 0s and 1s. Always length >= 2.
+   
+ Example:
+    Input: [0,1,0,1]
+    Output: 2
+
+*/
+
+
+// MARK: Brute Force
+// Time Complexity: O(n²) → We check every possible subarray (i..j)
+// Space Complexity: O(1) → Only using counters (zeroCount, oneCount) and minLength
+
+methodLabel("Problem 13:  Smallest Balanced Subarray", .bruteForce)
+
+func smallestBalancedSubarrayBF(_ s: [Int]) -> Int {
+    var minLength = Int.max
+    
+    for i in 0..<s.count {
+        var zeroCount = 0
+        var oneCount = 0
+        for j in i..<s.count {
+            
+            if s[j] == 0 {
+                zeroCount += 1
+            } else {
+                oneCount += 1
+            }
+            
+            if zeroCount == oneCount {
+                minLength = min(minLength, j - i + 1)
+            }
+            
+            print("window: \(s[0...j]), zero: \(zeroCount), one: \(oneCount), min length: \(minLength)")
+        }
+    }
+    
+    return minLength == Int.max ? 0 : minLength
+}
+
+
+smallestBalancedSubarrayBF([0,1,0,1])
+
+// MARK: Prefix Sum – Advanced / Implicit Sliding Window
+// Time Complexity: O(n) → single pass through array
+// Space Complexity: O(n) → storing first occurrence of each prefix sum
+
+methodLabel("Problem 13:  Smallest Balanced Subarray", .prefixSum)
+
+func smallestBalancedSubarrayPrefix(_ s: [Int]) -> Int {
+    var minLength = Int.max
+    var prefixSum = 0
+    var firstIndexOfPrefix: [Int: Int] = [0: -1]  // base case
+    
+    for i in 0..<s.count {
+        prefixSum += (s[i] == 0 ? -1 : 1)
+        
+        if let prevIndex = firstIndexOfPrefix[prefixSum] {
+            minLength = min(minLength, i - prevIndex)
+            print("Index \(i), num: \(s[i]), prefixSum: \(prefixSum), prevIndex: \(prevIndex), minLength: \(minLength)")
+        } else {
+            firstIndexOfPrefix[prefixSum] = i
+            print("Index \(i), num: \(s[i]), prefixSum: \(prefixSum), storing firstIndex: \(i)")
+        }
+    }
+    
+    return minLength == Int.max ? 0 : minLength
+}
+
+smallestBalancedSubarrayPrefix([0,1,0,1])
+
+
+
+// MARK: Problem 15: Longest Balanced Subarray After One Flip
+/* Goal:
+    You may flip one element (0→1 or 1→0).
+    Goal: maximize balanced length.
+    Hint: try prefix sum technique + consider both flip possibilities.
+   
+ Example:
+    Input: [1,1,1,0]
+    Output: 4  // flipping one '1' makes 2 zeros, 2 ones
+*/
+
+
+// MARK: Brute Force
+// Time Complexity: O(n²) → We check every possible subarray (i..j)
+// Space Complexity: O(1) → We're keeping track of the counters and max length
+
+methodLabel("Problem 15: Longest Balanced Subarray After One Flip", .bruteForce)
+
+
+func longestBalancedSubarrayFlippedBF(_ s: [Int]) -> Int {
+    var maxLength = 0
+    
+    for i in 0..<s.count {
+        var zeroCount = 0
+        var oneCount = 0
+        for j in i..<s.count {
+            if s[j] == 0 {
+                zeroCount += 1
+            } else {
+                oneCount += 1
+            }
+
+            // Flipping a 0→1 or 1→0 changes the difference by 2.
+                // 0 → 1 → difference increases by 2
+                // 1 → 0 → difference decreases by 2
+            //  So a difference of 2 can become 0 with one flip.
+            if zeroCount == oneCount || abs(zeroCount - oneCount) == 2 {
+                maxLength = max(maxLength, j - i + 1)
+            }
+            print("window: \(s[i...j]), zeros: \(zeroCount), ones: \(oneCount), maxLength: \(maxLength)")
+
+        }
+    }
+    return maxLength
+}
+
+longestBalancedSubarrayFlippedBF( [1,1,1,0])
+
+// MARK: Prefix Sum – Advanced / Implicit Sliding Window
+// Time Complexity: O(n)
+// Space Complexity: O(n)
+
+methodLabel("Problem 15: Longest Balanced Subarray After One Flip", .prefixSum)
+
+func longestBalancedSubarrayFlippedPrefix(_ s: [Int]) -> Int {
+    var maxLength = 0
+    var prefixSum = 0
+    var firstIndex: [Int: Int] = [0: -1] // base case
+    
+    for i in 0..<s.count {
+        // Convert 0 -> -1, 1 -> 1
+        prefixSum += (s[i] == 0 ? -1 : 1)
+        
+        // Case 1: already balanced
+        if let prevIndex = firstIndex[prefixSum] {
+            maxLength = max(maxLength, i - prevIndex)
+            print("Index \(i), num: \(s[i]), prefixSum: \(prefixSum), prevIndex: \(prevIndex) → balanced, maxLength: \(maxLength)")
+        }
+        
+        // Case 2: can become balanced by flipping one element
+        // Flip 0->1 or 1->0 changes sum by ±2
+        if let prevIndexPlus = firstIndex[prefixSum + 2] {
+            maxLength = max(maxLength, i - prevIndexPlus)
+            print("Index \(i), num: \(s[i]), prefixSum+2: \(prefixSum + 2), prevIndex: \(prevIndexPlus) → one flip, maxLength: \(maxLength)")
+        }
+        if let prevIndexMinus = firstIndex[prefixSum - 2] {
+            maxLength = max(maxLength, i - prevIndexMinus)
+            print("Index \(i), num: \(s[i]), prefixSum-2: \(prefixSum - 2), prevIndex: \(prevIndexMinus) → one flip, maxLength: \(maxLength)")
+        }
+        
+        // Store first occurrence only
+        if firstIndex[prefixSum] == nil {
+            firstIndex[prefixSum] = i
+            print("Index \(i), num: \(s[i]), storing firstIndex[\(prefixSum)] = \(i)")
+        }
+    }
+    
+    return maxLength
+}
+
+longestBalancedSubarrayFlippedPrefix( [1,1,1,0])
+
+
+
 /*
  SUMMARY: Choosing the Right Prefix Sum Technique
 
