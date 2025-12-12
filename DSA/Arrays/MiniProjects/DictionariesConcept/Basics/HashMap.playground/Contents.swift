@@ -14,11 +14,11 @@
 // - Enables solving many O(n²) brute-force problems in **O(n)**
 //
 // 📘 Common Use Cases:
-// • Frequency maps (counting elements or characters)
-// • Tracking seen values to detect duplicates
-// • Storing index positions (first/last seen, distance checks)
-// • Complement lookups (Two Sum pattern)
-// • Grouping values (anagrams, buckets, prefix sums)
+// - Frequency maps (counting elements or characters)
+// - Tracking seen values to detect duplicates
+// - Storing index positions (first/last seen, distance checks)
+// - Complement lookups (Two Sum pattern)
+// - Grouping values (anagrams, buckets, prefix sums)
 //
 // 🔥 What Hash Maps Unlock:
 // - Real-time checks during iteration
