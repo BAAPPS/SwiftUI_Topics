@@ -339,18 +339,7 @@ func replaceWordsWithDictionaryBF(_ dict: [String], _ sentence: String) -> Strin
 replaceWordsWithDictionaryBF(["cat","bat","rat", "c"],"the cattle was rattled")
 
 
-// MARK: Hash Map
-/*
- Time Complexity: Time Complexity: O(n * m * l)
-    → n = number of words in sentence
-    →  m = number of roots in dictionary
-    →  l = average length of roots / words (for starts(with:))
- Space Complexity: O(n)
-    → Words array stores all words in the sentence → O(n)
-    → Root dictionary stores at most one entry per word → O(n)
-    → No additional large data structures
- */
-methodLabel("Problem 3: Replace Words with Dictionary (Trie-like using HashMap)", .hashMap)
+
 
 func replaceWordsWithDictionaryHM(_ dict: [String], _ sentence: String) -> String {
     
@@ -400,3 +389,415 @@ func replaceWordsWithDictionaryHM(_ dict: [String], _ sentence: String) -> Strin
 }
 
 replaceWordsWithDictionaryHM(["cat","bat","rat","c"],"the cattle was rattled")
+
+
+// MARK: -  Problem 4: Most Frequent Subtree Sum (Tree + HashMap)
+
+/*
+ Goal:
+ Compute the sum of every subtree in a binary tree. Find which sums appear most frequently.
+ 
+ Example:
+ 
+ 5
+ / \
+ 2  -3
+ 
+ Compute subtree sums:
+ 
+ - Node 2 → sum = 2
+ 
+ -  Node -3 → sum = -3
+ 
+ - Node 5 → sum = 5 + 2 + (-3) = 4
+ 
+ Count frequencies:
+ 
+ - { 2: 1, -3: 1, 4: 1 }
+ 
+ Find max frequency:
+ 
+ - Here all sums appear once, so output all of them: [2, -3, 4].
+ 
+ Any problem where a node depends on its children → Post-order (left, right, root)
+ 
+ */
+
+
+class TreeNode {
+    var val: Int
+    var left: TreeNode?
+    var right: TreeNode?
+    
+    init(_ val: Int, _ left: TreeNode? = nil, _ right: TreeNode? = nil) {
+        self.val = val
+        self.left = left
+        self.right = right
+    }
+}
+
+
+// MARK: Brute Force
+/*
+ Time Complexity: O(n^2)
+ → n = number of nodes in the tree
+ → For brute force:
+ 1. Traverse each node → O(n)
+ 2. Compute subtree sum for each node (naively, recomputing sums of children each time) → O(n)
+ → Total = O(n * n) = O(n^2)
+ Space Complexity: O(n)
+ → Store all subtree sums in an array → O(n)
+ → Call stack for recursion → O(h), worst case O(n) for skewed tree
+ */
+methodLabel("Problem 4: Most Frequent Subtree Sum (Tree + HashMap)", .bruteForce)
+
+func collectSubtreeSums(_ node: TreeNode?, _ sums: inout [Int]) -> Int {
+    guard let node = node else { return 0 }
+    
+    let left = collectSubtreeSums(node.left, &sums)
+    let right = collectSubtreeSums(node.right, &sums)
+    
+    let subtreeSum = left + right + node.val
+    sums.append(subtreeSum)
+    
+    print("Node \(node.val) → Subtree Sum: \(subtreeSum)")
+    return subtreeSum
+}
+
+func findFrequentTreeSumBF(_ root: TreeNode?) -> [Int] {
+    var sums: [Int] = []
+    collectSubtreeSums(root, &sums)
+    
+    print("All Subtree Sums Collected: \(sums)\n")
+    
+    var maxFreq = 0
+    var result: [Int] = []
+    
+    for sum in sums {
+        let freq = sums.filter { $0 == sum }.count
+        print("Checking sum: \(sum) → frequency: \(freq), current maxFreq: \(maxFreq)")
+        
+        if freq > maxFreq {
+            maxFreq = freq
+            result = [sum]
+            print(" → New max frequency! maxFreq updated to \(maxFreq), result: \(result)")
+        } else if freq == maxFreq && !result.contains(sum) {
+            result.append(sum)
+            print(" → Frequency ties maxFreq, adding sum to result: \(result)")
+        } else {
+            print(" → Sum ignored, not max or tie")
+        }
+    }
+    
+    print("\nFinal Result: \(result)")
+    return result
+}
+
+let root = TreeNode(
+    2,
+    TreeNode(-3, TreeNode(2), TreeNode(2)),  // left subtree
+    TreeNode(4)                               // right subtree
+)
+findFrequentTreeSumBF(root)
+
+
+// MARK: HashMap
+/*
+ Time Complexity: O(n)
+ → n = number of nodes in the tree
+ → Each node is visited exactly once (post-order traversal)
+ → Updating the hash map for subtree sums is O(1) per node
+ Space Complexity: O(n)
+ → HashMap stores frequency for each unique subtree sum → O(n) in worst case
+ → Recursion stack → O(h), worst case O(n) for skewed tree
+ */
+methodLabel("Problem 4: Most Frequent Subtree Sum (Tree + HashMap)", .hashMap)
+
+func postOrder(_ node: TreeNode?, _ sumFrequency: inout [Int: Int]) -> Int {
+    guard let node = node else { return 0 }
+    let leftSum = postOrder(node.left, &sumFrequency) // left
+    let rightSum = postOrder(node.right, &sumFrequency) // right
+    let subtreeSum = leftSum + rightSum + node.val // root
+    sumFrequency[subtreeSum, default: 0] += 1
+    print("Node \(node.val) → Subtree Sum: \(subtreeSum)")
+    print("Map: \(sumFrequency)\n")
+    return subtreeSum
+}
+
+func findFrequentTreeSum(_ root: TreeNode?) -> [Int] {
+    var sumFrequency: [Int: Int] = [:]
+    postOrder(root, &sumFrequency)
+    var maxFreq = sumFrequency.values.max() ?? 0
+    
+    
+    return sumFrequency
+        .filter { $0.value == maxFreq }
+        .map { $0.key }
+}
+
+let root1 = TreeNode(5, TreeNode(2), TreeNode(-3))
+
+findFrequentTreeSum(root1)
+
+
+
+// MARK: -  Problem 5: Find Duplicate Subtrees (Serialize + HashMap)
+
+/*
+ Goal:
+ Identify all subtrees in a binary tree that appear more than once.
+ 
+ Serialize each subtree into a string (or tuple) representing its structure and values.
+ 
+ Use a HashMap to track the frequency of each serialization.
+ 
+ Return the root nodes of all duplicate subtrees.
+ Example:
+ Input:
+ 1
+ / \
+ 2   3
+ /   / \
+ 4  2   4
+ /
+ 4
+ 
+ Subtree serializations:
+ - "4" → appears 3 times
+ - "2,4" → appears 2 times
+ 
+ Output: [TreeNode(4), TreeNode(2)]
+ 
+ Any problem where a node depends on its children → Post-order (left, right, root)
+ */
+
+
+// MARK: Brute Force
+/*
+ Time Complexity: O(n^2)
+ → n = number of nodes in the tree
+ → For brute force:
+ 1. Traverse each node → O(n)
+ 2. For each node, serialize its subtree by recursively visiting all its children → O(n)
+ → Total = O(n * n) = O(n^2)
+ 
+ Space Complexity: O(n)
+ → Store all subtree serializations in an array → O(n)
+ → Recursion call stack → O(h), where h = height of the tree
+ → Worst case O(n) for skewed tree, O(log n) for balanced tree
+ */
+methodLabel("Problem 5: Find Duplicate Subtrees (Serialize + HashMap)", .bruteForce)
+
+let root2 = TreeNode(
+    1,
+    TreeNode(
+        2,
+        TreeNode(4), // left child of 2
+        nil          // right child of 2
+    ),
+    TreeNode(
+        3,
+        TreeNode(
+            2,
+            TreeNode(4), // left child of 2
+            nil          // right child of 2
+        ),
+        TreeNode(4)      // right child of 3
+    )
+)
+
+func collectSubtreeSerializationsBF(_ node: TreeNode?, _ serials: inout [String], _ nodes: inout [TreeNode] ) -> String {
+    guard let node = node else { return "#" } // Use "#" to represent nil
+    
+    // Post-order: left, right, root
+    let leftSerial = collectSubtreeSerializationsBF(node.left, &serials, &nodes)
+    let rightSerial = collectSubtreeSerializationsBF(node.right, &serials, &nodes)
+    
+    let subtreeSerial = "\(node.val),\(leftSerial),\(rightSerial)"
+    
+    // Add subtree to the array
+    serials.append(subtreeSerial)
+    nodes.append(node)
+    
+    print("Node \(node.val) → Subtree Serial: \(subtreeSerial)")
+    
+    
+    return subtreeSerial
+    
+    
+}
+
+
+func findDuplicateSubtreesBF(_ node: TreeNode?) -> [TreeNode] {
+    var serials: [String] = []
+    var nodes: [TreeNode] = []
+    
+    // Collect all subtree serializations
+    _ = collectSubtreeSerializationsBF(node, &serials, &nodes)
+    
+    var duplicates: [TreeNode] = []
+    
+    for (i, serial) in serials.enumerated() {
+        let count = serials.filter { $0 == serial }.count
+        if count > 1 && !duplicates.contains(where: { $0 === nodes[i]}) {
+            duplicates.append(nodes[i])
+            print("Duplicate Found: Node \(nodes[i].val), Serial: \(serial)")
+        }
+    }
+    
+    
+    return duplicates
+}
+
+let duplicates = findDuplicateSubtreesBF(root2)
+print("Duplicate subtree roots:")
+for node in duplicates {
+    print(node.val)
+}
+
+// MARK: HashMap
+/*
+ Time Complexity: O(n)
+ → n = number of nodes in the tree
+ → Each node is visited exactly once during post-order traversal
+ → Serializing a subtree and updating the HashMap is O(1) average per node
+ 
+ Space Complexity: O(n)
+ → HashMap stores frequency of each unique subtree serialization → O(n) in worst case
+ → Recursion stack → O(h), where h = tree height
+ → Worst case O(n) for skewed tree, O(log n) for balanced tree
+ */
+methodLabel("Problem 5: Find Duplicate Subtrees (Serialize + HashMap)", .hashMap)
+
+func findDuplicateSubtreesHM(_ root: TreeNode?) -> [TreeNode] {
+    var frequencyMap: [String: Int] = [:]
+    var duplicates: [TreeNode] = []
+    
+    func serialize(_ node: TreeNode?) -> String {
+        guard let node = node else { return "#"}  // Null marker for missing children
+        
+        // Post-order: left, right, root
+        let leftSerial = serialize(node.left)
+        let rightSerial = serialize(node.right)
+        let subtreeSerial = "\(node.val),\(leftSerial),\(rightSerial)"
+        
+        frequencyMap[subtreeSerial, default: 0] += 1
+        
+        // If this is the second time we see this subtree, add root to duplicates
+        if frequencyMap[subtreeSerial] == 2 {
+            duplicates.append(node)
+            print("Duplicate Found: Node \(node.val), Serial: \(subtreeSerial)")
+        }
+        
+        
+        // Debug output
+        print("Node \(node.val) → Serial: \(subtreeSerial), Frequency: \(frequencyMap[subtreeSerial]!)")
+        
+        return subtreeSerial
+        
+    }
+    
+    _ = serialize(root)
+    
+    return duplicates
+    
+}
+
+let duplicatesHM = findDuplicateSubtreesHM(root2)
+print("Duplicate subtree roots:")
+for node in duplicatesHM {
+    print(node.val)
+}
+
+
+// MARK: -  Problem 6: Longest Palindrome by Character Frequency
+
+/*
+ Goal:
+ Given a string, determine the length of the longest palindrome that can be built using its characters.
+ Count the frequency of each character.
+ For characters with even counts, all can be used.
+ For characters with odd counts, use the largest even part of each and possibly one odd character in the center.
+ Example:
+ Input: "abccccdd"
+ Output: 7
+ Explanation: "ccdbdcc" or  "ccdadcc"
+ */
+
+// MARK: Brute Force
+/*
+ Time Complexity: O(n^2)
+ → n = length of the string
+ → For brute force approach:
+ 1. Consider every possible substring using two loops → O(n^2)
+ 2. Count frequency of characters in each substring → O(n) per substring in worst case
+ → Total = O(n^3) if counting separately for each substring
+ 
+ Space Complexity: O(n)
+ → Frequency array or dictionary for each substring → O(n)
+ → Call stack is negligible (iterative loops)
+ 
+ ⚠ Why it’s not viable:
+ - Brute-force requires checking **all substrings**, which grows cubically with string length.
+ - For moderate/large strings, this approach becomes extremely slow.
+ - The optimal approach is **single-pass frequency counting**, which is O(n) time and O(1) space (for fixed alphabet).
+ */
+
+methodLabel("Problem 6: Longest Palindrome by Character Frequency", .bruteForce)
+
+// MARK: HashMap
+/*
+ Time Complexity: O(n)
+ → n = number of nodes in the tree
+ → Each node is visited exactly once during post-order traversal
+ → Serializing a subtree and updating the HashMap is O(1) average per node
+ 
+ Space Complexity: O(n)
+ → HashMap stores frequency of each unique subtree serialization → O(n) in worst case
+ → Recursion stack → O(h), where h = tree height
+ → Worst case O(n) for skewed tree, O(log n) for balanced tree
+ */
+methodLabel("Problem 6: Longest Palindrome by Character Frequency", .hashMap)
+
+
+func longestPalindromeByCharacterFrequencyHM(_ str: String) -> Int {
+    var maxLength = 0
+    var hasOddCount = false
+    
+    // Convert string to array for easier indexing
+    let arr = Array(str)
+    
+    var frequencyMap: [Character: Int] = [:]
+    
+    for char in arr{
+        frequencyMap[char, default: 0] += 1
+    }
+    
+    // Compute max palindrome length
+    for (char, count) in frequencyMap {
+        if count % 2  == 0 {
+            maxLength += count
+            print("Char '\(char)' count \(count) → even → add all: maxLength = \(maxLength)")
+        }
+        else {
+            // If a character has an odd count, we can only use the largest even portion
+            // for the mirrored halves of the palindrome.
+            // We mark `hasOddCount = true` to potentially place **one odd character in the center** later.
+            maxLength += count - 1
+            hasOddCount = true
+            print("Char '\(char)' count \(count) → odd → add \(count - 1): maxLength = \(maxLength)")
+        }
+    }
+    
+    //  Add 1 if there was at least one odd character
+    if hasOddCount {
+        maxLength += 1
+        print("At least one odd count → add 1 for center: maxLength = \(maxLength)")
+    }
+    
+    print("\nFinal Longest Palindrome Length: \(maxLength)")
+    return maxLength
+}
+
+let input = "abccccdd"
+longestPalindromeByCharacterFrequencyHM(input)
