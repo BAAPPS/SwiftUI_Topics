@@ -748,17 +748,17 @@ methodLabel("Problem 6: Longest Palindrome by Character Frequency", .bruteForce)
 // MARK: HashMap
 /*
  Time Complexity: O(n)
- → n = number of nodes in the tree
- → Each node is visited exactly once during post-order traversal
- → Serializing a subtree and updating the HashMap is O(1) average per node
- 
- Space Complexity: O(n)
- → HashMap stores frequency of each unique subtree serialization → O(n) in worst case
- → Recursion stack → O(h), where h = tree height
- → Worst case O(n) for skewed tree, O(log n) for balanced tree
+    → n = length of the input string
+    → Single pass to count frequency of each character → O(n)
+    → Single pass over frequency dictionary to compute max palindrome length → O(1) per character (constant alphabet size)
+    → Total = O(n)
+
+ Space Complexity: O(1) (or O(k))
+    → HashMap / dictionary stores frequency of characters → O(k), where k = size of alphabet
+    → For English letters, k = 26 → constant → O(1)
+    → Otherwise, worst case O(n) if all characters are unique
  */
 methodLabel("Problem 6: Longest Palindrome by Character Frequency", .hashMap)
-
 
 func longestPalindromeByCharacterFrequencyHM(_ str: String) -> Int {
     var maxLength = 0
