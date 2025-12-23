@@ -170,15 +170,23 @@ func longestCycleBF(_ graph: [[Int]]) -> Int {
 let graph = [[1],[2],[0],[4],[]]
 longestCycleBF(graph)
 
-// MARK: Brute Force
+// MARK: Hash Set
 /*
  Time Complexity: O(V * (V + E))
-  → For each node, we perform a DFS exploring all reachable paths.
-    - V = number of vertices (nodes)
-    - E = number of edges
-  → In the worst case, each DFS can traverse all edges.
+  → For each node (V nodes), we perform a DFS.
+  → In the worst case, the DFS explores all reachable nodes and edges:
+     - Each DFS visit touches all edges in the connected component: O(E)
+     - So for all nodes: O(V * (V + E))
+
  Space Complexity: O(V)
-  → Recursion stack + path array + visited set for DFS.
+  → We store visited nodes in a set: O(V)
+  → Recursion stack can go as deep as the number of nodes: O(V)
+  → Path array stores nodes along the current DFS path: O(V)
+  
+ Notes:
+     V = number of vertices (nodes)
+     E = number of edges
+     Using a hash set allows O(1) membership checks for visited nodes and recursion stack
 */
 
 methodLabel("Problem 1: Longest Cycle in Graph", .hashSet)
@@ -273,3 +281,227 @@ func longestCycleDebug(_ graph: [[Int]]) -> Int {
 }
 
 longestCycleDebug(graph)
+
+
+
+// MARK: -  Problem 2: Smallest Missing Positive
+
+/*
+ Goal:
+    Find the smallest positive integer that does not appear in the array by checking which numbers are missing in the sequence starting from 1.
+
+ Example:
+     Input: [1, 2, 0]
+     Output: 3
+ Explanation:
+    1 and 2 are present, so the smallest missing positive integer is 3.
+*/
+
+
+// MARK: Brute Force
+/*
+ Time Complexity: O(n²)
+  → For each candidate positive integer (up to n+1), we scan the array to check if it exists.
+  → contains() check is O(n), repeated up to n times → O(n²)
+ Space Complexity: O(1)
+  → Only a few counters are used (i, smallestMissing), no extra data structures.
+  
+ Notes:
+ - The smallest missing positive is at most n+1 for an array of length n.
+ - This approach is simple but not optimal for large arrays.
+*/
+
+
+methodLabel("Problem 2: Smallest Missing Positive", .bruteForce)
+
+func smallestMissingPositive(_ nums: [Int]) -> Int {
+    var n = nums.count
+    var i = 1
+    
+    while true {
+        print("Smallest missing positive:", i)
+        if !nums.contains(i){
+            return i
+        }
+        
+        i+=1
+    }
+}
+
+smallestMissingPositive([1, 2, 0])
+
+
+// MARK: Hash Set
+/*
+ Time Complexity: O(n)
+  → Building the hash set takes O(n)
+  → Checking numbers from 1 upwards takes at most n+1 steps → O(n)
+  → Overall: O(n)
+
+ Space Complexity: O(n)
+  → Hash set stores all numbers from the array → O(n)
+  
+ Notes:
+ - The smallest missing positive is always in the range 1 to n+1 for an array of length n.
+ - This approach is simple, efficient, and uses extra space for fast lookup.
+*/
+
+
+methodLabel("Problem 2: Smallest Missing Positive", .hashSet)
+
+func smallestMissingPositiveHS(_ nums: [Int]) -> Int {
+    var n = nums.count
+    var seen = Set(nums)
+    print("Seen set: \(seen)")
+    var i = 1
+    
+    while true {
+        print("current i: \(i)")
+        if !seen.contains(i) {
+            print("Smallest missing positive:", i)
+            return i
+        }
+        
+        i += 1
+    }
+}
+
+smallestMissingPositiveHS([1, 2, 0])
+
+
+// MARK: -  Problem 3: Word Ladder
+
+/*
+ Goal:
+      Transform the start word into the end word by changing **one letter at a time**,
+      ensuring each intermediate word exists in the given dictionary,
+      and determine the **minimum number of transformations** required.
+
+ Example:
+      Input: beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log","cog"]
+      Output: 5
+ Explanation:
+      A shortest transformation sequence is: "hit" → "hot" → "dot" → "dog" → "cog"
+      Each intermediate word is in the dictionary, and only one letter changes at a time.
+*/
+
+// MARK: Brute Force
+/*
+ Time Complexity: O((26^L)^N)
+  → L = length of each word
+  → N = number of words in the dictionary
+  → For each word, we try changing each of L positions with 26 letters
+  → Recursively explores all possible sequences → exponential
+
+ Space Complexity: O(N * L)
+  → Recursion stack can go as deep as N words
+  → Each word takes O(L) space for the array/string operations
+  → Visited set stores words in the current path → O(N)
+  
+ Notes:
+ - Extremely inefficient for large inputs
+ - BFS is the preferred approach for shortest path in Word Ladder
+*/
+
+
+methodLabel("Problem 3: Word Ladder", .bruteForce)
+
+func wordLadderBF(_ current: String, _ endWord: String, _ wordSet: Set<String>, _ visited: Set<String>, _ pathLength: Int) -> Int {
+    
+    if current == endWord {
+        return pathLength
+    }
+    
+    var minLength: Int  = Int.max
+    var visited = visited
+    visited.insert(current)
+    let letters = Array("abcdefghijklmnopqrstuvwxyz")
+    var wordArray = Array(current)
+    
+    for i in 0..<wordArray.count {
+        let originalChar = wordArray[i]
+        for c in letters {
+            wordArray[i] = c
+            let nextWord = String(wordArray)
+            
+            if wordSet.contains(nextWord), !visited.contains(nextWord) {
+                let newLength = wordLadderBF(nextWord, endWord, wordSet, visited, pathLength + 1)
+                minLength = min(minLength, newLength)
+            }
+            wordArray[i] = originalChar
+        }
+    }
+    return minLength
+}
+
+// Wrapper
+func ladderLengthBF(beginWord: String, endWord: String, wordList: [String]) -> Int {
+    let wordSet = Set(wordList)
+    let result = wordLadderBF(beginWord, endWord, wordSet, [], 1)
+    return result == Int.max ? 0 : result
+}
+
+
+// MARK: HashSet + BFS Approach
+/*
+ Time Complexity: O(N * L * 26)
+  → N = number of words in the dictionary
+  → L = length of each word
+  → For each word dequeued, we try changing each letter to all 26 letters
+ Space Complexity: O(N + L)
+  → Queue stores words for BFS, and visited set contains words already processed
+*/
+
+
+methodLabel("Problem 3: Word Ladder", .hashSet)
+
+func wordLadderLength(beginWord: String, endWord: String, wordList: [String]) -> Int {
+    let wordSet = Set(wordList)
+    if !wordSet.contains(endWord) {
+        return 0
+    }
+    
+    var queue: [(String, Int)] = [(beginWord, 1)]
+    var visited: Set<String> = [beginWord]
+    
+    print("Starting BFS from '\(beginWord)' to reach '\(endWord)'")
+     
+    while !queue.isEmpty {
+        let (currentWord, level) = queue.removeFirst()
+        print("\nDequeued: '\(currentWord)', level: \(level)")
+        
+        if currentWord == endWord {
+            print("Reached endWord! Shortest path length: \(level)")
+            return level
+        }
+        
+        var wordArray = Array(currentWord)
+        
+        for i in 0..<wordArray.count {
+            let originalChar = wordArray[i]
+            
+            for c in "abcdefghijklmnopqrstuvwxyz" {
+                wordArray[i] = c
+                let nextWord = String(wordArray)
+                
+                if wordSet.contains(nextWord), !visited.contains(nextWord) {
+                    queue.append((nextWord, level + 1))
+                    visited.insert(nextWord)
+                    print(" → Enqueue '\(nextWord)', next level: \(level + 1)")
+                }
+            }
+            
+            wordArray[i] = originalChar  // Restore original character
+        }
+        
+    }
+    
+    print("End word not reachable from begin word.")
+    return 0
+}
+
+let beginWord = "hit"
+let endWord = "cog"
+let wordList = ["hot","dot","dog","lot","log","cog"]
+
+wordLadderLength(beginWord: beginWord, endWord: endWord, wordList: wordList)
